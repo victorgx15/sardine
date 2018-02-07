@@ -1,0 +1,16 @@
+#title_l {
+	text-align: center;
+	font-family: arial;
+}
+
+#employee_form_login {
+	background: grey;
+	width: 200px;
+	padding: 10px;
+	height: 80px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -110px;
+	margin-top: -50px;
+}
