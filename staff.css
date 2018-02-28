@@ -15,20 +15,27 @@
 	margin-top: -50px;
 }
 
-#announcementbox {
-    box-sizing: content-box;    
-    width: 300px;
-    height: 400px;
-    padding: 15px;    
-    border: 2px solid black;
-	text-align: center;
-	overflow: auto;
-	float: left;
-}
 #functionbox {
     box-sizing: content-box;    
     width: 400px;
     height: 400px; 
 	float: left;
 	margin-left: 3.5cm;
+}
+
+#label{
+display:inline-block;
+width:200px;
+margin-right:30px;
+text-align:right;
+}
+
+#input{
+
+}
+
+#fieldset{
+border:none;
+width:500px;
+margin:0px auto;
 }

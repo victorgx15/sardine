@@ -1,6 +1,7 @@
 <?php
 // Sous WAMP (Windows)
-$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+$bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,26 +15,29 @@ $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
     <body>
         <!-- Corps de la page -->
         <h1 id="title_l">La Vieille Sardine : Site Intranet</h1>
-        <form method="post" id="employee_form_login" action="./staffhome.html">
+        <form method="post" id="employee_form_login" action="">
         	<?php 
 				if (isset($_POST['employeeEmail']) OR isset($_POST['employeePwd'])) {
 				    $req = $bdd->prepare('SELECT id_client, password, status FROM compte WHERE email = :pseudo');
 					$req->execute(array('pseudo' => $_POST['employeeEmail']));
-					$resultat = $req->fetch();
 
-					while ($donnees = $resultat->fetch()) {
-						if(!$resultat OR $_POST['employeePwd'] != $donnees['password']) {
+					while ($resultat = $req->fetch()) {
+						if(!$resultat OR $_POST['employeePwd'] != $resultat['password']) {
 							echo 'Mauvais identifiant ou mot de passe !';
 						} else {
 							session_start();
 					        $_SESSION['id'] = $resultat['id'];
 					        $_SESSION['email'] = $_POST['employeeEmail'];
 					        $_SESSION['status'] = $resultat['status'];
-					        header('Location: staffhome.php');
+					        if ($resultat['status'] == 'A') {
+					        	header('Location: adminpage.php');
+					        } else if ($resultat['status'] == 'E') {
+					        	header('Location: staffhome.php');
+					        }
+					        
   							exit();
 						}
 					}
-					
 				}
 				?>
         	<input type="email" name="employeeEmail" placeholder="Email employé"><br>
