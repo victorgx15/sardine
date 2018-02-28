@@ -124,7 +124,7 @@ body {
 						<?php 
 							if (isset($_POST['lastNameS'])) {
 								// Selection
-								$req = $bdd->query('SELECT id_client, nom, prenom, email FROM compte WHERE nom = \''. $_POST['lastNameS'] .'\'');
+								$req = $bdd->query('SELECT id_client, nom, prenom, email FROM compte WHERE status = \'E\' AND nom = \''. $_POST['lastNameS'] .'\'');
 
 								while ($data = $req->fetch()) {
 									echo 'Nom : ' . $data['nom'] . ', Prenom : ' . $data['prenom'] . ', Email : ' . $data['email'] .
@@ -140,24 +140,21 @@ body {
 			        	Rechercher un produit<br>
 			        	<input type="text" name="productDesignation" placeholder="Designation"><input type="submit" value="Rechercher" />
 			        	<?php 
-							if (isset($_GET['productName']) AND $_GET['act'] == 'del') {
+							if (isset($_GET['productName'])) {
 								// Selection
-								$req = $bdd->query('DELETE FROM compte WHERE id_client = \''. $_GET['compteDelete'] .'\'');
-								echo 'Compte supprime';
+								$req = $bdd->query('DELETE FROM produit WHERE id_produit = \''. $_GET['productName'] .'\'');
+								echo 'Produit retire';
 							}
 						?><br>
 
 						<?php 
 							if (isset($_POST['productDesignation'])) {
 								// Selection
-								$req = $bdd->query('SELECT id_produit, designation, prix FROM produit WHERE nom = \''. $_POST['productDesignation'] .'\'');
+								$req = $bdd->query('SELECT id_produit, designation, prix FROM produit WHERE designation = \''. $_POST['productDesignation'] .'\'');
 
 								while ($data = $req->fetch()) {
-									echo 'Designation : ' . $data['designation'] . ', Prix : ' . $data['prix'] .
-									' | <a href="adminpage.php?productName='. $data['id_produit'] . '&act=del">Supprimer</a><br>
-
-									<form method="post" id="employee_search" action="adminpage.php"></form>
-									<a href="adminpage.php?productName='. $data['id_produit'] . '&act=add">Ajouter du stock</a>';
+									echo 'Designation : ' . $data['designation'] . ', Prix : ' . $data['prix'].
+									' | <a href="adminpage.php?productName='. $data['id_produit'] . '&act=del">Supprimer</a><br>';
 								}
 							}
 						?>

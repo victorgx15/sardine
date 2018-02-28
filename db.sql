@@ -204,6 +204,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `civilite`, `username`, `lastname`, `tel1`, `tel2`, `email`, `password`) VALUES
 (1, 'Mr', 'Nizar', 'OUAZZANI', '0661803954', '0661803954', 'nizarouazzanichahdi17@gmail.com', 'db9e0e81988b9b0e007d67caa8c67eae02c4fa14c90ddc5e362590d2ccabdb59');
 
+INSERT INTO `compte` (`id_client`, `nom`, `prenom`, `telephone`, `email`, `civilite`, `telephone2`,
+  `password`, `status`) VALUES (NULL, 'admin', 'admin', '0101010101', 'admin@admin.fr', 'M', NULL, '4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2', 'A');
 --
 -- Contraintes pour les tables déchargées
 --

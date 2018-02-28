@@ -22,7 +22,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 					$req->execute(array('pseudo' => $_POST['employeeEmail']));
 
 					while ($resultat = $req->fetch()) {
-						if(!$resultat OR $_POST['employeePwd'] != $resultat['password']) {
+						if(!$resultat OR hash('sha256', $_POST['employeePwd']) != $resultat['password']) {
 							echo 'Mauvais identifiant ou mot de passe !';
 						} else {
 							session_start();
