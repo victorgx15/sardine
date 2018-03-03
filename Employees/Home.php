@@ -33,17 +33,21 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
         <div class="container">	
 			<p> Note: layout will need to be re-designed to be more user-friendly and to look nicer</p>
 			<div class = "search-container">
-				<form action="/action_page.php" autocomplete="off">
-					<p>Rechercher un client: (needs to be changed so that drop down changes text-field type (refID, name, phone, email))</p>
-					<select>
-						<option value="refID">ref ID</option>
-						<option value="name">nom</option>
-						<option value="phonenumber">numéro de téléphone</option>
+				<form name="search" method="post" action="SearchClient.php" autocomplete="off">
+					<p>Rechercher un client:</p>
+					<select name="searchmethod" id="searchmethod">
+						<option value="id">ref ID</option>
+                        <option value="username">username</option>
+						<option value="lastName">nom de famille</option>
+						<option value="telephone">numéro de téléphone</option>
 						<option value="email">e-mail</option>
 					</select>
-					<input type="text" placeholder="Search..." name="searchclient">
+					<input type="text" placeholder="Search..." name="searchclient" id="searchclient">
 					<button type="submit"><i class="fa fa-search"></i></button>
 				</form>
+
+                <!-- A réfléchir si on veut la barre de recherche sur l'autre page (au pire je rajouterais plus tard)-->
+                <a href="ClientList.php">Parcourir la liste des clients</a> <br>
                 <button type="button" data-toggle="modal" data-target="#newClient">Enregistrer un nouveau client</button>
 
                 <!-- Modal -->
@@ -57,39 +61,26 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                                 <h4 class="modal-title">Enregistrer un nouveau client</h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" id="client_register" action="staffhome.php">
+                                <form method="post" id="client_register" action="AddClient.php">
                                     <fieldset>
 
-                                        <label for civil> Civilité : </label>
-                                        <select name="civil">
+                                        <label for gender> Civilité : </label>
+                                        <select name="civilite" id="civilite">
                                             <option value="M">Monsieur</option>
                                             <option value="Mme">Madame</option>
                                         </select><br>
-                                        <label for firstname> Prenom : </label><input type="text" name="firstname" placeholder="ex. John"><br>
-                                        <label for lastname> Nom : </label><input type="text" name="lastname" placeholder="ex. Smith"><br>
-                                        <label for telephone> Téléphone : </label><input type="text" name="telephone" placeholder="01 01 02 03 04"><br>
-                                        <label for email> E-mail : </label><input type="email" name="email" placeholder="johnsmith@email.com"><br>
-                                        <label for username> Username : </label><input type="text" name="username" placeholder="ex. johnsmith88"><br>
-                                        <label for password> Password : </label><input type="text" name="password" placeholder="ex. abc123"><br>
+                                        <label for firstname> Prenom : </label><input type="text" name="firstName" id= "firstName" placeholder="ex. John"><br>
+                                        <label for lastname> Nom : </label><input type="text" name="lastName" id="lastName" placeholder="ex. Smith"><br>
+                                        <label for telephone> Téléphone : </label><input type="text" name="telephone" id="telephone" placeholder="01 01 02 03 04"><br>
+                                        <label for email> E-mail : </label><input type="email" name="email" id="email" placeholder="johnsmith@email.com"><br>
+                                        <label for username> Username : </label><input type="text" name="username" id="username" placeholder="ex. johnsmith88"><br>
+                                        <label for password> Password : </label><input type="password" name="password" id="password" placeholder="ex. abc123"><br>
                                         <input type="submit" value="Inscrire" style="float: right;">
                                     </fieldset>
-                                        <?php
-                                    if (isset($_POST['email'])) {
-                                        // Insertion
-                                        $req = $bdd->prepare("INSERT INTO user(civil, firstname, lastname, telephone, email, password) VALUES(:civil, :firstname, :lastname, :telephone, :email, :password)");
-                                        $req->execute(array('civil' => $_POST['civil'],
-                                            'username' => $_POST['username'],
-                                            'firstname' => $_POST['firstname'],
-                                            'lastname' => $_POST['lastname'],
-                                            'telephone' => $_POST['telephone'],
-                                            'email' => $_POST['email'],
-                                            'password' => hash('sha256', $_POST['password'])));
-                                            echo "<script>alert('Sucès!');</script>";
-                                    }else{
-                                        echo "<script>alert('Echec!');</script>";
-                                    }
-                                    ?>
 
+                                    <!-- J'avais fait en fonction de ce que je voyais dans le db.sql que j'ai trouvé sur fb/github et j'ai resté cohérent avec ceci
+                                         (db.sql -> users est en anglais de ce que je vois...)
+                                         je suis pas trop sûr de comment exactement tu préfère le changer donc on discuterais
                                     <!-- TODO:
                                     	-Refaire toute ta table en francais (sorry :-/): user => compte, firstname => prenom, ...
                                     	-Integrer le 'status' dans la table compte, pour le Client tu diras status = 'C'
@@ -98,9 +89,10 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 
 									Voici ma correction
 									-J'ai fait le cryptage du mot de passe
+									-->
 
                                     <?php
-                                    if (isset($_POST['email'])) {
+/*                                    if (isset($_POST['email'])) {
                                         // Insertion
                                         $req = $bdd->prepare("INSERT INTO compte(nom, prenom, telephone, email, civilite, password, status)
                                         						VALUES(:lastname, :firstname, :telephone, :email, :civilite, :password, 'C')");
@@ -112,8 +104,8 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                                             'password' => hash('sha256', $_POST['password'])));
                                             echo "<script>alert('Sucès!');</script>";
                                     }
-                                    ?>
-									-->
+                                    */?>
+
 
                                 </form>
                             </div>
@@ -124,16 +116,6 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 
                     </div>
                 </div>
-			</div>
-
-
-			<div class="search-container">
-				<form action="/action_page.php" autocomplete="off">
-					<p> Rechercher un produit dans la catalogue (link will need to open in new tab, used to get refID of products):</p>
-					<input type="text" placeholder="Search..." name="searchcatalog">
-					<button type="submit"><i class="fa fa-search"></i></button>
-				</form>
-				<a href="catalog.html">Acceder directement à toute la catalogue</a> <br>
 			</div>
 			<div class="search-container">
 				<form action="/action_page.php" autocomplete="off">

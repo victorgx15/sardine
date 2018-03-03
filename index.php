@@ -30,9 +30,9 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 					        $_SESSION['email'] = $_POST['employeeEmail'];
 					        $_SESSION['status'] = $resultat['status'];
 					        if ($resultat['status'] == 'A') {
-					        	header('Location: adminpage.php');
+					        	header('Location: Employees/adminpage.php');
 					        } else if ($resultat['status'] == 'E') {
-					        	header('Location: staffhome.php');
+					        	header('Location: Employees/Home.php');
 					        }
 					        
   							exit();
