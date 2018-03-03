@@ -66,7 +66,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 
                                         <label for gender> Civilité : </label>
                                         <select name="civilite" id="civilite">
-                                            <option value="M">Monsieur</option>
+                                            <option value="Mr">Monsieur</option>
                                             <option value="Mme">Madame</option>
                                         </select><br>
                                         <label for firstname> Prenom : </label><input type="text" name="firstName" id= "firstName" placeholder="ex. John"><br>
