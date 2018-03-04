@@ -32,7 +32,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 					        if ($resultat['status'] == 'A') {
 					        	header('Location: adminpage.php');
 					        } else if ($resultat['status'] == 'E') {
-					        	header('Location: staffhome.php');
+					        	header('Location: Home.php');
 					        }
 					        
   							exit();
