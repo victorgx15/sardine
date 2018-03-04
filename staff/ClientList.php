@@ -15,7 +15,9 @@
     </style>
 </head>
 <body>
+
 <div class="container">
+
     <br><input class="form-control" id="searchInput" type="text" placeholder="Rechercher..."><br>
     <script>
         $(document).ready(function(){
@@ -27,7 +29,6 @@
             });
         });
     </script>
-
 </div>
 
 <?php
@@ -38,7 +39,7 @@ try {
 
     /*$bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $query="SELECT id, civilite, lastName, firstName, telephone, email FROM user ";
+    $query="SELECT id, civilite, Nom, PRENOM, Tel, Email FROM user ";
     $stmt = $bdd->prepare($query);
     $stmt->execute();
 
@@ -65,38 +66,106 @@ try {
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Clients</strong>
         </div>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newClient">
+            <span class="glyphicon glyphicon-plus"></span> Nouveau Client
+        </button>
         <thead>
         <tr>
-            <th onclick='sortTable(0)' >Id</th>
-            <th onclick='sortTable(1)'>Civilite</th>
+            <th onclick='sortTable(0)' >ID_Client</th>
+            <th onclick='sortTable(1)'>Prenom</th>
             <th onclick='sortTable(2)'>Nom</th>
-            <th onclick='sortTable(3)'>Prénom</th>
-            <th onclick='sortTable(4)'>Téléphone</th>
-            <th onclick='sortTable(5)'>E-mail</th>
+            <th onclick='sortTable(3)'>Tel</th>
+            <th onclick='sortTable(4)'>Email</th>
+            <th onclick='sortTable(5)'>Civilite</th>
             <th> Action </th>
         </tr>
         </thead>
         <tbody>
         <?php
         $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-        $result = $bdd->prepare("SELECT * FROM user ORDER BY id ASC");
+        $result = $bdd->prepare("SELECT * FROM compte WHERE Status='C' ");
         $result->execute();
+
         for($i=0; $row = $result->fetch(); $i++){
-            $id=$row['id'];
+            $id=$row['ID_Client'];
             ?>
             <tr>
-                <td style="text-align:center; word-break:break-all; width:300px;"> <?php echo $row ['id']; ?></td>
-                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['civilite']; ?></td>
-                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['firstName']; ?></td>
-                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['lastName']; ?></td>
-                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['telephone']; ?></td>
-                <td style="text-align:center; word-break:break-all; width:450px;"> <?php echo $row ['email']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['ID_Client']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Nom']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['PRENOM']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Tel']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Email']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:50px;"> <?php echo $row ['Civilite']; ?></td>
                 <td style="text-align:center; width:350px;">
                     <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info">Edit</a>
                     <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" >Delete </a>
                 </td>
 
-                <!-- Modal -->
+                <!-- New Client Modal -->
+                <div class="modal fade" id="newClient" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title" text-align="center">Enregistrer un nouveau client</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" method="post" id="add_client" action="AddClient.php">
+                                    <div class="container">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for Civilite> Civilité : </label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" name="Civilite" id="Civilite">
+                                                    <option value="M">Monsieur</option>
+                                                    <option value="Mme">Madame</option>
+                                                </select>
+                                            </div>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for PRENOM> Prenom : </label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" name="PRENOM" id= "PRENOM">
+                                            </div>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for Nom> Nom : </label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" name="Nom" id="Nom" >
+                                            </div>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for Tel> Téléphone : </label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" name="Tel" id="Tel" >
+                                            </div>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for Email> E-mail : </label>
+                                            <div class="col-sm-4">
+                                                <input type="email" class="form-control" name="Email" id="Email" >
+                                            </div>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for Password> Mot de passe : </label>
+                                            <div class="col-sm-4">
+                                                <input type="password" class="form-control" name="Password" id="Password">
+                                            </div>
+                                        </div><br><br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" type="button" class="btn btn-info" value="Confirmer">
+                                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Edit Client Modal -->
                 <div class="modal fade" id="edit<?php  echo $id;?>" role="dialog">
                     <div class="modal-dialog">
 
@@ -111,50 +180,42 @@ try {
                                     <div class="container">
                                         <div class="form-group">
                                             <input type="hidden" value="<?php  echo $id;?>" id= "id" name="id" >
-                                            <label class="control-label col-sm-2" for civilite> Civilité : </label>
+                                            <label class="control-label col-sm-2" for Civilite> Civilité : </label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="civilite" id= "civilite" required value=<?php echo $row['civilite']; ?>>
+                                                <input type="text" class="form-control" name="Civilite" id= "Civilite" required value=<?php echo $row['Civilite']; ?>>
                                             </div>
                                         </div><br>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for firstname> Prenom : </label>
+                                            <label class="control-label col-sm-2" for PRENOM> Prenom : </label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="firstName" id= "firstName" required value=<?php echo $row['firstName']; ?>>
+                                                <input type="text" class="form-control" name="PRENOM" id= "PRENOM" required value=<?php echo $row['PRENOM']; ?>>
                                             </div>
                                         </div><br>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for lastname> Nom : </label>
+                                            <label class="control-label col-sm-2" for Nom> Nom : </label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="lastName" id="lastName" required value=<?php echo $row['lastName']; ?>>
+                                                <input type="text" class="form-control" name="Nom" id="Nom" required value=<?php echo $row['Nom']; ?>>
                                             </div>
                                         </div><br>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for telephone> Téléphone : </label>
+                                            <label class="control-label col-sm-2" for Tel> Téléphone : </label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="telephone" id="telephone" required value=<?php echo $row['telephone']; ?>>
+                                                <input type="text" class="form-control" name="Tel" id="Tel" required value=<?php echo $row['Tel']; ?>>
                                             </div>
                                         </div><br>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for email> E-mail : </label>
+                                            <label class="control-label col-sm-2" for Email> E-mail : </label>
                                             <div class="col-sm-4">
-                                                <input type="email" class="form-control" name="email" id="email" required value=<?php echo $row['email']; ?>>
+                                                <input type="email" class="form-control" name="Email" id="Email" required value=<?php echo $row['Email']; ?>>
                                             </div>
                                         </div><br>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for username> Username : </label>
+                                            <label class="control-label col-sm-2" for Password> Mot de passe : </label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="username" id="username" required value=<?php echo $row['username']; ?>>
+                                                <input type="password" class="form-control" name="Password" id="Password">
+                                                <input type="hidden" class="form-control" name="Password_def" id="Password_def" value=<?php echo $row['Password']; ?>>
                                             </div>
-                                        </div><br>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2" for password> Password : </label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="password" id="password" required value=<?php echo $row['password']; ?>>
-                                            </div><br><br>
-
-                                        </div>
-
-
+                                        </div><br><br>
                                     </div>
                                     <div class="modal-footer">
                                         <input type="submit" type="button" class="btn btn-info" value="Confirmer">
@@ -170,22 +231,21 @@ try {
 
 
 
-
+                <!-- Delete Client Modal -->
                 <div id="delete<?php  echo $id;?>" class="modal fade" role="dialog">
                     <div class="modal-header">
                         <h3 id="myModalLabel">Delete</h3>
                     </div>
                     <div class="modal-body">
-                        <p><div style="font-size:larger;" class="alert alert-danger">Etes-vous sûr de vouloir effacer les données de <b style="color:red;"><?php echo $row['firstName']." ".$row['lastName'] ; ?></b> ? <br> Cette action n'est pas réversible</p>
+                        <p><div style="font-size:larger;" class="alert alert-danger">Etes-vous sûr de vouloir effacer les données de <b style="color:red;"><?php echo $row['PRENOM']." ".$row['Nom'] ; ?></b> ? <br> Cette action n'est pas réversible</p>
                     </div>
-                    <hr>
+                    <br>
                     <div class="modal-footer">
                         <button class="btn btn-inverse" data-dismiss="modal" >Non</button>
                         <a href="DeleteClient.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
 
 
                     </div>
-                </div>
                 </div>
             </tr>
         <?php } ?>
