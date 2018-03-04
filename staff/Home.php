@@ -28,9 +28,11 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     </head>
 
     <body>
-        <!-- Corps de la page -->
-        <h1 id="title_l">La Vieille Sardine</h1>
+
         <div class="container">	
+
+            <?php include('header.php'); ?>
+
 			<p> Note: layout will need to be re-designed to be more user-friendly and to look nicer</p>
 			<div class = "search-container">
 				<form name="search" method="post" action="SearchClient.php" autocomplete="off">

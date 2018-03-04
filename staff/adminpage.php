@@ -9,6 +9,16 @@ session_start();
         <!-- En-tête de la page -->
         <meta charset="utf-8" />
         <link rel="stylesheet" href="staff.css" />
+
+                <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
         <style>
 * {box-sizing: border-box;}
 
@@ -40,10 +50,11 @@ body {
     </head>
 
     <body>
-        <!-- Corps de la page -->
-        <h1 id="title_l">La Vieille Sardine : Site Intranet</h1>
+
+        
         
         <?php
+        include('header.php');
         if(isset($_SESSION['status'])){
         	if($_SESSION['status'] == 'A') {
         
@@ -167,14 +178,5 @@ body {
         <?php
         	}}
         ?>
-        <!-- 
-
-        <div>
-        	<input type="text" name="qte" placeholder="Quantite"><br>
-        	<input type="text" name="couloir" placeholder="Couloir">
-        	<input type="text" name="etagere" placeholder="Etagere"><br>
-        	<input type="text" name="travee" placeholder="Travee">
-        </div>
-    -->
     </body>
 </html>
