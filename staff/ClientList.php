@@ -66,7 +66,7 @@ try {
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Clients</strong>
         </div>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newClient">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newClient">
             <span class="glyphicon glyphicon-plus"></span> Nouveau Client
         </button>
         <thead>
@@ -97,9 +97,10 @@ try {
                 <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Nom']; ?></td>
                 <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Tel']; ?></td>
                 <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Email']; ?></td>
-                <td style="text-align:center; width:350px;">
-                    <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info">Edit</a>
-                    <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" >Delete </a>
+                <td style="text-align:center; word-break:break-all; width:90px;">
+                    <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
                 </td>
 
                 <!-- New Client Modal -->
