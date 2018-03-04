@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php include('header.php'); ?>
     <style>
         th {
             cursor: pointer;
@@ -53,6 +48,7 @@ try {
     ?>
     <div class="container" style="width:1800px; padding-bottom: 10px">
         <br><div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Clients</strong>
         </div>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newClient">
@@ -98,12 +94,12 @@ try {
                 <th> Action </th>
             </tr>
             <tr id="searchFilter" class="collapse">
-                <th style="text-align:center; word-break:break-all; width:200px;"><input type="text" id="filterCol0" onkeyup="filterCol(0)"></th>
+                <th style="text-align:center; word-break:break-all; width:200px;"><input style="text-align:center;" type="text" id="filterCol0" onkeyup="filterCol(0)"></th>
                 <th style="text-align:center; word-break:break-all; width:50px;"> </th>
-                <th style="text-align:center; word-break:break-all; width:200px;"> <input type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
-                <th style="text-align:center; word-break:break-all; width:200px;"> <input type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
-                <th style="text-align:center; word-break:break-all; width:200px;"><input type="text" id="filterCol4" onkeyup="filterCol(4)"> </th>
-                <th style="text-align:center; word-break:break-all; width:200px;"><input type="text" id="filterCol5" onkeyup="filterCol(5)"></th>
+                <th style="text-align:center; word-break:break-all; width:200px;"> <input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
+                <th style="text-align:center; word-break:break-all; width:200px;"> <input style="text-align:center;" type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
+                <th style="text-align:center; word-break:break-all; width:200px;"><input style="text-align:center;" type="text" id="filterCol4" onkeyup="filterCol(4)"> </th>
+                <th style="text-align:center; word-break:break-all; width:200px;"><input style="text-align:center;" type="text" id="filterCol5" onkeyup="filterCol(5)"></th>
                 <th style="text-align:center; word-break:break-all; width:100px;"> </th>
             </tr>
             </thead>
