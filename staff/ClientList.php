@@ -18,7 +18,7 @@
 
 <div class="container">
 
-    <br><input class="form-control" id="searchInput" type="text" placeholder="Rechercher..."><br>
+    <br><input class="form-control" id="searchInput" type="text" placeholder="Filtrer..."><br>
     <script>
         $(document).ready(function(){
             $("#searchInput").on("keyup", function() {
@@ -72,11 +72,12 @@ try {
         <thead>
         <tr>
             <th onclick='sortTable(0)' >ID_Client</th>
-            <th onclick='sortTable(1)'>Prenom</th>
-            <th onclick='sortTable(2)'>Nom</th>
-            <th onclick='sortTable(3)'>Tel</th>
-            <th onclick='sortTable(4)'>Email</th>
-            <th onclick='sortTable(5)'>Civilite</th>
+            <th onclick='sortTable(1)'>Civilite</th>
+            <th onclick='sortTable(2)'>Prenom</th>
+            <th onclick='sortTable(3)'>Nom</th>
+            <th onclick='sortTable(4)'>Tel</th>
+            <th onclick='sortTable(5)'>Email</th>
+
             <th> Action </th>
         </tr>
         </thead>
@@ -91,11 +92,11 @@ try {
             ?>
             <tr>
                 <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['ID_Client']; ?></td>
-                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Nom']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:50px;"> <?php echo $row ['Civilite']; ?></td>
                 <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['PRENOM']; ?></td>
+                <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Nom']; ?></td>
                 <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Tel']; ?></td>
                 <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Email']; ?></td>
-                <td style="text-align:center; word-break:break-all; width:50px;"> <?php echo $row ['Civilite']; ?></td>
                 <td style="text-align:center; width:350px;">
                     <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info">Edit</a>
                     <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" >Delete </a>
