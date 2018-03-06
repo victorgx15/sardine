@@ -43,12 +43,7 @@ session_start();
 					        $_SESSION['id'] = $resultat['id_client'];
 					        $_SESSION['email'] = $_POST['employeeEmail'];
 					        $_SESSION['status'] = $resultat['status'];
-					        if ($resultat['status'] == 'A') {
-					        	header('Location: adminpage.php');
-					        } else if ($resultat['status'] == 'E') {
-					        	header('Location: Home.php');
-					        }
-					        
+					        header('Location: Home.php');
   							exit();
 						}
 					}

@@ -23,11 +23,23 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     <div class="jumbotron" style="text-align: center; width=100%">
         <br><h1>Bienvenue</h1>
         <div class="container" style="padding: 10px; display:inline;">
-            <a href="ClientList.php" type="button" style="padding:20px; margin-right:10px;" class="btn btn-lg btn-success">Gestion comptes clients</a>
-            <a href="ClientList.php" type="button" style="padding:20px; margin-left:10px;" class="btn btn-lg btn-warning">Gestion de stock</a>
+
+            <?php
+            if(isset($_SESSION['status'])){
+                if($_SESSION['status'] == 'A') {
+
+            ?>
+                    <a href="StaffList.php" type="button" style="padding:20px; margin-right:20px; width:25%;" class="btn btn-lg btn-danger">Gestion comptes employés</a>
+            <?php
+                }
+            }
+            ?>
+            <a href="ClientList.php" type="button" style="padding:20px; margin-right:10px; width:25%" class="btn btn-lg btn-success">Gestion comptes clients</a>
+            <a href="ProductList.php" type="button" style="padding:20px; margin-left:10px; width:25%" class="btn btn-lg btn-warning">Gestion de stock</a>
 
         </div>
     </div>
 
     </body>
 </html
+        }

@@ -7,6 +7,7 @@
             cursor: pointer;
             text-align: center;
         }
+
         input {
             width: 80%;
             box-sizing: border-box;
@@ -21,18 +22,42 @@
 </div>
 
 <?php
-
+if(isset($_SESSION['status'])){
+    if($_SESSION['status'] == 'A') {
 
 
 try {
+
+    /*$bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query="SELECT id, civilite, Nom, PRENOM, Tel, Email FROM user ";
+    $stmt = $bdd->prepare($query);
+    $stmt->execute();
+
+
+
+    echo "<table class='table table-striped table-bordered table-hover' id='staffTable'>";
+    echo "<tr><th onclick='sortTable(0)' >Id</th><th onclick='sortTable(1)'>Civilite</th><th onclick='sortTable(2)'>Nom</th><th onclick='sortTable(3)'>Prénom</th><th onclick='sortTable(4)'>Téléphone</th><th onclick='sortTable(5)'>E-mail</th><th> Action </th></tr>";
+
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "<tr>";
+        $id=$row['id'];
+        foreach($row as $value) {
+            echo "<td>{$value}</td>";
+        }
+        echo "<td> <a href='#editClient<?php echo $id;?>'  data-toggle='modal'  class='btn btn-info' >Modifier </a>              <input type='button' class='btn btn-danger btn-xs' value='Supprimer'></td>";
+        include 'modal_EditClient.php';
+        echo "</tr>";
+    }
+    echo "</table>";*/
     ?>
     <div class="container" style="width:100%; padding-bottom: 10px">
         <br><div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Clients</strong>
+            <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Employés</strong>
         </div>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newClient">
-            <span class="glyphicon glyphicon-plus"></span> Nouveau Client
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newStaff">
+            <span class="glyphicon glyphicon-plus"></span> Nouveau Employé
         </button>
         <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#searchFilter">
             <span class="glyphicon glyphicon-search"></span> Filtrer
@@ -42,7 +67,7 @@ try {
                 var input, filter, table, tr, td, i;
                 input = document.getElementById("filterCol"+k.toString());
                 filter = input.value.toUpperCase();
-                table = document.getElementById("clientTable");
+                table = document.getElementById("staffTable");
                 tr = table.getElementsByTagName("tr");
                 for (i = 0; i < tr.length; i++) {
                     td = tr[i].getElementsByTagName("td")[k];
@@ -59,7 +84,7 @@ try {
     </div>
 
     <div class="container" style="width:100% ">
-        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover" id="clientTable">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover" id="staffTable">
 
 
             <thead>
@@ -76,7 +101,7 @@ try {
             <tr id="searchFilter" class="collapse">
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol0" onkeyup="filterCol(0)"></th>
                 <th style="text-align:center; word-break:break-all; "> </th>
-                <th style="text-align:center; word-break:break-all;"> <input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
+                <th style="text-align:center; word-break:break-all; "> <input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
                 <th style="text-align:center; word-break:break-all; "> <input style="text-align:center;" type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol4" onkeyup="filterCol(4)"> </th>
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol5" onkeyup="filterCol(5)"></th>
@@ -86,37 +111,36 @@ try {
             <tbody>
             <?php
             $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-            $result = $bdd->prepare("SELECT * FROM compte WHERE Status='C' ");
+            $result = $bdd->prepare("SELECT * FROM compte WHERE Status='E' ");
             $result->execute();
 
             for($i=0; $row = $result->fetch(); $i++){
                 $id=$row['ID_Client'];
                 ?>
                 <tr>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['ID_Client']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Civilite']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['PRENOM']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Nom']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Tel']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Email']; ?></td>
-                    <td style="text-align:center; word-break:break-all; ">
-                        <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['ID_Client']; ?></td>
+                    <td style="text-align:center; word-break:break-all; width:50px;"> <?php echo $row ['Civilite']; ?></td>
+                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['PRENOM']; ?></td>
+                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Nom']; ?></td>
+                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Tel']; ?></td>
+                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Email']; ?></td>
+                    <td style="text-align:center; word-break:break-all; width:100px;">
                         <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
                     </td>
 
-                    <!-- New Client Modal -->
-                    <div class="modal fade" id="newClient" role="dialog">
+                    <!-- New Employee Modal -->
+                    <div class="modal fade" id="newStaff" role="dialog">
                         <div class="modal-dialog">
 
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title" text-align="center">Enregistrer un nouveau client</h4>
+                                    <h4 class="modal-title" text-align="center">Enregistrer un nouveau employé</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal" method="post" id="add_client" action="AddClient.php">
+                                    <form class="form-horizontal" method="post" id="add_staff" action="AddStaff.php">
                                         <div class="container">
                                             <div class="form-group">
                                                 <label class="control-label col-sm-2" for Civilite> Civilité : </label>
@@ -169,7 +193,7 @@ try {
 
                         </div>
                     </div>
-                    <!-- Edit Client Modal -->
+                    <!-- Edit Employee Modal -->
                     <div class="modal fade" id="edit<?php  echo $id;?>" role="dialog">
                         <div class="modal-dialog">
 
@@ -177,10 +201,10 @@ try {
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title" text-align="center">Modifier un client</h4>
+                                    <h4 class="modal-title" text-align="center">Modifier un employé</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal" method="post" id="edit_client" action="EditClient.php">
+                                    <form class="form-horizontal" method="post" id="edit_staff" action="EditStaff.php">
                                         <div class="container">
                                             <div class="form-group">
                                                 <input type="hidden" value="<?php  echo $id;?>" id= "id" name="id" >
@@ -235,10 +259,10 @@ try {
 
 
 
-                    <!-- Delete Client Modal -->
+                    <!-- Delete Employee Modal -->
                     <div id="delete<?php  echo $id;?>" class="modal fade" role="dialog">
                         <div class="modal-header">
-                            <h3 id="myModalLabel">Delete</h3>
+                            <h3>Delete</h3>
                         </div>
                         <div class="modal-body">
                             <p><div style="font-size:larger;" class="alert alert-danger">Etes-vous sûr de vouloir effacer les données de <b style="color:red;"><?php echo $row['PRENOM']." ".$row['Nom'] ; ?></b> ? <br> Cette action n'est pas réversible</p>
@@ -246,7 +270,7 @@ try {
                         <br>
                         <div class="modal-footer">
                             <button class="btn btn-inverse" data-dismiss="modal" >Non</button>
-                            <a href="DeleteClient.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
+                            <a href="DeleteStaff.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
 
 
                         </div>
@@ -265,6 +289,11 @@ catch(PDOException $e) {
 }
 $bdd = null;
 echo "</table>";
+
+}else{
+        echo "<script>alert('Vous n\'avez pas la permission d\'accéder cette page'); window.location='Home.php'</script>";
+    }
+}
 ?>
 
 <script>
@@ -275,7 +304,7 @@ echo "</table>";
 
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("clientTable");
+        table = document.getElementById("staffTable");
         switching = true;
         //Set the sorting direction to ascending:
         dir = "asc";
