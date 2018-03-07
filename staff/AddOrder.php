@@ -16,6 +16,9 @@ try {
     for($i=0; $i<=$_POST['nbProducts']; $i++){
         $ID_Produit=$_POST['ID_Produit'.$i];
         $Quantite=$_POST['Quantite'.$i];
+        if($Quantite==""||$Quantite=="0"){
+            continue;
+        }
         $query="INSERT INTO lignecommande(Quantite, ID_Commande, ID_Produit) VALUES('$Quantite','$ID_Commande','$ID_Produit')";
         $stmt = $bdd->prepare($query);
         $stmt->execute();
