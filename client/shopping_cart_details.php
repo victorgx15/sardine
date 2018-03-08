@@ -91,8 +91,9 @@ if (isset($_POST['purchase'])) {
 							$stmt->close();
 
 							$prixtotal=0;
-						
+
 					while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+
 
 						 
             	?>

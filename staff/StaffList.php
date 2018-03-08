@@ -105,26 +105,26 @@ try {
                 <th style="text-align:center; word-break:break-all; "> <input style="text-align:center;" type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol4" onkeyup="filterCol(4)"> </th>
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol5" onkeyup="filterCol(5)"></th>
-                <th style="text-align:center; word-break:break-all; "> </th>
+                <th style="text-align:center; word-break:break-all; display:inline-block"> </th>
             </tr>
             </thead>
             <tbody>
             <?php
             $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-            $result = $bdd->prepare("SELECT * FROM compte WHERE Status='E' ");
+            $result = $bdd->prepare("SELECT * FROM compte WHERE Status='E' OR Status='A'");
             $result->execute();
 
             for($i=0; $row = $result->fetch(); $i++){
                 $id=$row['ID_Client'];
                 ?>
                 <tr>
-                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['ID_Client']; ?></td>
-                    <td style="text-align:center; word-break:break-all; width:50px;"> <?php echo $row ['Civilite']; ?></td>
-                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['PRENOM']; ?></td>
-                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Nom']; ?></td>
-                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Tel']; ?></td>
-                    <td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['Email']; ?></td>
-                    <td style="text-align:center; word-break:break-all; width:100px;">
+                    <td style="text-align:center; word-break:break-all;"> <?php if($row['Status']=='A'){ echo "<font color='red'>"; echo $row ['ID_Client']; echo "</font>";}else{echo $row ['ID_Client'];} ?></td>
+                    <td style="text-align:center; word-break:break-all; width:5%;"> <?php if($row['Status']=='A'){ echo "<font color='red'>"; echo $row ['Civilite']; echo "</font>";}else{echo $row ['Civilite'];} ?></td>
+                    <td style="text-align:center; word-break:break-all;"> <?php if($row['Status']=='A'){ echo "<font color='red'>"; echo $row ['PRENOM']; echo "</font>";}else{echo $row ['PRENOM'];} ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php if($row['Status']=='A'){ echo "<font color='red'>"; echo $row ['Nom']; echo "</font>";}else{echo $row ['Nom'];} ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php if($row['Status']=='A'){ echo "<font color='red'>"; echo $row ['Tel']; echo "</font>";}else{echo $row ['Tel'];} ?></td>
+                    <td style="text-align:center; word-break:break-all; width:20%;"> <?php if($row['Status']=='A'){ echo "<font color='red'>"; echo $row ['Email']; echo "</font>";}else{echo $row ['Email'];} ?></td>
+                    <td style="text-align:center; word-break:break-all; width:10%">
                         <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
                     </td>
@@ -142,6 +142,15 @@ try {
                                 <div class="modal-body">
                                     <form class="form-horizontal" method="post" id="add_staff" action="AddStaff.php">
                                         <div class="container">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for Status> Status : </label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" name="Status" id="Status">
+                                                        <option value="E">Employé</option>
+                                                        <option value="A">Administrateur</option>
+                                                    </select>
+                                                </div>
+                                            </div><br>
                                             <div class="form-group">
                                                 <label class="control-label col-sm-2" for Civilite> Civilité : </label>
                                                 <div class="col-sm-4">

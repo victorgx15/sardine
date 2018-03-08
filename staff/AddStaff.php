@@ -6,6 +6,7 @@ try {
 
     if (isset($_POST['Email'])) {
         // Insertion
+        $Status=$_POST['Status'];
         $Civilite=$_POST['Civilite'];
         $PRENOM=$_POST['PRENOM'];
         $Nom=$_POST['Nom'];
@@ -13,7 +14,7 @@ try {
         $Email=$_POST['Email'];
         $Password=hash('sha256', $_POST['Password']);
 
-        $query="INSERT INTO compte(Civilite, PRENOM, Nom, Tel, Email, Password, Status) VALUES('$Civilite', '$PRENOM', '$Nom', '$Tel', '$Email', '$Password','E')";
+        $query="INSERT INTO compte(Civilite, PRENOM, Nom, Tel, Email, Password, Status) VALUES('$Civilite', '$PRENOM', '$Nom', '$Tel', '$Email', '$Password','$Status')";
 
         $stmt = $bdd->prepare($query);
 
