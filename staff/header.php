@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="Home.php" style="padding:5px;"><img src="logo.png" width="40px" style="display:inline;margin-right:10px">La Vieille Sardine : Intranet</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mon compte</a></li>
+      <li><a href="myaccount.php"><span class="glyphicon glyphicon-user"></span> Mon compte</a></li>
       <li><a href="logout.php">Deconnexion</a></li>
     </ul>
   </div>
