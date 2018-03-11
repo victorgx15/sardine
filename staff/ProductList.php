@@ -37,7 +37,7 @@ try {
         <?php
             if($_SESSION['status'] == 'A') {
         ?>
-        <a href="AddProduct.php" class="btn btn-success" role="button">
+        <a href="AddProductPage.php" class="btn btn-success" role="button">
             <span class="glyphicon glyphicon-plus"></span> Nouveau Produit
         </a>
         <?php
@@ -91,13 +91,16 @@ try {
                 }
                 ?>
             </tr>
-            <!--<tr id="searchFilter" class="collapse">
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol0" onkeyup="filterCol(0)"></th>
-                <th style="text-align:center; word-break:break-all; "> </th>
+            <tr id="searchFilter" class="collapse">
+                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol0" onkeyup="ProductList.php"></th>
+                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(1)"></th>
                 <th style="text-align:center; word-break:break-all;"> <input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
                 <th style="text-align:center; word-break:break-all; "> <input style="text-align:center;" type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol4" onkeyup="filterCol(4)"> </th>
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol5" onkeyup="filterCol(5)"></th>
+                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol6" onkeyup="filterCol(6)"></th>
+                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol7" onkeyup="filterCol(7)"></th>
+                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol8" onkeyup="filterCol(8)"></th>
                 <?php
 /*                if($_SESSION['status'] == 'A') {
                     */?>
@@ -105,7 +108,7 @@ try {
                     <?php
 /*                }
                 */?>
-            </tr>-->
+            </tr>
             </thead>
             <tbody>
             <?php
@@ -118,7 +121,7 @@ try {
                 ?>
                 <tr>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Id_Produit']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Prix']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo number_format($row ['Prix'],'2'); ?>€</td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Ref']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Nombre_boites']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Poids']; ?></td>
@@ -138,7 +141,7 @@ try {
                         }
                     ?>
 
-                    <!-- Delete Client Modal -->
+                    <!-- Delete Product Modal -->
                     <div id="delete<?php  echo $id;?>" class="modal fade" role="dialog">
                         <div class="modal-header">
                             <h3 id="myModalLabel">Delete</h3>
