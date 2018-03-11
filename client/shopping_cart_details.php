@@ -1,19 +1,22 @@
 <?php
 
 /*on inclue fichier de connexion à la bd */
+//récupérer la session 
+session_start();
 require_once 'dbconnect.php';
-
-
 
 
 if (isset($_POST['purchase'])) {
     //$email = $_POST['email'];
     if (!isset($_SESSION['user'])) {
-    //header("Location: login.php");
-    //exit;
-    	echo "hey1";
+    	
+        $stmtStock = $conn->prepare("INSERT INTO commande(Date_Livraison,Etat, ID_Client) VALUES('2018-08-01','Commandé', 2)");
+	    $stmtStock->execute();
+    header("Location: inscription_connexion/login.php");
+    exit;
+	}else{
+	  	echo "hey1".$_SESSION['user'];
 	}
-	echo "hey";
 }
 
 
@@ -23,6 +26,7 @@ if (isset($_POST['purchase'])) {
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+
 </head>
 
 
@@ -41,14 +45,11 @@ if (isset($_POST['purchase'])) {
             <div class="card-body">
 
             	<?php 
-            		//récupérer la session 
-					session_start();
+            		
 					//initialiser un tableau
 					$eltsPanier=array();
-
 					//if 1
 					if(isset($_SESSION['cart'])){
-
 						if(!empty($_GET["action"])) {
 							switch($_GET["action"]) {
 								case "remove":
@@ -146,26 +147,20 @@ if (isset($_POST['purchase'])) {
                 <div class="pull-right" style="margin: 5px">
                     Prix ​​total: <b>
 	                    <?php
-	                    //reduction selon page 10 cahier de charge
-	                    if($prixtotal<229){
-							echo $prixtotal;
-	                    }else{
-		                    $prixremise=0;
-		                    $remise=0;
-		                    if($prixtotal>229 && $prixtotal<=381){
-								$prixremise=$prixtotal*(1-0.03);
-								$remise=3;
-		                    }elseif ($prixtotal>381 && $prixtotal<=1220){
-								$prixremise=$prixtotal*(1-0.05);
-								$remise=5;
-		                    }elseif( $prixtotal>1220){
-		                    	$prixremise=$prixtotal*(1-0.07);
-		                    	$remise=7;
-		                    }
-
-		                     echo $prixtotal."€ avec remise de ".$remise."% est : ".$prixremise;	
-	                    }
-	                    
+		                    //reduction selon page 10 cahier de charge
+		                    if (!isset($_SESSION['user'] )) {
+		                    	reduction($prixtotal,"V");
+							}else{
+								$res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
+	             				$userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
+	             				$statusClient=$userRow['Status'];
+	             				if($statusClient=='C'){
+		             				reduction($prixtotal,"C");
+	             				}//else client Professionnel
+	             				else{
+	             					reduction($prixtotal,"P");
+	             				}	
+							}
 	                     ?>
                   
                   	€</b>
@@ -184,3 +179,50 @@ if (isset($_POST['purchase'])) {
 		?>
 </div>
 
+<?php 
+
+function reduction($prixtotal,$status) {
+	if($status=="V" || $status=="C"){
+	if($prixtotal<229){
+		echo $prixtotal;
+	}else{
+		$prixremise=0;
+		$remise=0;
+		if($prixtotal>229 && $prixtotal<=381){
+			$prixremise=$prixtotal*(1-0.03);
+				$remise=3;
+        }elseif ($prixtotal>381 && $prixtotal<=1220){
+			$prixremise=$prixtotal*(1-0.05);
+			$remise=5;
+        }elseif( $prixtotal>1220){
+	    	$prixremise=$prixtotal*(1-0.07);
+    	 	$remise=7;
+		}
+		echo $prixtotal."€ avec remise de ".$remise."% est : ".$prixremise;	
+	}	
+	}else{
+		if($prixtotal<1220){
+		echo $prixtotal;
+	}elseif($status=="P"){
+		$prixremise=0;
+		$remise=0;
+		if($prixtotal>1220 && $prixtotal<=2020){
+			$prixremise=$prixtotal*(1-0.07);
+				$remise=7;
+		}elseif ($prixtotal>2020 && $prixtotal<=3010){
+			$prixremise=$prixtotal*(1-0.09);
+			$remise=9;
+		}elseif( $prixtotal>3010){
+			$prixremise=$prixtotal*(1-0.11);
+			$remise=11;
+	    }
+
+		echo $prixtotal."€ avec remise de ".$remise."% est : ".$prixremise;	
+	}
+	}
+							
+}
+
+
+
+?>

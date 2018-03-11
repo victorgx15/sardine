@@ -3,19 +3,20 @@ ob_start();
 session_start();
 require_once 'dbconnect.php';
 
+
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit;
 }
 // select logged in users detail
-$res = $conn->query("SELECT * FROM users WHERE id=" . $_SESSION['user']);
+$res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
 $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
 ?>
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Hello,<?php echo $userRow['email']; ?></title>
+    <title>Hello,<?php echo $userRow['Email']; ?></title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="assets/css/index.css" type="text/css"/>
 </head>
@@ -42,7 +43,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
                         <span
-                            class="glyphicon glyphicon-user"></span>&nbsp;Connecté en tant que : <?php echo $userRow['email']; ?>
+                            class="glyphicon glyphicon-user"></span>&nbsp;Connecté en tant que : <?php echo $userRow['Email']; ?>
                         &nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Déconnexion</a>

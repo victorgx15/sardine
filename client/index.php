@@ -2,7 +2,9 @@
 <html lang="en">
 
 
- <?php include 'header.php';?>
+ <?php 
+ 	include 'header.php';
+ ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -86,6 +88,9 @@
 	                     <!--On affiche la designation du produit -->
 	                  <div class="project-name">
 	                     <?php echo $row["Designation"]; ?>
+	                  </div>
+	                  <div class="project-name">
+	                     <?php echo "<a4><p><strong>".$row["Prix"]."€<a4></p></strong>"; ?>
 	                  </div>
 	                </div>
 	              </div>

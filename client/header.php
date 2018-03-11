@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <head>
   <!--Style carroussel-->
  <link rel="stylesheet" href="css/style_Caroussel.css">
@@ -86,7 +86,21 @@ background-color: #0c7cbb !important;
     
     
     </a></li> 
-        <li><a href=""><i class=" fa fa-user site-nav--icon"></i>Connexion | Inscription</a></li>
+        <li><a href="inscription_connexion/index.php"><i class=" fa fa-user site-nav--icon"></i>
+          <?php 
+            
+            if (isset($_SESSION['user'])) {
+              // select logged in users detail
+              require_once 'dbconnect.php';
+              $res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
+              $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
+                echo "Hello,".$userRow['Email'];
+            }else{
+              echo "Connexion | Inscription";
+            }
+          ?>
+
+        </a></li>
         <li><a href="shopping_cart_details.php"><i class="fa fa-shopping-cart site-nav--icon"></i>Panier</a></li>
        
       </ul> 

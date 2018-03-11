@@ -14,7 +14,7 @@ if (isset($_POST['btn-login'])) {
     $upass = $_POST['pass'];
 
     $password = hash('sha256', $upass); // password hashing using SHA256
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email= ?");
+    $stmt = $conn->prepare("SELECT ID_Client, Nom, Password FROM compte WHERE Email= ?");
     $stmt->bind_param("s", $email);
     /* execute query */
     $stmt->execute();
@@ -25,8 +25,8 @@ if (isset($_POST['btn-login'])) {
     $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
     $count = $res->num_rows;
-    if ($count == 1 && $row['password'] == $password) {
-        $_SESSION['user'] = $row['id'];
+    if ($count == 1 && $row['Password'] == $password) {
+        $_SESSION['user'] = $row['ID_Client'];
         header("Location: index.php");
     } elseif ($count == 1) {
         $errMSG = "Bad password";

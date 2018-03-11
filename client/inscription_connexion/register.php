@@ -2,6 +2,8 @@
 ob_start();
 session_start();
 
+
+
 if (isset($_SESSION['user']) != "") {
     header("Location: index.php");
 }
@@ -15,14 +17,14 @@ if (isset($_POST['signup'])) {
 	$tel2 = trim($_POST['tel2']);
     $email = trim($_POST['email']);
     $upass = trim($_POST['pass']);
-	
+	$status="C";
 	
 
     // hashage du mot de pass avec SHA256;
     $password = hash('sha256', $upass);
 
     // check si l'email existe ou pas lol
-    $stmt = $conn->prepare("SELECT email FROM users WHERE email=?");
+    $stmt = $conn->prepare("SELECT Email FROM compte WHERE Email=?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -33,8 +35,8 @@ if (isset($_POST['signup'])) {
     if ($count == 0) { // Si email n'existe pas 
 
 
-        $stmts = $conn->prepare("INSERT INTO users(civilite, username,lastname, tel1, tel2, email,password) VALUES(?,?,?,?, ?, ?, ?)");
-        $stmts->bind_param("sssssss", $civil, $uname,$prenom,$tel1, $tel2, $email, $password);
+        $stmts = $conn->prepare("INSERT INTO compte(Civilite,Nom,PRENOM,Tel,Tel2,Email,Password,Status) VALUES(?,?,?,?,?,?,?,?)");
+        $stmts->bind_param("ssssssss", $civil, $uname,$prenom,$tel1, $tel2, $email, $password,$status);
         $res = $stmts->execute();//get result
         $stmts->close();
 
