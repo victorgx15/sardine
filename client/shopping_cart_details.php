@@ -5,23 +5,51 @@
 session_start();
 require_once 'dbconnect.php';
 
+if(isset($_POST['orderpaper'])){
+	require('pdf_generator/fpdf.php');
+	    header("Location: invoice.php");
+
+		/*$pdf = new FPDF();
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',16);
+		$pdf->Cell(40,10,'Hello World !');
+		//$pdf->Output(F,'directory/filename.pdf'); 
+		$pdf->Output('D','filename.pdf');*/
+}
 
 if (isset($_POST['purchase'])) {
-    //$email = $_POST['email'];
     if (!isset($_SESSION['user'])) {
-    	
-        $stmtStock = $conn->prepare("INSERT INTO commande(Date_Livraison,Etat, ID_Client) VALUES('2018-08-01','Commandé', 2)");
-	    $stmtStock->execute();
     header("Location: inscription_connexion/login.php");
     exit;
 	}else{
-	  	echo "hey1".$_SESSION['user'];
+		
+
+		$Date=date("Y-m-d");
+	    $Date_Livraison=date("Y-m-d", strtotime($Date. ' + 3 days'));
+	    $Etat='En cours de préparation';
+	    $ID_Client=$_SESSION['user'];
+
+		$stmt = $conn->prepare("INSERT INTO commande(Date, Date_Livraison, Etat, ID_Client) VALUES('$Date', '$Date_Livraison','$Etat','$ID_Client')");
+							/*on execute la requete SQL enregistrée dans la variable stmt */
+		if($stmt->execute()){
+			echo "<p><strong>Votre commande est passée avec succèse !</strong></p>";
+			//unset($_SESSION["cart"]);
+
+		}else{
+			echo "<p><strong>Une erreur s'est produite, veuillez réessayer s'il vous plaît !</strong></p>";
+		}
+		$stmt->execute();
+		$stmt->close();
+
 	}
 }
 
 
 ?>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>eCommerce Product Detail</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -166,6 +194,13 @@ if (isset($_POST['purchase'])) {
                   
                   	€</b>
                 </div>
+            </div>
+
+            <div class="card-footer">
+            	<form action="" method="post">
+            		<button type="submit" name="orderpaper" class="btn btn-success pull-right">Bon de commande </button>
+                	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
+            	</form>
             </div>
         </div>
 

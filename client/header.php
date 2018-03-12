@@ -94,7 +94,7 @@ background-color: #0c7cbb !important;
               require_once 'dbconnect.php';
               $res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
               $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
-                echo "Hello,".$userRow['Email'];
+                echo "Hello, ".$userRow['PRENOM'];
             }else{
               echo "Connexion | Inscription";
             }

@@ -1,4 +1,6 @@
+
 <?php
+	    session_start();
 	    /*on inclue fichier de connexion à la bd */
     	require_once 'dbconnect.php';
 	    /*on prend l'ID du produit envoyé depuis la page inde après click su produit par l'utilisateur */
@@ -8,6 +10,7 @@
 	    $stmt->execute();
 	    $res = $stmt->get_result();
 	    $stmt->close();
+	    
 	    $stmtStock = $conn->prepare("SELECT SUM(Quantite_stock) FROM est_placer GROUP BY Id_Produit HAVING Id_Produit=$id");
 	    $stmtStock->execute();
 		
@@ -18,13 +21,26 @@
 		$quantityStock=0;
 		}
 
-		
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>eCommerce Product Detail</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  </head>
+
+
+<?php
 
 
 	    if(isset($_POST["add_to_cart"]))
 	    {
-	    	session_start();
-
 	    	if(empty($_SESSION['cart'])){
 	    		//initialisation de la session
 	    		$_SESSION['cart']=array();
@@ -39,31 +55,16 @@
 	    			$_SESSION['cart'][$id]=$_POST['quantity'];
 	    		}
 	    	}
+
+
 	    	
 	    }
 
 		
 	   	/*on retire tous les enregistrements dans la table produit */
 	    while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-    	
 
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>eCommerce Product Detail</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
- <?php include 'header.php';?>
-
-  </head>
-
-
-
+ ?>
 
 
 <!-- NEEDED FOR PRODUCT DETAILS PAGE-->
@@ -119,7 +120,9 @@
 					
 
 
-
+						<?php 
+						//afficher bouton ajouter au panier quand il y a bien une quantité disponible 
+						if($quantityStock>0){ ?>
 						<div class="action">
 							<form method="post">
 								<button class="add-to-cart btn btn-default" type="submit" name="add_to_cart" value="add_to_cart">Ajouter au panier</button>
@@ -128,6 +131,7 @@
 							</form>
 								<p class="">
 									<?php  
+								}
 									if(isset($_POST["add_to_cart"]))
 									{ 
 										if($quantityStock-$_POST['quantity']>0){
@@ -135,6 +139,9 @@
 										}else{
 											echo "<p><strong>Désolé, quantité indisponible au stock !</strong></p>";
 										}
+									//sleep(2);
+									//echo "<script> window.location.assign('index.php'); </script>";
+
 									} 
 									?>
 								</p>
@@ -150,4 +157,5 @@
   		//fin while
     		}
 ?>
+
 </html>
