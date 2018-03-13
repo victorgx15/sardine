@@ -17,7 +17,7 @@ try {
 
     $query="UPDATE compte SET Civilite='$Civilite', PRENOM='$PRENOM', Nom='$Nom', Tel='$Tel', Email='$Email', Password='$Password' WHERE ID_Client = '$get_id'";
     $bdd->exec($query);
-    echo "<script>alert('Employé modifié avec succès!'); window.location='StaffList.php'</script>";
+    echo "<script>alert('Employé modifié avec succès!'); window.location.href='StaffList.php'; window.location('StaffList.php')</script>";
 
 }
 catch(PDOException $e) {

@@ -3,7 +3,7 @@ session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 ?>
 
-<form method="post" action="myaccount.php">
+<form method="post" action="MyAccount.php">
 	<?php
 
 		if(isset($_POST['email'])) {
