@@ -16,12 +16,12 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
             }
         </style>
         <link rel="stylesheet" href="staff.css" />
-        <title>La vieille sardine : Accueil Intranet</title>
     </head>
 
     <body>
     <div class="jumbotron" style="text-align: center; width=100%">
         <br><h1>Bienvenue</h1>
+
         <div class="container" style="padding: 10px; display:inline;">
 
             <?php

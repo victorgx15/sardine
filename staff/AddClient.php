@@ -14,10 +14,17 @@ try {
         $Password=hash('sha256', $_POST['Password']);
 
         $query="INSERT INTO compte(Civilite, PRENOM, Nom, Tel, Email, Password, Status) VALUES('$Civilite', '$PRENOM', '$Nom', '$Tel', '$Email', '$Password','C')";
+        $newAccount = $bdd->prepare($query);
+        $newAccount->execute();
+        $ID_Client=$bdd->lastInsertId();
 
-        $stmt = $bdd->prepare($query);
-
-        $stmt->execute();
+        $Adresse=$_POST['Adresse'];
+        $Postal_Code=$_POST['Postal_Code'];
+        $Ville=$_POST['Ville'];
+        $Pays=$_POST['Pays'];
+        $query="INSERT INTO adresse(ID_Client, Adresse, Postal_Code, Ville, Pays, Status) VALUES('$ID_Client','$Adresse', '$Postal_Code', '$Ville', '$Pays', 'C')";
+        $newAddress = $bdd->prepare($query);
+        $newAddress->execute();
         echo "<script>alert('Client enregistré avec succès'); window.location.href='ClientList.php'; window.location('ClientList.php')</script>";
     }
 }

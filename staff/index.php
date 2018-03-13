@@ -32,17 +32,18 @@ session_start();
         <form method="post" id="employee_form_login" action="">
         	<?php 
 				if (isset($_POST['employeeEmail']) OR isset($_POST['employeePwd'])) {
-				    $req = $bdd->prepare('SELECT id_client, password, status FROM compte WHERE email = :pseudo');
+				    $req = $bdd->prepare('SELECT Id_client, Password, Status, Nom, PRENOM FROM compte WHERE email = :pseudo');
 					$req->execute(array('pseudo' => $_POST['employeeEmail']));
 
 					while ($resultat = $req->fetch()) {
-						if(!$resultat OR hash('sha256', $_POST['employeePwd']) != $resultat['password']) {
+						if(!$resultat OR hash('sha256', $_POST['employeePwd']) != $resultat['Password']) {
 							echo 'Mauvais identifiant ou mot de passe !';
 						} else {
-							session_start();
-					        $_SESSION['id'] = $resultat['id_client'];
+					        $_SESSION['id'] = $resultat['Id_client'];
+					        $_SESSION['PRENOM']= $resultat['PRENOM'];
+					        $_SESSION['Nom']=$resultat['Nom'];
 					        $_SESSION['email'] = $_POST['employeeEmail'];
-					        $_SESSION['status'] = $resultat['status'];
+					        $_SESSION['status'] = $resultat['Status'];
 					        header('Location: Home.php');
   							exit();
 						}
