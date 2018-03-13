@@ -8,13 +8,6 @@ require_once 'dbconnect.php';
 if(isset($_POST['orderpaper'])){
 	require('pdf_generator/fpdf.php');
 	    header("Location: invoice.php");
-
-		/*$pdf = new FPDF();
-		$pdf->AddPage();
-		$pdf->SetFont('Arial','B',16);
-		$pdf->Cell(40,10,'Hello World !');
-		//$pdf->Output(F,'directory/filename.pdf'); 
-		$pdf->Output('D','filename.pdf');*/
 }
 
 if (isset($_POST['purchase'])) {
@@ -23,22 +16,29 @@ if (isset($_POST['purchase'])) {
     exit;
 	}else{
 		
-
+		//a mettre apres validation du paiement 
+		//unset($_SESSION["cart"]);
+		
 		$Date=date("Y-m-d");
 	    $Date_Livraison=date("Y-m-d", strtotime($Date. ' + 3 days'));
 	    $Etat='En cours de préparation';
 	    $ID_Client=$_SESSION['user'];
 
 		$stmt = $conn->prepare("INSERT INTO commande(Date, Date_Livraison, Etat, ID_Client) VALUES('$Date', '$Date_Livraison','$Etat','$ID_Client')");
-							/*on execute la requete SQL enregistrée dans la variable stmt */
-		if($stmt->execute()){
-			echo "<p><strong>Votre commande est passée avec succèse !</strong></p>";
-			//unset($_SESSION["cart"]);
-
-		}else{
-			echo "<p><strong>Une erreur s'est produite, veuillez réessayer s'il vous plaît !</strong></p>";
-		}
 		$stmt->execute();
+
+		$stmt = $conn->prepare("SELECT MAX(`Id_Commande`) FROM `commande`");
+		$stmt->execute();
+		$res = $stmt->get_result();
+		$row = mysqli_fetch_array($res, MYSQLI_ASSOC);
+
+		$ID_Commande=$row["MAX(`Id_Commande`)"];
+		foreach($_SESSION["cart"] as $idProduit => $quantite) {
+			$stmt = $conn->prepare("INSERT INTO lignecommande(Quantite, ID_Commande, ID_Produit) VALUES('$quantite','$ID_Commande','$idProduit')");
+			$stmt->execute();
+		}		
+		echo "<p><strong>Votre commande est passée avec succès !</strong></p>";		
+		
 		$stmt->close();
 
 	}
