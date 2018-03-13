@@ -19,7 +19,7 @@ if(!isset($_SESSION['status'])||($_SESSION['status'] != 'A' && $_SESSION['status
             <a class="navbar-brand" href="Home.php" style="padding:5px;"><img src="logo.png" width="40px" style="display:inline;margin-right:10px">La Vieille Sardine : Intranet</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="MyAccount.php"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['PRENOM'].' '.$_SESSION['Nom'];?></a></li>
+            <li><a href="MyAccount.php?Edit=0"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['PRENOM'].' '.$_SESSION['Nom'];?></a></li>
             <li><a href="logout.php">Deconnexion</a></li>
         </ul>
     </div>

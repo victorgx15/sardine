@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<?php
-// Sous WAMP (Windows)
-// Will be changed to correspond to proper database later
-$bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-?>
+
 <html>
     <head>
         <?php include('header.php'); ?>
