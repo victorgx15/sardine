@@ -23,7 +23,7 @@ VALUES('$Designation', '$Marque', '$Famille', '$Gamme', '$Poids', '$Nombre_boite
         $stmt = $bdd->prepare($query);
 
         $stmt->execute();
-        echo "<script>alert('Produit ajouté avec succès');window.location('ProductList.php')</script>";
+        echo "<script>alert('Produit ajouté avec succès');window.location.href='ProductList.php';window.location('ProductList.php')</script>";
 
     }
     catch(PDOException $e) {

@@ -22,12 +22,11 @@ try {
 
     $stmt->execute();
 
-    echo "<script>alert('Produit modifié avec succès');</script>";
+    echo "<script>alert('Produit modifié avec succès');window.location.href='ProductList.php'; window.location('ProductList.php');</script>";
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-header("Location: ProductList.php");
 $bdd = null;
 
 ?>

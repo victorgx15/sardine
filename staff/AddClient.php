@@ -18,7 +18,7 @@ try {
         $stmt = $bdd->prepare($query);
 
         $stmt->execute();
-        echo "<script>alert('Client enregistré avec succès'); window.location('ClientList.php')</script>";
+        echo "<script>alert('Client enregistré avec succès'); window.location.href='ClientList.php'; window.location('ClientList.php')</script>";
     }
 }
 catch(PDOException $e) {

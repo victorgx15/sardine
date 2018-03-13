@@ -23,7 +23,7 @@ try {
         $stmt = $bdd->prepare($query);
         $stmt->execute();
     }
-    echo "<script>alert('Commande passé avec succès');window.location('ClientList.php');</script>";
+    echo "<script>alert('Commande passé avec succès');window.location.href='ClientList.php';window.location('ClientList.php');</script>";
     //header('Location: ClientList.php');
 
 }
