@@ -17,44 +17,48 @@
 
 <div class="jumbotron" align="center">
     <h2>Informations de votre compte</h2><br>
-    <form class="form-horizontal" method="post" id="edit_account" action="">
+    <form class="form-horizontal" method="post" id="edit_account" action="EditAccount.php">
         <?php
-        $stmt = $bdd->query("SELECT Email, Nom, PRENOM, Tel, Civilite, Password FROM compte WHERE Id_Client = ".$_SESSION['id']."");
-        while ($client = $stmt->fetch()) {
+        $accountInfo = $bdd->prepare("SELECT Email, Nom, PRENOM, Tel, Civilite, Password, Status FROM compte WHERE Id_Client = ".$_SESSION['id']."");
+        $accountInfo->execute();
+        while ($compte = $accountInfo->fetch()) {
         ?>
         <div class="container">
             <div class="form-group">
                 <input type="hidden" value="<?php  echo $id;?>" id= "id" name="id" >
+                <input type="hidden" value="<?php  echo $compte['Status'];?>" id="Status" name="Status" >
+                <input type="hidden" value="<?php  echo $compte['Password'];?>" id="Password" name="Password" >
+
                 <label class="control-label col-sm-2" for Civilite> Civilité : </label>
                 <div class="col-sm-2">
                     <select class="form-control" name="Civilite" id="Civilite" required <?php if(!$_GET['Edit']) echo 'disabled'?>>
-                        <option value="M" <?php if($client['Civilite']=='M') echo 'selected="selected"';?>>Monsieur</option>
-                        <option value="Mme" <?php if($client['Civilite']=='Mme') echo 'selected="selected"';?>>Madame</option>
+                        <option value="M" <?php if($compte['Civilite']=='M') echo 'selected="selected"';?>>Monsieur</option>
+                        <option value="Mme" <?php if($compte['Civilite']=='Mme') echo 'selected="selected"';?>>Madame</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for PRENOM> Prenom : </label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="PRENOM" id= "PRENOM" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $client['PRENOM']; ?>>
+                    <input type="text" class="form-control" name="PRENOM" id= "PRENOM" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $compte['PRENOM']; ?>>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for Nom> Nom : </label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="Nom" id="Nom" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $client['Nom']; ?>>
+                    <input type="text" class="form-control" name="Nom" id="Nom" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $compte['Nom']; ?>>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for Tel> Téléphone : </label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="Tel" id="Tel" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $client['Tel']; ?>>
+                    <input type="text" class="form-control" name="Tel" id="Tel" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $compte['Tel']; ?>>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for Email> E-mail : </label>
                 <div class="col-sm-3">
-                    <input type="email" class="form-control" name="Email" id="Email" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $client['Email']; ?>>
+                    <input type="email" class="form-control" name="Email" id="Email" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $compte['Email']; ?>>
                 </div>
             </div><br>
             <?php
