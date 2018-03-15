@@ -547,7 +547,7 @@ try {
                         <br>
                         <div class="modal-footer">
                             <button class="btn btn-inverse" data-dismiss="modal" >Non</button>
-                            <a href="DeleteClient.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
+                            <a href="DeleteAccount.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
 
 
                         </div>

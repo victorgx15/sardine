@@ -29,15 +29,13 @@ try {
     $stmt=$bdd->prepare($query);
     $stmt->execute();
 
-    header('Location:'. $_SERVER['HTTP_REFERER']);
-    /*
-        if($Status=='C'){
-            echo "<script>alert('Client modifié avec succès'); window.location.href='ClientList.php'; window.location('ClientList.php')</script>";
-        }else{
-            echo "<script>alert('Employé modifié avec succès'); window.location.href='StaffList.php'; window.location('StaffList.php')</script>";
+    $prevPage=$_SERVER['HTTP_REFERER'];
 
-        }
-    */
+    if(substr($prevPage,-6)=="Edit=1"){
+        $prevPage=substr_replace($prevPage,"Edit=0", -6);
+    }
+    echo "<script>alert('Compte modifié avec succès'); window.location.href='$prevPage'; window.location('$prevPage')</script>";
+
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();

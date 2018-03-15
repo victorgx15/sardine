@@ -24,15 +24,13 @@ try {
         $Ville=$_POST['Ville'];
         $Pays=$_POST['Pays'];
 
-        $query="INSERT INTO adresse(ID_Client, Adresse, Postal_Code, Ville, Pays, Status) VALUES('$ID_Client','$Adresse', '$Postal_Code', '$Ville', '$Pays', 'C')";
+        $query="INSERT INTO adresse(ID_Client, Adresse, Postal_Code, Ville, Pays, Status) VALUES('$ID_Client','$Adresse', '$Postal_Code', '$Ville', '$Pays', '$Status')";
         $newAddress = $bdd->prepare($query);
         $newAddress->execute();
-        if($Status=='C'){
-            echo "<script>alert('Client enregistré avec succès'); window.location.href='ClientList.php'; window.location('ClientList.php')</script>";
-        }else{
-            echo "<script>alert('Employé enregistré avec succès'); window.location.href='StaffList.php'; window.location('StaffList.php')</script>";
 
-        }
+        $prevPage=$_SERVER['HTTP_REFERER'];
+        echo "<script>alert('Compte ajouté avec succès'); window.location.href='$prevPage'; window.location('$prevPage')</script>";
+
     }
 }
 catch(PDOException $e) {
