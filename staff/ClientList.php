@@ -434,6 +434,7 @@ try {
                     <td style="text-align:center; word-break:break-all; "> <?php echo $compte ['Tel']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $compte ['Email']; ?></td>
                     <td style="text-align:center; word-break:break-all; ">
+                        <a href="ClientInfo.php?ID_Client=<?php echo $id;?>&ID_Panier=<?php echo '0';?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-time"></span></a>
                         <a href="AddOrderPage.php?ID_Client=<?php echo $id;?>&ID_Panier=<?php echo '0';?>" data-toggle="modal" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>
                         <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
