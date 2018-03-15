@@ -1,3 +1,7 @@
+	<!-- inclure N O S   S E R V I C E S -->	
+	<?php include 'nos_services.php';?>
+	</div>
+
 <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">

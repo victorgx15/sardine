@@ -16,7 +16,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Hello,<?php echo $userRow['Email']; ?></title>
+    <title>Hello,<?php echo $userRow['PRENOM']; ?></title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="assets/css/index.css" type="text/css"/>
 </head>
@@ -43,7 +43,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
                         <span
-                            class="glyphicon glyphicon-user"></span>&nbsp;Connecté en tant que : <?php echo $userRow['Email']; ?>
+                            class="glyphicon glyphicon-user"></span>&nbsp;Connecté en tant que : <?php echo $userRow['PRENOM']; ?>
                         &nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Déconnexion</a>
@@ -51,6 +51,23 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                     </ul>
                 </li>
             </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span
+                            class="glyphicon glyphicon-user"></span>&nbsp;Connecté en tant que : <?php echo $userRow['PRENOM']; ?>
+                        &nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Déconnexion</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
         </div>
     </div>
 </nav>
