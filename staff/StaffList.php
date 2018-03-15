@@ -492,17 +492,16 @@ try {
                                         <div class="container">
                                             <div class="form-group">
                                                 <input type="hidden" value="<?php  echo $id;?>" id= "id" name="id">
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-2" for Status> Status : </label>
-                                                    <div class="col-sm-2">
-                                                        <select class="form-control" name="Status" id="Status">
-                                                            <option disabled selected value style="display:none"></option>
-                                                            <option value="E" <?php if($compte ['Status']=='E') echo 'selected="selected"';?>>Employé</option>
-                                                            <option value="A" <?php if($compte ['Status']=='A') echo 'selected="selected"';?>>Administrateur</option>
-                                                        </select>
-                                                    </div>
-                                                </div><br>
-
+                                                <label class="control-label col-sm-2" for Status> Status : </label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" name="Status" id="Status">
+                                                        <option disabled selected value style="display:none"></option>
+                                                        <option value="E" <?php if($compte ['Status']=='E') echo 'selected="selected"';?>>Employé</option>
+                                                        <option value="A" <?php if($compte ['Status']=='A') echo 'selected="selected"';?>>Administrateur</option>
+                                                    </select>
+                                                </div>
+                                            </div><br>
+                                            <div class="form-group">
                                                 <label class="control-label col-sm-2" for Civilite> Civilité : </label>
                                                 <div class="col-sm-2">
                                                     <select class="form-control" name="Civilite" id="Civilite" required>
@@ -600,7 +599,7 @@ try {
                         <br>
                         <div class="modal-footer">
                             <button class="btn btn-inverse" data-dismiss="modal" >Non</button>
-                            <a href="DeleteStaff.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
+                            <a href="DeleteAccount.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
 
 
                         </div>
