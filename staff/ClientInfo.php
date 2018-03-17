@@ -24,15 +24,16 @@
     <h2>Commandes du client</h2>
     <h3 style="color:#ad0510"><?php echo $client ['PRENOM']." ".$client ['Nom'];?></h3><br>
 
-<table  style="width:70%;" class="table table-bordered table-hover" id="commandesList">
+<table  style="width:70%; margin-bottom:5px" class="table table-bordered table-hover">
     <thead>
     <tr>
-        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2;">ID </th>
-        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2;">Date</th>
-        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2;">Date Livraison</th>
-        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2;">Etat</th>
+        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2; width: 15%">ID </th>
+        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2; width: 25%">Date</th>
+        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2; width: 25%">Date Livraison</th>
+        <th style="text-align:center; word-break:break-all; background-color:#a2a2a2; width: 35%">Etat</th>
     </tr>
     </thead>
+</table>
     <?php
     $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $commandesList = $bdd->prepare("SELECT * FROM commande WHERE ID_Client='$ID_Client'");
@@ -40,47 +41,62 @@
     while($commande = $commandesList->fetch()){
         $Id_Commande=$commande['Id_Commande'];
     ?>
-
+    <table  style="width:70%; margin-top: 0; margin-bottom:0; background:whitesmoke" class="table table-bordered table-hover">
+        <thead>
         <tr class="parent">
-            <td style="text-align:center; word-break:break-all;"><?php echo $commande['Id_Commande']; ?></td>
-            <td style="text-align:center; word-break:break-all;"><?php echo $commande['Date']; ?></td>
-            <td style="text-align:center; word-break:break-all;"><?php echo $commande['Date_Livraison']; ?></td>
-            <td style="text-align:center; word-break:break-all;"><?php echo $commande['Etat']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 15%"><?php echo $commande['Id_Commande']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 25%"><?php echo $commande['Date']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 25%"><?php echo $commande['Date_Livraison']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 35%"><?php echo $commande['Etat']; ?></td>
         </tr>
-        <tr id="product<?php echo $Id_Commande?>" class="child" style="display:none;">
-            <th style="text-align:center; word-break:break-all; background-color:white"></th>
-            <th style="text-align:center; word-break:break-all; background-color:white">ID Produit</th>
-            <th style="text-align:center; word-break:break-all; background-color:white">Nom du Produit</th>
-            <th style="text-align:center; word-break:break-all; background-color:white">Quantité</th>
-        </tr>
+        </thead>
+    </table>
+        <div class="tableWrap" style="display:none">
+            <table  style="width:40%; margin-top: 0; margin-bottom:0;" class="table">
+                <tbody>
+                <tr id="product<?php echo $Id_Commande?>" class="child">
+                    <th style="text-align:center; word-break:break-all;">ID Produit</th>
+                    <th style="text-align:center; word-break:break-all;">Nom du Produit</th>
+                    <th style="text-align:center; word-break:break-all;">Quantité</th>
+                    <th style="text-align:center; word-break:break-all;">Prix</th>
+                </tr>
 
+                <?php
+                $ligneCommandeList = $bdd->prepare("SELECT * FROM lignecommande WHERE Id_Commande='$Id_Commande'");
+                $ligneCommandeList->execute();
+                $orderTotal=0;
+                while($ligneCommande=$ligneCommandeList->fetch()){
+                    $Id_Produit = $ligneCommande['Id_Produit'];
+                    $getProduct=$bdd->prepare("SELECT * FROM produit WHERE ID_Produit='$Id_Produit'");
+                    $getProduct->execute();
+                    $product=$getProduct->fetch();
+                    $orderTotal+=$product['Prix']*$ligneCommande['Quantite'];
+                    ?>
+                    <tr id="product<?php echo $Id_Commande?>" class="child">
+                        <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Id_Produit']; ?></td>
+                        <td style="text-align:center; word-break:break-all"><?php echo $product['Designation']; ?></td>
+                        <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Quantite']; ?></td>
+                        <td style="text-align:center; word-break:break-all;"><?php echo number_format($product['Prix']*$ligneCommande['Quantite'],'2')."€"; ?></td>
 
+                    </tr>
+                    <?php
+                }
+                ?>
+                <tr id="product<?php echo $Id_Commande?>" class="child">
+                    <td style="text-align:center; word-break:break-all;" colspan="3"></td>
+                    <td style="text-align:center; word-break:break-all;" ><?php echo number_format($orderTotal,'2')."€"; ?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <?php
-        $ligneCommandeList = $bdd->prepare("SELECT * FROM lignecommande WHERE Id_Commande='$Id_Commande'");
-        $ligneCommandeList->execute();
-        while($ligneCommande=$ligneCommandeList->fetch()){
-            $Id_Produit = $ligneCommande['Id_Produit'];
-            $getProductName=$bdd->prepare("SELECT * FROM produit WHERE ID_Produit='$Id_Produit'");
-            $getProductName->execute();
-            $productName=$getProductName->fetch();
-        ?>
-            <tr id="product<?php echo $Id_Commande?>" class="child" style="display:none;">
-                <td style="text-align:center; word-break:break-all; background-color:white"></td>
-                <td style="text-align:center; word-break:break-all; background-color:white"><?php echo $ligneCommande['Id_Produit']; ?></td>
-                <td style="text-align:center; word-break:break-all; background-color:white"><?php echo $productName['Designation']; ?></td>
-                <td style="text-align:center; word-break:break-all; background-color:white"><?php echo $ligneCommande['Quantite']; ?></td>
-            </tr>
-
-    <?php
-        }
     }
     ?>
-</table>
-
 </div>
+
 </body>
 <script>
-    $(document).ready(function() {
+    /*$(document).ready(function() {
 
         function getChildren($row) {
             var children = [];
@@ -95,9 +111,14 @@
 
             var children = getChildren($(this));
             $.each(children, function() {
-                $(this).slideToggle("slow");
+                $(this).slideToggle();
             })
         });
 
-    })
+    })*/
+
+    $("thead").click(function () {
+            $(this).parent().next("div").slideToggle();
+        }
+    )
 </script>
