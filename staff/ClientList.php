@@ -62,11 +62,11 @@ try {
             <thead>
             <tr>
                 <th style="width:10%"; onclick='sortTable(0)' >ID_Client</th>
-                <th style="width:5%"; onclick='sortTable(1)'>Civilite</th>
-                <th style="width:20%"; onclick='sortTable(2)'>Prenom</th>
-                <th style="width:20%"; onclick='sortTable(3)'>Nom</th>
-                <th style="width:15%"; onclick='sortTable(4)'>Tel</th>
-                <th style="width:10%"; onclick='sortTable(5)'>Email</th>
+                <th style="width:5%">Civilite</th>
+                <th style="width:20%">Prenom</th>
+                <th style="width:20%">Nom</th>
+                <th style="width:15%">Tel</th>
+                <th style="width:10%">Email</th>
 
                 <th> Action </th>
             </tr>
@@ -630,6 +630,31 @@ echo "</table>";
         }
     }
 </script>
+<script>
+    var $rows = $('tbody > tr'),
+        $filters = $('#filter_table input'),
+        cache, $m, len, cls;
 
+    $filters.on("keyup", function () {
+        $m = $filters.filter(function () {
+            return $.trim(this.value).length > 0;
+        }), len = $m.length;
+
+        if (len === 0) return $rows.show();
+
+        cache = {};
+        cls = '.' + $m.map(function () {
+            cache[this.className] = $.trim(this.value);
+            return this.className;
+        }).get().join(',.');
+
+        $rows.hide().filter(function () {
+            return $('td', this).filter(cls).filter(function () {
+                return this.textContent.indexOf(cache[this.className]) > -1;
+            }).length === len;
+        }).show();
+    });
+</script>
 </body>
 </html>
+<!-- https://stackoverflow.com/questions/43622127/filtering-table-multiple-columns -->

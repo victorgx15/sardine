@@ -5,6 +5,9 @@
             padding: 10px;
             padding-right: 30px;
         }
+        .parent:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -92,7 +95,7 @@
 
             var children = getChildren($(this));
             $.each(children, function() {
-                $(this).toggle();
+                $(this).slideToggle("slow");
             })
         });
 
