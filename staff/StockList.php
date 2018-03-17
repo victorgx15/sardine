@@ -34,15 +34,9 @@ try {
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Produits</strong>
         </div>
-        <?php
-            if($_SESSION['status'] == 'A') {
-        ?>
         <a href="AddProductPage.php" class="btn btn-success" role="button">
-            <span class="glyphicon glyphicon-plus"></span> Nouveau Produit
+            <span class="glyphicon glyphicon-plus"></span>Ajouter stock
         </a>
-        <?php
-            }
-        ?>
         <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#searchFilter">
             <span class="glyphicon glyphicon-search"></span> Filtrer
         </button>
@@ -75,18 +69,14 @@ try {
             <tr>
                 <th style="width:10%"; onclick='sortTable(0)' >ID_Produit</th>
                 <th style="width:5%"; onclick='sortTable(1)'>ID_Boutique</th>
-                <th style="width:15%"; onclick='sortTable(4)'>Designation</th>
-                <th style="width:10%"; onclick='sortTable(5)'>Quantite</th>
-                <th style="width:10%"; onclick='sortTable(9)'>Description</th>
-                <th> Action </th>
+                <th style="width:15%"; onclick='sortTable(2)'>Designation</th>
+                <th style="width:10%"; onclick='sortTable(3)'>Quantite</th>
             </tr>
             <tr id="searchFilter" class="collapse">
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol0" onkeyup="ProductList.php"></th>
                 <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(1)"></th>
                 <th style="text-align:center; word-break:break-all;"> <input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
                 <th style="text-align:center; word-break:break-all; "> <input style="text-align:center;" type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol4" onkeyup="filterCol(4)"> </th>
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol5" onkeyup="filterCol(5)"></th>
                 <?php
 /*                if($_SESSION['status'] == 'A') {
                     */?>
@@ -99,46 +89,18 @@ try {
             <tbody>
             <?php
             $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-            $result = $bdd->prepare("SELECT * FROM produit p JOIN produitboutique pb ON p.ID_Produit = pb.pid JOIN boutique b ON pb.bid = b.ID_Boutique");
+            $result = $bdd->prepare("SELECT pb.pid, pb.bid, p.designation, pb.quantite FROM produitboutique pb, produit p WHERE pb.pid = p.ID_produit");
             $result->execute();
 
             for($i=0; $row = $result->fetch(); $i++){
-                $id=$row['Id_Produit'];
                 ?>
                 <tr>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Id_Produit']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo number_format($row ['Prix'],'2'); ?>€</td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Ref']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Nombre_boites']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Poids']; ?></td>
-                    <?php
-                        if($_SESSION['status'] == 'A') {
-                    ?>
-                    <td style="text-align:center; word-break:break-all; ">
-                        <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
-                    </td>
-                    <?php
-                        }
-                    ?>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['pid']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['bid']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['designation']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['quantite']; ?></td>
 
-                    <!-- Delete Product Modal -->
-                    <div id="delete<?php  echo $id;?>" class="modal fade" role="dialog">
-                        <div class="modal-header">
-                            <h3 id="myModalLabel">Delete</h3>
-                        </div>
-                        <div class="modal-body">
-                            <p><div style="font-size:larger;" class="alert alert-danger">Etes-vous sûr de vouloir supprimer le produit <b style="color:red;"><?php echo $row['Designation']; ?></b> ? <br> Cette action n'est pas réversible</p>
-                        </div>
-                        <br>
-                        <div class="modal-footer">
-                            <button class="btn btn-inverse" data-dismiss="modal" >Non</button>
-                            <a href="DeleteProduct.php<?php echo '?id='.$id; ?>" class="btn btn-danger">Oui</a>
-
-
-                        </div>
-                    </div>
-
+                   
                 </tr>
             <?php } ?>
             </tbody>
