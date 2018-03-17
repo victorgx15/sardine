@@ -130,6 +130,19 @@ CREATE TABLE IF NOT EXISTS `produit` (
   PRIMARY KEY (`Id_Produit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
+
+-- -------------------------------------
+-- Intermediare `produit` et commande
+-- -------------------------------------
+DROP TABLE IF EXISTS `produitboutique`;
+CREATE TABLE IF NOT EXISTS `produitboutique` (
+  `pid` int(10) NOT NULL,
+  `bid` int(10) NOT NULL,
+  `Quantite` int(10) DEFAULT NULL,
+  PRIMARY KEY (`pid`, `bid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+
 -- -------------------------------------
 -- Déchargement des données de la table `produit` et 'compte'
 -- -------------------------------------
