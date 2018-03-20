@@ -39,7 +39,7 @@
 </table>
     <?php
     $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-    $commandesList = $bdd->prepare("SELECT * FROM commande WHERE ID_Client='$ID_Client'");
+    $commandesList = $bdd->prepare("SELECT * FROM commande WHERE ID_Client='$ID_Client' ORDER BY Id_Commande DESC");
     $commandesList->execute();
     while($commande = $commandesList->fetch()){
         $Id_Commande=$commande['Id_Commande'];
@@ -101,7 +101,7 @@
                         <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Id_Produit']; ?></td>
                         <td style="text-align:center; word-break:break-all"><?php echo $product['Designation']; ?></td>
                         <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Quantite']; ?></td>
-                        <td style="text-align:center; word-break:break-all;"><?php echo number_format($product['Prix']*$ligneCommande['Quantite'],'2')."€"; ?></td>
+                        <td style="text-align:center; word-break:break-all;"><?php echo number_format($product['Prix'],'2')."€"; ?></td>
 
                     </tr>
                     <?php
@@ -121,27 +121,6 @@
 
 </body>
 <script>
-    /*$(document).ready(function() {
-
-        function getChildren($row) {
-            var children = [];
-            while($row.next().hasClass('child')) {
-                children.push($row.next());
-                $row = $row.next();
-            }
-            return children;
-        }
-
-        $('.parent').on('click', function() {
-
-            var children = getChildren($(this));
-            $.each(children, function() {
-                $(this).slideToggle();
-            })
-        });
-
-    })*/
-
     $(".clickSlide").on('click', function () {
             $(this).parent().parent().parent().next("div").slideToggle();
         }

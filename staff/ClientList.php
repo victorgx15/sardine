@@ -31,9 +31,6 @@ try {
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newClient">
             <span class="glyphicon glyphicon-plus"></span> Nouveau Client
         </button>
-        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#searchFilter">
-            <span class="glyphicon glyphicon-search"></span> Filtrer
-        </button>
         <script>
             function filterCol(k) {
                 var input, filter, table, tr, td, i;
@@ -55,29 +52,18 @@ try {
         </script>
     </div>
 
-    <div class="container" style="width:100% ">
-        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover" id="clientTable">
-
+    <div class="container" style="width:100% " id="liveFilter">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped liveFilterList" id="clientTable">
 
             <thead>
             <tr>
-                <th style="width:10%"; onclick='sortTable(0)' >ID_Client</th>
+                <th style="width:10%";>ID_Client</th>
                 <th style="width:5%">Civilite</th>
                 <th style="width:20%">Prenom</th>
                 <th style="width:20%">Nom</th>
                 <th style="width:15%">Tel</th>
                 <th style="width:10%">Email</th>
-
                 <th> Action </th>
-            </tr>
-            <tr id="searchFilter" class="collapse">
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol0" onkeyup="filterCol(0)"></th>
-                <th style="text-align:center; word-break:break-all; "> </th>
-                <th style="text-align:center; word-break:break-all;"> <input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
-                <th style="text-align:center; word-break:break-all; "> <input style="text-align:center;" type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol4" onkeyup="filterCol(4)"> </th>
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol5" onkeyup="filterCol(5)"></th>
-                <th style="text-align:center; word-break:break-all; "> </th>
             </tr>
             </thead>
             <tbody>
@@ -570,89 +556,39 @@ echo "</table>";
 ?>
 
 <script>
-
     $('.modal').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
     });
 
-    function sortTable(n) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("clientTable");
-        switching = true;
-        //Set the sorting direction to ascending:
-        dir = "asc";
-        /*Make a loop that will continue until
-        no switching has been done:*/
-        while (switching) {
-            //start by saying: no switching is done:
-            switching = false;
-            rows = table.getElementsByTagName("TR");
-            /*Loop through all table rows (except the
-            first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
-                //start by saying there should be no switching:
-                shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                one from current row and one from the next:*/
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-                /*check if the two rows should switch place,
-                based on the direction, asc or desc:*/
-                if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch= true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch= true;
-                        break;
-                    }
+    $(document).ready(function () {
+        var oTable = $('table').DataTable( {
+            "oLanguage": {
+                "sProcessing":     "Traitement en cours...",
+                "sSearch":         "Rechercher&nbsp;:",
+                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                "sInfoPostFix":    "",
+                "sLoadingRecords": "Chargement en cours...",
+                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                "oPaginate": {
+                    "sFirst":      "Premier",
+                    "sPrevious":   "Pr&eacute;c&eacute;dent",
+                    "sNext":       "Suivant",
+                    "sLast":       "Dernier"
+                },
+                "oAria": {
+                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
                 }
             }
-            if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                and mark that a switch has been done:*/
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                //Each time a switch is done, increase this count by 1:
-                switchcount ++;
-            } else {
-                /*If no switching has been done AND the direction is "asc",
-                set the direction to "desc" and run the while loop again.*/
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
-        }
-    }
-</script>
-<script>
-    var $rows = $('tbody > tr'),
-        $filters = $('#filter_table input'),
-        cache, $m, len, cls;
 
-    $filters.on("keyup", function () {
-        $m = $filters.filter(function () {
-            return $.trim(this.value).length > 0;
-        }), len = $m.length;
+        });
 
-        if (len === 0) return $rows.show();
 
-        cache = {};
-        cls = '.' + $m.map(function () {
-            cache[this.className] = $.trim(this.value);
-            return this.className;
-        }).get().join(',.');
 
-        $rows.hide().filter(function () {
-            return $('td', this).filter(cls).filter(function () {
-                return this.textContent.indexOf(cache[this.className]) > -1;
-            }).length === len;
-        }).show();
     });
 </script>
 </body>
