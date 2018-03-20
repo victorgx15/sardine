@@ -130,6 +130,19 @@ CREATE TABLE IF NOT EXISTS `produit` (
   PRIMARY KEY (`Id_Produit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
+
+-- -------------------------------------
+-- Intermediare `produit` et commande
+-- -------------------------------------
+DROP TABLE IF EXISTS `produitboutique`;
+CREATE TABLE IF NOT EXISTS `produitboutique` (
+  `pid` int(10) NOT NULL,
+  `bid` int(10) NOT NULL,
+  `Quantite` int(10) DEFAULT NULL,
+  PRIMARY KEY (`pid`, `bid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+
 -- -------------------------------------
 -- Déchargement des données de la table `produit` et 'compte'
 -- -------------------------------------
@@ -147,3 +160,5 @@ INSERT INTO `compte` (`nom`, `prenom`, `tel`, `email`, `civilite`, `password`, `
 ('Pigeon', 'TOURISTE', '0234890101', 'pigeon@gmail.fr', 'M', '3ca7f3b5755bba5adabe0790c216d55b3bdf30587efb4f0561556bbf1c75b5e6', 'C');
 --password pour employe@lvs.fr et admin@lvs.fr => root
 --password pour pigeon@gmail.fr => dauphine
+
+-- INSERT INTO  `Boutique` (`Dirigeant`, `telephone`, `Url_Boutique`, `horaire`) VALUES (`Jean Sy`, `0125347896`, `http`, `24/24h`)
