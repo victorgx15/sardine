@@ -8,6 +8,9 @@
         .parent:hover{
             cursor: pointer;
         }
+        .form-horizontal{
+            margin-bottom:0em;
+        }
     </style>
 </head>
 
@@ -40,19 +43,41 @@
     $commandesList->execute();
     while($commande = $commandesList->fetch()){
         $Id_Commande=$commande['Id_Commande'];
+
+        if(isset($_POST['Id_Commande'])&&$Id_Commande==$_POST['Id_Commande']){
+            $Etat=$_POST['Etat'];
+            $updateStatus=$bdd->prepare("UPDATE commande SET Etat='$Etat' WHERE Id_Commande='$Id_Commande'");
+            $updateStatus->execute();
+        }else{
+            $Etat=$commande['Etat'];
+        }
+
     ?>
     <table  style="width:70%; margin-top: 0; margin-bottom:0; background:whitesmoke" class="table table-bordered table-hover">
         <thead>
         <tr class="parent">
-            <td style="text-align:center; word-break:break-all; width: 15%"><?php echo $commande['Id_Commande']; ?></td>
-            <td style="text-align:center; word-break:break-all; width: 25%"><?php echo $commande['Date']; ?></td>
-            <td style="text-align:center; word-break:break-all; width: 25%"><?php echo $commande['Date_Livraison']; ?></td>
-            <td style="text-align:center; word-break:break-all; width: 35%"><?php echo $commande['Etat']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 15%" class="clickSlide"><?php echo $commande['Id_Commande']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide"><?php echo $commande['Date']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide"><?php echo $commande['Date_Livraison']; ?></td>
+            <td style="text-align:center; word-break:break-all; width: 35%" >
+                <form class="form-horizontal" method="post" id="statusForm" action="ClientInfo.php?ID_Client=<?php echo $ID_Client;?>">
+                    <input type="hidden" value="<?php  echo $Id_Commande;?>" id= "Id_Commande" name="Id_Commande">
+                    <select class="form-control Etat" name="Etat" id="Etat">
+                        <option value="Attente de paiement" <?php if($Etat=='Attente de paiement') echo 'selected="selected"';?>>Attente de paiement</option>
+                        <option value="En cours de préparation" <?php if($Etat=='En cours de préparation') echo 'selected="selected"';?>>En cours de préparation</option>
+                        <option value="Prêt à livrer" <?php if($Etat=='Prêt à livrer') echo 'selected="selected"';?>>Prêt à livrer</option>
+                        <option value="Prise en charge par le transporteur" <?php if($Etat=='Prise en charge par le transporteur') echo 'selected="selected"';?>>Prise en charge par le transporteur</option>
+                        <option value="En attente de réception" <?php if($Etat=='En attente de réception') echo 'selected="selected"';?>>En attente de réception</option>
+                        <option value="Commande livré" <?php if($Etat=='Commande livré') echo 'selected="selected"';?>>Commande livré</option>
+                    </select>
+
+                </form>
+            </td>
         </tr>
         </thead>
     </table>
         <div class="tableWrap" style="display:none">
-            <table  style="width:40%; margin-top: 0; margin-bottom:0;" class="table">
+            <table  style="width:600px; margin-top: 0; margin-bottom:0;" class="table">
                 <tbody>
                 <tr id="product<?php echo $Id_Commande?>" class="child">
                     <th style="text-align:center; word-break:break-all;">ID Produit</th>
@@ -117,8 +142,14 @@
 
     })*/
 
-    $("thead").click(function () {
-            $(this).parent().next("div").slideToggle();
+    $(".clickSlide").on('click', function () {
+            $(this).parent().parent().parent().next("div").slideToggle();
         }
     )
+    $(function() {
+        $(".Etat").change(function() {
+            this.form.submit();
+        });
+    });
+
 </script>
