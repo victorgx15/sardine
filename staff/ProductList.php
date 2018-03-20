@@ -142,6 +142,7 @@ echo "</table>";
 
     $(document).ready(function () {
         var oTable = $('table').DataTable( {
+            select: true,
             "oLanguage": {
                 "sProcessing":     "Traitement en cours...",
                 "sSearch":         "Rechercher&nbsp;:",

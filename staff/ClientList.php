@@ -11,6 +11,7 @@
             width: 80%;
             box-sizing: border-box;
         }
+
     </style>
 </head>
 <body>
@@ -31,25 +32,7 @@ try {
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newClient">
             <span class="glyphicon glyphicon-plus"></span> Nouveau Client
         </button>
-        <script>
-            function filterCol(k) {
-                var input, filter, table, tr, td, i;
-                input = document.getElementById("filterCol"+k.toString());
-                filter = input.value.toUpperCase();
-                table = document.getElementById("clientTable");
-                tr = table.getElementsByTagName("tr");
-                for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[k];
-                    if (td) {
-                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                        } else {
-                            tr[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-        </script>
+
     </div>
 
     <div class="container" style="width:100% " id="liveFilter">
@@ -561,7 +544,8 @@ echo "</table>";
     });
 
     $(document).ready(function () {
-        var oTable = $('table').DataTable( {
+        $('table').DataTable( {
+            select: true,
             "oLanguage": {
                 "sProcessing":     "Traitement en cours...",
                 "sSearch":         "Rechercher&nbsp;:",
@@ -588,9 +572,7 @@ echo "</table>";
         });
 
 
-
     });
 </script>
 </body>
 </html>
-<!-- https://stackoverflow.com/questions/43622127/filtering-table-multiple-columns -->
