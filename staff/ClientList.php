@@ -24,6 +24,7 @@
 
 try {
     ?>
+
     <div class="container" style="width:100%; padding-bottom: 10px">
         <br><div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -548,7 +549,8 @@ echo "</table>";
             select: true,
             "oLanguage": {
                 "sProcessing":     "Traitement en cours...",
-                "sSearch":         "Rechercher&nbsp;:",
+                "sSearch":         "",
+                "sSearchPlaceholder":         "Rechercher",
                 "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
                 "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
                 "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
@@ -570,7 +572,6 @@ echo "</table>";
             }
 
         });
-
 
     });
 </script>

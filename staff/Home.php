@@ -31,7 +31,7 @@
             ?>
             <a href="ClientList.php" type="button" style="padding:20px; margin-right:10px; width:20%" class="btn btn-lg btn-success">Gestion des clients</a>
             <a href="ProductList.php" type="button" style="padding:20px; margin-left:10px; width:20%" class="btn btn-lg btn-warning">Gestion de produits</a>
-            <a href="StockList.php" type="button" style="padding:20px; margin-left:10px; width:20%" class="btn btn-lg btn-info">Gestion des stocks</a>
+            <a href="StockList.php" type="button" style="padding:20px; margin-left:10px; width:20%" class="btn btn-lg btn-purple">Gestion des stocks</a>
 
         </div>
     </div>

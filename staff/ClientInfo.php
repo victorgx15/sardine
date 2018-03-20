@@ -53,7 +53,7 @@
         }
 
     ?>
-    <table  style="width:70%; margin-top: 0; margin-bottom:0; background:whitesmoke" class="table table-bordered table-hover">
+    <table  style="width:70%; margin-top: 0; margin-bottom:0; background:rgba(255, 255, 255, 0.61);" class="table table-bordered table-hover">
         <thead>
         <tr class="parent">
             <td style="text-align:center; word-break:break-all; width: 15%" class="clickSlide"><?php echo $commande['Id_Commande']; ?></td>
@@ -77,7 +77,7 @@
         </thead>
     </table>
         <div class="tableWrap" style="display:none">
-            <table  style="width:600px; margin-top: 0; margin-bottom:0;" class="table">
+            <table style="width:600px; margin-top: 0; margin-bottom:0; background:rgba(255,255,255,0);" class="table">
                 <tbody>
                 <tr id="product<?php echo $Id_Commande?>" class="child">
                     <th style="text-align:center; word-break:break-all;">ID Produit</th>
