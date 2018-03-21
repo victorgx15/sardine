@@ -105,9 +105,7 @@
 	      </div>
     </section>
 	
-	<!-- inclure N O S   S E R V I C E S -->	
-	<?php include 'nos_services.php';?>
-	</div>
+
 
  
 	<!-- inclure le footer-->

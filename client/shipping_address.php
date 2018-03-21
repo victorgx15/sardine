@@ -5,10 +5,13 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Adresse de livraison</title>
+
     <?php
     include('header.php');
     $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $id=$_SESSION['user'];
+
     ?>
 
     <style>
@@ -34,20 +37,22 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                 <input type="hidden" value="<?php  echo $id;?>" id= "id" name="id" >
                 <input type="hidden" value="<?php  echo $compte['Status'];?>" id="Status" name="Status" >
                 <input type="hidden" value="<?php  echo $compte['Password'];?>" id="Password" name="Password" >
-
-
-				<label class="control-label col-sm-2" for Civilite> Mode de livraison : </label>
-                <div class="col-sm-2">
-                   <form>
-				    <label class="radio-inline">
-				      <input type="radio" name="livraison" checked="checked" style="vertical-align: middle">En boutique.
-				    </label>
-				    <label class="radio-inline">
-				      <input type="radio" name="livraison" style="vertical-align: middle">A domicile.
-				    </label>
-				  </form>
-                </div>
             </div>
+
+            	<div class="form-group">
+	                <label class="control-label col-sm-2"> Mode de livraison : </label>
+	                <div class="col-sm-3">
+						<label class="radio-inline">
+				      		<input type="radio" name="livraison" checked="checked" style="vertical-align: middle">A domicile.
+				    	</label>
+				    	<label class="radio-inline">
+				      		<input type="radio" name="livraison" checked="checked" style="vertical-align: middle">En boutique.
+				    	</label>
+	                </div>
+	            </div>
+
+
+
 
             <div id="livraison_boutique" class="desc">
             	<div class="form-group">
@@ -124,25 +129,27 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 	            }
 	            ?>
 	            
-	            <?php
-	            if(!$_GET['Edit']){
-	                ?>
-	                <a href="MyAccount.php?Edit=1" class="btn btn-info">Modifier les informations</a> <br><br>
-	                <?php
-	            }
-	            ?>
+	                <a href="" class="btn btn-info">Modifier les informations</a> <br><br>
+
             </div>
 
         </div>
 
-        <div class="modal-footer">
-            <input type="submit" type="button" class="btn btn-success" value="Confirmer" >
-        </div>
+        
         <?php }
         ?>
     </form>
 
+	<div class="modal-footer">
+        	<form method="post"  action="payment.php">
+	            <input type="submit" name="continu" type="button" class="btn btn-success" value="Continuez vers l'étape suivante" >
+        	</form>
+        </div>
 </div>
+
+
+<!-- inclure le footer-->
+<?php include 'footer.php';?>
 
 <script type="text/javascript">
     $(document).ready(function(){ 
@@ -153,4 +160,6 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     }); 
 	});
 </script>
+
+
 </html>

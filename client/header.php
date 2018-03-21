@@ -68,9 +68,13 @@ background-color: #0c7cbb !important;
 
   <header id="header">
 <div class="container">
-
-  <img src="images/logo.png" style="width:45px; length :30px;float:left;" alt="Accueil"><h1 class="logo">La vieille<span>Sardine</span></h1><h1 class="logoBas">- Villeneuve la vieille -</h1>
-  
+  <a href="index.php" style="color: #FFFFF0;">
+    <img src="images/logo.png" style="width:45px; length :30px;float:left;" alt="Accueil">
+      <h1 class="logo">La vieille
+        <span>Sardine</span>
+      </h1>
+      <h1 class="logoBas">- Villeneuve la vieille -</h1>
+  </a>
   <nav class="site-nav">
       <ul>
         <li><a href=""><i class=" "></i>
@@ -82,25 +86,46 @@ background-color: #0c7cbb !important;
 <li>EN</li>
 <li>All</li>
     </ul>
-</div>
-    
-    
+</div>  
     </a></li> 
-        <li><a href="inscription_connexion/index.php"><i class=" fa fa-user site-nav--icon"></i>
-          <?php 
-            
-            if (isset($_SESSION['user'])) {
-              // select logged in users detail
-              require_once 'dbconnect.php';
-              $res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
-              $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
-                echo "Hello, ".$userRow['PRENOM'];
-            }else{
-              echo "Connexion | Inscription";
-            }
-          ?>
 
-        </a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <i class=" fa fa-user site-nav--icon"></i>
+                       <?php 
+                        if (isset($_SESSION['user'])) {
+                          // select logged in users detail
+                          require_once 'dbconnect.php';
+                          $res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
+                          $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
+                            echo "Hello, ".$userRow['PRENOM'];
+                        }else{
+                          echo "Connexion | Inscription";
+                        }
+                      ?>
+                      </a>
+                    <ul class="dropdown-menu">
+                       <?php 
+                        if (isset($_SESSION['user'])) {
+                          // select logged in users detail
+                          require_once 'dbconnect.php';
+                          $res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
+                          $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
+                       ?>
+                        <li><a href="user_account.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Espace Perso</a></li>
+                        <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Déconnexion</a></li>
+                        <?php 
+                        }
+                        else{
+                        ?>
+                        <li><a href="register.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Inscription | Connexion</a></li>
+                        <?php 
+                        }
+                      ?>
+                    </ul>
+                </li>
+
         <li><a href="shopping_cart_details.php"><i class="fa fa-shopping-cart site-nav--icon"></i>Panier</a></li>
        
       </ul> 

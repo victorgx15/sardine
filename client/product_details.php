@@ -1,6 +1,33 @@
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>eCommerce Product Detail</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  </head>
+
+<!-- NEEDED FOR PRODUCT DETAILS PAGE-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="css/product_details.css">
+
+    <!--fin PRODUCT DETAILS-->
+
+
+<header>
+		   <?php include 'header.php';?>        
+
+</header>
+
+
 <?php
-	    session_start();
+	    //session_start();
 	    /*on inclue fichier de connexion à la bd */
     	require_once 'dbconnect.php';
 	    /*on prend l'ID du produit envoyé depuis la page inde après click su produit par l'utilisateur */
@@ -23,17 +50,6 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>eCommerce Product Detail</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-
-  </head>
 
 
 <?php
@@ -67,13 +83,6 @@
  ?>
 
 
-<!-- NEEDED FOR PRODUCT DETAILS PAGE-->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="css/product_details.css">
-
-    <!--fin PRODUCT DETAILS-->
 
   <body>
 	
@@ -157,5 +166,10 @@
   		//fin while
     		}
 ?>
+
+
+<!-- inclure le footer-->
+<?php include 'footer.php';?>
+
 
 </html>

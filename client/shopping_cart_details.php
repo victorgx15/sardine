@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Votre ePanier</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+</head>
+<header>
+
+</header>
+
 <?php
 
 /*on inclue fichier de connexion à la bd */
@@ -8,6 +22,10 @@ require_once 'dbconnect.php';
 if(isset($_POST['orderpaper'])){
 	require('pdf_generator/fpdf.php');
 	    header("Location: invoice.php");
+}
+
+if(isset($_POST['shippingaddress'])){
+	    header("Location: shipping_address.php");
 }
 
 if (isset($_POST['purchase'])) {
@@ -46,21 +64,13 @@ if (isset($_POST['purchase'])) {
 
 
 ?>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>eCommerce Product Detail</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-</head>
 
 
 
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
-<div class="container"></div>
+<body>
+	<div class="container"></div>
 
     <div class="card">
 
@@ -207,6 +217,8 @@ if (isset($_POST['purchase'])) {
             	<form action="" method="post">
             		<button type="submit" name="orderpaper" class="btn btn-success pull-right">Bon de commande </button>
                 	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
+                	<button type="submit" name="shippingaddress" class="btn btn-success pull-right">Adresse de livraison </button>
+                	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
             	</form>
             </div>
         </div>
@@ -221,6 +233,7 @@ if (isset($_POST['purchase'])) {
 					}
 		?>
 </div>
+
 
 <?php 
 
@@ -265,7 +278,14 @@ function reduction($prixtotal,$status) {
 	}
 							
 }
-
-
-
 ?>
+
+
+</body>
+
+<footer>
+<!-- inclure le footer-->
+</footer>
+
+</html>
+

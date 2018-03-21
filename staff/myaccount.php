@@ -97,7 +97,7 @@
             <?php
             if(!$_GET['Edit']){
                 ?>
-                <a href="MyAccount.php?Edit=1" class="btn btn-info">Modifier les informations</a> <br><br>
+                <a href="MyAccount.php?Edit=1" class="btn btn-primary">Modifier les informations</a> <br><br>
                 <?php
             }
             ?>

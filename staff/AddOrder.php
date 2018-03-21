@@ -5,7 +5,7 @@ try {
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $Date=date("Y-m-d");
     $Date_Livraison=date("Y-m-d", strtotime($Date. ' + 3 days'));
-    $Etat='En cours de préparation';
+    $Etat='Attente de paiement';
     $ID_Client=$_GET['ID_Client'];
     $query="INSERT INTO commande(Date, Date_Livraison, Etat, ID_Client) VALUES('$Date', '$Date_Livraison','$Etat','$ID_Client')";
 

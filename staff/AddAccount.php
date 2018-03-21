@@ -8,8 +8,8 @@ try {
         // Insertion
         $Status=$_POST['Status'];
         $Civilite=$_POST['Civilite'];
-        $PRENOM=$_POST['PRENOM'];
-        $Nom=$_POST['Nom'];
+        $PRENOM=ucfirst(strtolower($_POST['PRENOM']));
+        $Nom=strtoupper($_POST['Nom']);
         $Tel=$_POST['Tel'];
         $Email=$_POST['Email'];
         $Password=hash('sha256', $_POST['Password']);

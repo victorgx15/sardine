@@ -1,9 +1,37 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.bootstrap.min.css">
+
+<style>
+    .btn-purple {
+        color: #ffffff;
+        background-color: #611BBD;
+        border-color: #130269;
+    }
+
+    .jumbotron {
+        background: rgba(255, 255, 255, 0.61);
+    }
+    body{
+        background-image: url("background.jpg");
+    }
+    table{
+        background: white;
+    }
+
+</style>
 
 <?php
 session_start();
@@ -13,7 +41,7 @@ if(!isset($_SESSION['status'])||($_SESSION['status'] != 'A' && $_SESSION['status
 
 
 ?>
-<nav class="navbar navbar-inverse" style="margin-top:20px;">
+<nav class="navbar navbar-inverse" style="margin-top:20px; background-color:#0c154c">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="Home.php" style="padding:5px;"><img src="logo.png" width="40px" style="display:inline;margin-right:10px">La Vieille Sardine : Intranet</a>

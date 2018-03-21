@@ -6,8 +6,8 @@ try {
     $get_id=$_POST['id'];
     $Status=$_POST['Status'];
     $Civilite=$_POST['Civilite'];
-    $PRENOM=$_POST['PRENOM'];
-    $Nom=$_POST['Nom'];
+    $PRENOM=ucfirst(strtolower($_POST['PRENOM']));
+    $Nom=strtoupper($_POST['Nom']);
     $Tel=$_POST['Tel'];
     $Email=$_POST['Email'];
     if(!isset($_POST['Password'])||$_POST['Password']=='') {
@@ -20,14 +20,16 @@ try {
     $stmt=$bdd->prepare($query);
     $stmt->execute();
 
+    if(isset($_POST['Adresse'])&&isset($_POST['Postal_Code'])&&isset($_POST['Ville'])){
+        $Adresse=$_POST['Adresse'];
+        $Postal_Code=$_POST['Postal_Code'];
+        $Ville=$_POST['Ville'];
+        $Pays=$_POST['Pays'];
+        $query="UPDATE adresse SET Adresse='$Adresse', Postal_Code='$Postal_Code', Ville= '$Ville', Pays='$Pays' WHERE Id_Client= '$get_id' ";
+        $stmt=$bdd->prepare($query);
+        $stmt->execute();
+    }
 
-    $Adresse=$_POST['Adresse'];
-    $Postal_Code=$_POST['Postal_Code'];
-    $Ville=$_POST['Ville'];
-    $Pays=$_POST['Pays'];
-    $query="UPDATE adresse SET Adresse='$Adresse', Postal_Code='$Postal_Code', Ville= '$Ville', Pays='$Pays' WHERE Id_Client= '$get_id' ";
-    $stmt=$bdd->prepare($query);
-    $stmt->execute();
 
     $prevPage=$_SERVER['HTTP_REFERER'];
 
