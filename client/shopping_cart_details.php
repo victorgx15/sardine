@@ -173,6 +173,13 @@ if (isset($_POST['purchase'])) {
             		<button type="submit" name="purchase" class="btn btn-success pull-right">Passer la commande</button>
                 	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
             	</form>
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="KG2WQ7Z3AJRUU">
+<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+</form>
+
                 <div class="pull-right" style="margin: 5px">
                     Prix ​​total: <b>
 	                    <?php
