@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `Tel` varchar(20) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
+  `Autorisation` varchar(25) NOT NULL,
   `Civilite` varchar(12) DEFAULT NULL,
   `Tel2` varchar(20) DEFAULT NULL,
   `Status` char(1) DEFAULT NULL,  -- 'C' si c'est client,
