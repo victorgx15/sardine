@@ -79,14 +79,15 @@
                     <td colspan="4" style="padding:0px;">
                         <div class="tableWrap" style="display:none;">
                             <table style="width:600px; margin: auto; margin-top: 0; margin-bottom:0; background:rgba(255,255,255,0);" class="table">
-                                <tbody>
+                                <thead>
                                 <tr id="product<?php echo $Id_Commande?>" class="child">
-                                    <td style="text-align:center; word-break:break-all;">ID Produit</td>
-                                    <td style="text-align:center; word-break:break-all;">Nom du Produit</td>
-                                    <td style="text-align:center; word-break:break-all;">Quantité</td>
-                                    <td style="text-align:center; word-break:break-all;">Prix</td>
+                                    <th style="text-align:center; word-break:break-all;">ID Produit</th>
+                                    <th style="text-align:center; word-break:break-all;">Nom du Produit</th>
+                                    <th style="text-align:center; word-break:break-all;">Quantité</th>
+                                    <th style="text-align:center; word-break:break-all;">Prix</th>
                                 </tr>
-
+                                </thead>
+                                <tbody>
                                 <?php
                                 $ligneCommandeList = $bdd->prepare("SELECT * FROM lignecommande WHERE Id_Commande='$Id_Commande'");
                                 $ligneCommandeList->execute();

@@ -28,8 +28,8 @@
       <file leaf-file-name="ClientInfo.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/staff/ClientInfo.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1292">
-              <caret line="79" column="67" lean-forward="false" selection-start-line="79" selection-start-column="67" selection-end-line="79" selection-end-column="67" />
+            <state relative-caret-position="162">
+              <caret line="81" column="38" lean-forward="false" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
               <folding>
                 <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
@@ -44,28 +44,28 @@
                 <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <marker date="1521721667951" expanded="true" signature="560:624" ph="SELECT * FRO... compte" />
-                <marker date="1521721667951" expanded="true" signature="1631:1708" ph="SELECT * FRO... commande" />
-                <marker date="1521721667951" expanded="true" signature="2025:2090" ph="UPDATE commande... " />
-                <marker date="1521721667951" expanded="true" signature="5285:5345" ph="SELECT * FRO... lignecommande" />
-                <marker date="1521721667951" expanded="true" signature="5685:5737" ph="SELECT * FRO... produit" />
-                <marker date="1521721667951" expanded="true" signature="8163:8171" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8172:8180" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8187:8195" ph="à" />
-                <marker date="1521721667951" expanded="true" signature="8204:8212" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8213:8221" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8270:8278" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8288:8296" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8297:8305" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8465:8473" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8474:8482" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8487:8495" ph="à" />
-                <marker date="1521721667951" expanded="true" signature="8554:8562" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8708:8716" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="8717:8725" ph="é" />
-                <marker date="1521721667951" expanded="true" signature="9046:9054" ph="é" />
+                <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <marker date="1521722034909" expanded="true" signature="560:624" ph="SELECT * FRO... compte" />
+                <marker date="1521722034909" expanded="true" signature="1631:1708" ph="SELECT * FRO... commande" />
+                <marker date="1521722034909" expanded="true" signature="2025:2090" ph="UPDATE commande... " />
+                <marker date="1521722034909" expanded="true" signature="5365:5425" ph="SELECT * FRO... lignecommande" />
+                <marker date="1521722034909" expanded="true" signature="5765:5817" ph="SELECT * FRO... produit" />
+                <marker date="1521722034909" expanded="true" signature="8243:8251" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8252:8260" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8267:8275" ph="à" />
+                <marker date="1521722034909" expanded="true" signature="8284:8292" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8293:8301" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8350:8358" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8368:8376" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8377:8385" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8545:8553" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8554:8562" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8567:8575" ph="à" />
+                <marker date="1521722034909" expanded="true" signature="8634:8642" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8788:8796" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="8797:8805" ph="é" />
+                <marker date="1521722034909" expanded="true" signature="9126:9134" ph="é" />
               </folding>
             </state>
           </provider>
@@ -260,17 +260,18 @@
       <workItem from="1520941148322" duration="10069000" />
       <workItem from="1521119552295" duration="26693000" />
       <workItem from="1521539794370" duration="6689000" />
-      <workItem from="1521624979856" duration="12710000" />
+      <workItem from="1521624979856" duration="13040000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198443000" />
+    <option name="totallyTimeSpent" value="198773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1727672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1727672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08661418" sideWeight="0.5080527" order="8" side_tool="true" content_ui="tabs" />
@@ -570,8 +571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/staff/ClientInfo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1292">
-          <caret line="79" column="67" lean-forward="false" selection-start-line="79" selection-start-column="67" selection-end-line="79" selection-end-column="67" />
+        <state relative-caret-position="162">
+          <caret line="81" column="38" lean-forward="false" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
@@ -586,28 +587,28 @@
             <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <marker date="1521721667951" expanded="true" signature="560:624" ph="SELECT * FRO... compte" />
-            <marker date="1521721667951" expanded="true" signature="1631:1708" ph="SELECT * FRO... commande" />
-            <marker date="1521721667951" expanded="true" signature="2025:2090" ph="UPDATE commande... " />
-            <marker date="1521721667951" expanded="true" signature="5285:5345" ph="SELECT * FRO... lignecommande" />
-            <marker date="1521721667951" expanded="true" signature="5685:5737" ph="SELECT * FRO... produit" />
-            <marker date="1521721667951" expanded="true" signature="8163:8171" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8172:8180" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8187:8195" ph="à" />
-            <marker date="1521721667951" expanded="true" signature="8204:8212" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8213:8221" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8270:8278" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8288:8296" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8297:8305" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8465:8473" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8474:8482" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8487:8495" ph="à" />
-            <marker date="1521721667951" expanded="true" signature="8554:8562" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8708:8716" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="8717:8725" ph="é" />
-            <marker date="1521721667951" expanded="true" signature="9046:9054" ph="é" />
+            <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <marker date="1521722034909" expanded="true" signature="560:624" ph="SELECT * FRO... compte" />
+            <marker date="1521722034909" expanded="true" signature="1631:1708" ph="SELECT * FRO... commande" />
+            <marker date="1521722034909" expanded="true" signature="2025:2090" ph="UPDATE commande... " />
+            <marker date="1521722034909" expanded="true" signature="5365:5425" ph="SELECT * FRO... lignecommande" />
+            <marker date="1521722034909" expanded="true" signature="5765:5817" ph="SELECT * FRO... produit" />
+            <marker date="1521722034909" expanded="true" signature="8243:8251" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8252:8260" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8267:8275" ph="à" />
+            <marker date="1521722034909" expanded="true" signature="8284:8292" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8293:8301" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8350:8358" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8368:8376" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8377:8385" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8545:8553" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8554:8562" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8567:8575" ph="à" />
+            <marker date="1521722034909" expanded="true" signature="8634:8642" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8788:8796" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="8797:8805" ph="é" />
+            <marker date="1521722034909" expanded="true" signature="9126:9134" ph="é" />
           </folding>
         </state>
       </provider>
