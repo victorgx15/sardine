@@ -26,6 +26,7 @@
     }
     body{
         background-image: url("background.jpg");
+        background-size:cover;
     }
     table{
         background: white;

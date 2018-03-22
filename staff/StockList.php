@@ -34,7 +34,7 @@ try {
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Produits</strong>
         </div>
-        <a href="AddProductPage.php" class="btn btn-success" role="button">
+        <a href="AddStock.php" class="btn btn-success" role="button">
             <span class="glyphicon glyphicon-plus"></span>Ajouter stock
         </a>
         <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#searchFilter">
