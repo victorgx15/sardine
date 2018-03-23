@@ -76,7 +76,7 @@ try {
             $result = $bdd->prepare("SELECT * FROM produit");
             $result->execute();
 
-            for($i=0; $row = $result->fetch(); $i++){
+            while($row = $result->fetch()){
                 $id=$row['Id_Produit'];
                 ?>
                 <tr>

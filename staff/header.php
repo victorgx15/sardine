@@ -26,10 +26,18 @@
     }
     body{
         background-image: url("background.jpg");
-        background-size:cover;
+
     }
     table{
         background: white;
+    }
+
+    .btn-circle {
+        width: 22px;
+        height: 22px;
+        padding:0;
+        border-radius: 50%;
+        margin:auto;
     }
 
 </style>
