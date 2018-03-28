@@ -20,6 +20,9 @@
             display: none;
         }
 
+        .modal-body {
+            overflow-x: auto;
+        }
 
     </style>
 </head>
@@ -44,6 +47,7 @@
                 <th style="text-align:center; word-break:break-all; background-color:#a2a2a2; width: 25%">Date</th>
                 <th style="text-align:center; word-break:break-all; background-color:#a2a2a2; width: 25%">Date Livraison</th>
                 <th style="text-align:center; word-break:break-all; background-color:#a2a2a2; width: 35%">Etat</th>
+                <th>Details</th>
             </tr>
             </thead>
             <?php
@@ -63,9 +67,9 @@
             ?>
                 <tr>
                     <td style="text-align:center; word-break:break-all; width: 15%" class="clickSlide" data-toggle="modal" data-target="#orderDetails<?php  echo $Id_Commande;?>"><?php echo $commande['Id_Commande']; ?></td>
-                    <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide" id="<?php echo $Id_Commande ?>"><?php echo date( "d/m/Y", strtotime($commande['Date'])); ?></td>
+                    <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide" data-toggle="modal" data-target="#orderDetails<?php  echo $Id_Commande;?>" id="<?php echo $Id_Commande ?>"><?php echo date( "d/m/Y", strtotime($commande['Date'])); ?></td>
                     <form class="form-horizontal orderForm" method="post" id="orderForm<?php echo $Id_Commande; ?>" action="ClientInfo.php?ID_Client=<?php echo $ID_Client;?>">
-                        <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide">
+                        <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide" >
                             <input type="hidden" value="<?php  echo $Id_Commande;?>" id= "Id_Commande" name="Id_Commande">
                             <input readonly ondblclick="onDoubleClick(this.id)" class="form-control Date_Livraison" type="date" value="<?php echo $Date_Livraison; ?>" id="Date_Livraison" name="Date_Livraison" style="text-align:center;">
                         </td>
@@ -81,22 +85,39 @@
                             </select>
                         </td>
                     </form>
-                </tr>
+                    <td>
+                        <div class="tableWrap" style="display:none;">
+                            <table style="width:600px; margin: auto; margin-top: 0; margin-bottom:0; background:rgba(255,255,255,0);" class="table">
+                                <tbody>
+                                <?php
+                                $ligneCommandeList = $bdd->prepare("SELECT * FROM lignecommande WHERE Id_Commande='$Id_Commande'");
+                                $ligneCommandeList->execute();
+                                $orderTotal=0;
+                                while($ligneCommande=$ligneCommandeList->fetch()){
+                                    $Id_Produit = $ligneCommande['Id_Produit'];
+                                    $getProduct=$bdd->prepare("SELECT * FROM produit WHERE ID_Produit='$Id_Produit'");
+                                    $getProduct->execute();
+                                    $product=$getProduct->fetch();
+                                    $orderTotal+=$product['Prix']*$ligneCommande['Quantite'];
+                                    ?>
+                                    <tr id="product<?php echo $Id_Commande?>" class="child">
+                                        <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Id_Produit']; ?></td>
+                                        <td style="text-align:center; word-break:break-all"><?php echo $product['Designation']; ?></td>
+                                        <td style="text-align:center; word-break:break-all;"><?php echo number_format($product['Prix'],'2')."€"; ?></td>
 
-            <div class="modal fade" id="orderDetails<?php  echo $Id_Commande;?>" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" text-align="center">Commande N°<?php echo $Id_Commande;?></h4>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                <tr id="product<?php echo $Id_Commande?>" class="child">
+                                    <td style="text-align:center; word-break:break-all;" colspan="3"></td>
+                                    <td style="text-align:center; word-break:break-all;" ><?php echo number_format($orderTotal,'2')."€"; ?></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="modal-body">
-                            teststsetsetts
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </td>
+                </tr>
             <?php
             }
             ?>
@@ -104,11 +125,80 @@
         </table>
     </div>
 </div>
+
+<?php
+$commandesList = $bdd->prepare("SELECT * FROM commande WHERE ID_Client='$ID_Client'");
+$commandesList->execute();
+while($commande = $commandesList->fetch()){
+$Id_Commande=$commande['Id_Commande'];
+$Date_Livraison=$commande['Date_Livraison'];
+$Etat=$commande['Etat'];
+?>
+<div class="modal fade" id="orderDetails<?php  echo $Id_Commande;?>" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" text-align="center">Commande N°<?php echo $Id_Commande;?></h4>
+            </div>
+            <div class="modal-body">
+                <table style=" margin: auto; margin-top: 0; margin-bottom:0; background:rgba(255,255,255,0);" class="table">
+                    <thead>
+                    <tr id="product<?php echo $Id_Commande?>" class="child">
+                        <th style="text-align:center; word-break:break-all;">ID Produit</th>
+                        <th style="text-align:center; word-break:break-all;">Nom du Produit</th>
+                        <th style="text-align:center; word-break:break-all;">Quantité</th>
+                        <th style="text-align:center; word-break:break-all;">Prix</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $ligneCommandeList = $bdd->prepare("SELECT * FROM lignecommande WHERE Id_Commande='$Id_Commande'");
+                    $ligneCommandeList->execute();
+                    $orderTotal=0;
+                    while($ligneCommande=$ligneCommandeList->fetch()){
+                        $Id_Produit = $ligneCommande['Id_Produit'];
+                        $getProduct=$bdd->prepare("SELECT * FROM produit WHERE ID_Produit='$Id_Produit'");
+                        $getProduct->execute();
+                        $product=$getProduct->fetch();
+                        $orderTotal+=$product['Prix']*$ligneCommande['Quantite'];
+                        ?>
+                        <tr id="product<?php echo $Id_Commande?>" class="child">
+                            <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Id_Produit']; ?></td>
+                            <td style="text-align:center; word-break:break-all"><?php echo $product['Designation']; ?></td>
+                            <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Quantite']; ?></td>
+                            <td style="text-align:center; word-break:break-all;"><?php echo number_format($product['Prix'],'2')."€"; ?></td>
+
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    <tr id="product<?php echo $Id_Commande?>" class="child">
+                        <td style="text-align:center; word-break:break-all;" colspan="3"></td>
+                        <td style="text-align:center; word-break:break-all;" ><?php echo number_format($orderTotal,'2')."€"; ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+}
+?>
 </body>
 <script>
 
     $(document).ready(function () {
         $('#orderTable').DataTable( {
+            "columnDefs": [
+                {
+                    "targets": [ 4 ],
+                    "visible": false
+                }
+            ],
             "oLanguage": {
                 "sProcessing":     "Traitement en cours...",
                 "sSearch":         "",
@@ -136,9 +226,6 @@
         });
 
     });
-    function format(value) {
-        return '<div>Hidden Value: ' + value + '</div>';
-    }
 
     $(function() {
         $(".Etat").change(function() {
