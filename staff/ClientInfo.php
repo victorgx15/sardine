@@ -71,7 +71,7 @@
                     <form class="form-horizontal orderForm" method="post" id="orderForm<?php echo $Id_Commande; ?>" action="ClientInfo.php?ID_Client=<?php echo $ID_Client;?>">
                         <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide" >
                             <input type="hidden" value="<?php  echo $Id_Commande;?>" id= "Id_Commande" name="Id_Commande">
-                            <input readonly ondblclick="onDoubleClick(this.id)" class="form-control Date_Livraison" type="date" value="<?php echo $Date_Livraison; ?>" id="Date_Livraison" name="Date_Livraison" style="text-align:center;">
+                            <input readonly ondblclick="onDoubleClick(this.id)" class="form-control Date_Livraison" type="date" value="<?php echo $Date_Livraison; ?>" id="Date_Livraison<?php  echo $Id_Commande;?>" name="Date_Livraison" style="text-align:center;">
                         </td>
                         <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide" >
                             <select class="form-control Etat" name="Etat" id="Etat">
@@ -224,6 +224,17 @@ $Etat=$commande['Etat'];
             }
 
         });
+        $("input").on("blur", function() {
+            $(this).prop('readonly', true);
+            this.form.submit();
+        })
+
+        function onDoubleClick(id) {
+            var element = $('#' + id);
+            if (element.prop('readonly') == true) {
+                element.prop('readonly', false);
+            }
+        }
 
     });
 

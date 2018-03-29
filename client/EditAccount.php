@@ -1,23 +1,15 @@
 <?php
 try {
-    session_start();
     $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $get_id=$_POST['id'];
-
     $Status=$_POST['Status'];
     $Civilite=$_POST['Civilite'];
     $PRENOM=ucfirst(strtolower($_POST['PRENOM']));
     $Nom=strtoupper($_POST['Nom']);
     $Tel=$_POST['Tel'];
     $Email=$_POST['Email'];
-
-    if($get_id==$_SESSION['id']){
-        $_SESSION['PRENOM']=$PRENOM;
-        $_SESSION['Nom']=$Nom;
-    }
-
     if(!isset($_POST['Password'])||$_POST['Password']=='') {
         $Password = $_POST['Password_def'];
     }else{

@@ -19,7 +19,7 @@
     <h2>Informations de votre compte</h2><br>
     <form class="form-horizontal" method="post" id="edit_account" action="EditAccount.php">
         <?php
-        $accountInfo = $bdd->prepare("SELECT Email, Nom, PRENOM, Tel, Civilite, Password, Status FROM compte WHERE Id_Client = ".$_SESSION['id']."");
+        $accountInfo = $bdd->prepare("SELECT * FROM compte WHERE Id_Client = ".$_SESSION['id']."");
         $accountInfo->execute();
         while ($compte = $accountInfo->fetch()) {
         ?>
@@ -59,6 +59,13 @@
                 <label class="control-label col-sm-2" for Email> E-mail : </label>
                 <div class="col-sm-3">
                     <input type="email" class="form-control" name="Email" id="Email" required <?php if(!$_GET['Edit']) echo 'readonly'?> value=<?php echo $compte['Email']; ?>>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for Password> Mot de passe : </label>
+                <div class="col-sm-3">
+                    <input type='password' class="form-control" name="Password" id="Password" <?php if(!$_GET['Edit']) echo 'readonly'?>>
+                    <input type='hidden' class="form-control" name="Password_def" id="Password_def" value=<?php echo $compte['Password']; ?>>
                 </div>
             </div><br>
             <?php

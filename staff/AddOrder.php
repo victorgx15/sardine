@@ -3,7 +3,6 @@
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $Date=date("Y-m-d");
     $Date_Livraison=date("Y-m-d", strtotime($Date. ' + 3 days'));
     $Etat='Attente de paiement';
