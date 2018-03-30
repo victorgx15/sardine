@@ -15,7 +15,7 @@
 
 
       <!-- Page Content -->
-    <div class="container">
+    <div class="container"  style="padding-top: 10px;padding-bottom: 10px;" align="center">
 
 
     <div class="jumbotron" align="center">
@@ -73,10 +73,10 @@
                   <div class="portfolio-box-caption">
                     <div class="portfolio-box-caption-content">
                       <div class="project-name">
-                         <a4><p><strong>Modifier vos infos personnels</p></a4></strong>
+                         <a4><p><strong>Modifier vos infos personnels</p></a5></strong>
                       </div>
                       <div class="project-category text-faded">
-                         <a4><p><strong>Votre liberté passe avant tout</p></a4></strong>
+                         <h5><p><strong>Votre liberté passe avant tout</strong></p></h5>
                       </div>
                       <div class="project-name">
                          <a4><p><strong></p></a4></strong>
@@ -232,7 +232,7 @@
 
 
 
-<div class="jumbotron" align="center">
+<div class="jumbotron" align="center"  style="padding-top: 10px;padding-bottom: 10px;">
         <h2><strong>Nos best seller</strong></h2><br>
 </div>    
 

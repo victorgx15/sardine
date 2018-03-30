@@ -286,6 +286,10 @@ INSERT INTO `produit` (`Id_Produit`, `Prix`, `Ref`, `Nombre_boites`, `Poids`, `M
 (16, 15, 'Coffrets_thon', NULL, 10, NULL, NULL, NULL, 'Roseti', NULL, 'images/Produits/conserves/conserves.jpg'),
 (17, 12, 'Coffrets_thon', 1, 10, NULL, NULL, NULL, 'Nostra', NULL, 'images/Produits/conserves/conserves4.jpg'),
 (18, 8, 'Coffrets_thon', NULL, 10, NULL, NULL, NULL, 'Arbeo', NULL, 'images/Produits/conserves/conserves3.jpg');
+(19, 12, 'Coffrets_thon', 1, 10, NULL, NULL, NULL, 'Raviolis de poisson au coulis de langoustine', NULL, 'images/Produits/plats_prepares/platprepare.jpg'),
+(20, 15, 'Coffrets_thon', NULL, 10, NULL, NULL, NULL, 'Raviolis Poisson 3 Thon', NULL, 'images/Produits/plats_prepares/platprepare2.jpg'),
+(21, 12, 'Coffrets_thon', 1, 10, NULL, NULL, NULL, 'thon a la bretonne a la creme et aux poireaux', NULL, 'images/Produits/plats_prepares/platprepare3.jpg'),
+(22, 8, 'Coffrets_thon', NULL, 10, NULL, NULL, NULL, 'thon a la concarnoise', NULL, 'images/Produits/plats_prepares/plats_prepare4.jpg');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -125,9 +125,7 @@
 
 
 
-      <div class="jumbotron" align="center" style="padding-top: 10px;padding-bottom: 10px;">
-        <h2>Nos services</h2><br>
-      </div> 
+
 	<!-- inclure le footer-->
 	<?php include 'footer.php';?>
 

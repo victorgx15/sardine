@@ -147,20 +147,20 @@ background-color: #0c7cbb !important;
 <div class="btn-group" >
   <button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Conserves </button>
   <div class="dropdown-menu" >
-    <a class="dropdown-item" href="catalog.php?categorie=Produits&souscategorie=Produits_Thon">Thon</a>
-    <a class="dropdown-item" href="catalog.php?categorie=Produits&souscategorie=Produits_Sardine">Sardine</a>
-    <a class="dropdown-item" href="catalog.php?categorie=Produits&souscategorie=Produits_Maquereau">Maquereau</a>
+    <a class="dropdown-item" href="catalog.php?categorie=Conserves&souscategorie=Conserves_Thon">Thon</a>
+    <a class="dropdown-item" href="catalog.php?categorie=Conserves&souscategorie=Conserves_Sardine">Sardine</a>
+    <a class="dropdown-item" href="catalog.php?categorie=Conserves&souscategorie=Conserves_Maquereau">Maquereau</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="catalog.php?categorie=Produits">Tous les produits</a>
+    <a class="dropdown-item" href="catalog.php?categorie=Conserves">Tous les produits</a>
   </div>
 </div>
 <!-- Example single danger button -->
 <div class="btn-group">
   <button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Plat préparés</button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="catalog.php?categorie=Plats&souscategorie=Plat_thon">À base de thon</a>
-    <a class="dropdown-item" href="catalog.php?categorie=Plats&souscategoriePlat_sardine">À base de sardine</a>
-    <a class="dropdown-item" href="catalog.php?categorie=Plats&souscategoriePlat_maquereau">À base de maquereau</a>
+    <a class="dropdown-item" href="catalog.php?categorie=Plats&souscategorie=Plats_thon">À base de thon</a>
+    <a class="dropdown-item" href="catalog.php?categorie=Plats&souscategorie=Plats_sardine">À base de sardine</a>
+    <a class="dropdown-item" href="catalog.php?categorie=Plats&souscategorie=Plats_maquereau">À base de maquereau</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="catalog.php?categorie=Plats">Tous les plats</a>
   </div>

@@ -8,15 +8,19 @@
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<!------ Include the above in your HEAD tag ---------->
 </head>
-<header>
 
+
+<!-- Jumbotron Header -->
+<header class="">
+	<?php include 'header.php';?>        
 </header>
+
 
 <?php
 
 /*on inclue fichier de connexion à la bd */
 //récupérer la session 
-session_start();
+//session_start();
 require_once 'dbconnect.php';
 
 if(isset($_POST['orderpaper'])){
@@ -70,9 +74,9 @@ if (isset($_POST['purchase'])) {
 
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
 <body>
-	<div class="container"></div>
+	<div class="container" style="height: 100%;margin-top: 40px; margin-bottom: 40px;">
 
-    <div class="card">
+    <div class="card" style="height: 100%; ">
 
             <div class="card-header bg-dark text-light">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -154,11 +158,11 @@ if (isset($_POST['purchase'])) {
 	                        <div class="col-xs-2 col-md-2">
 							    <form action ="/" method = "get">
 							    	<td style="text-align:center;border-bottom:#F0F0F0 1px solid;">
-							    		<a href="shopping_cart_details.php?action=remove&code=<?php echo $row["Id_Produit"]; ?>" class="btn btn-outline-danger btn-xs">X</a></td>
+							    		<a href="shopping_cart_details.php?action=remove&code=<?php echo $row["Id_Produit"]; ?>" class="btn btn-outline-danger btn-xs">X</a>
+							    	</td>
 		                                <i class="fa fa-trash" aria-hidden="true"></i>
-		                            </button>
 	                        	</form>
-                        </div>
+                       		</div>
 	                    </div>
 	                </div>
 	            <?php 
@@ -167,31 +171,20 @@ if (isset($_POST['purchase'])) {
 
 					
             	?>
-                <hr>
-               
 
-                <hr>
                 <div class="pull-right">
-                	<table class=buttons style="width: 100%;table-layout: fixed;border-collapse: collapse;margin-bottom: 5px;">
-						 <tr>
-						    <td><a href="shopping_cart_details.php?action=empty" class="btn btn-outline-secondary pull-right" style="width: 25%;">Vider le panier</a>
-						</table>
+                	<table class=buttons style=" width: 100%;table-layout: fixed;border-collapse: collapse;margin-bottom: 5px;">
+						<a href="shopping_cart_details.php?action=empty" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Vider le panier</a>
+					</table>
                 </div>
             </div>
+
             <div class="card-footer">
             	<form action="" method="post">
-            		<button type="submit" name="purchase" class="btn btn-success pull-right">Passer la commande</button>
+            		<button type="submit" name="purchase" class="btn btn-success pull-right" style="background-color:#00008B; border-color:#00008B;">Passer la commande</button>
                 	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
-            	</form>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="KG2WQ7Z3AJRUU">
-<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
-<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-</form>
-
-                <div class="pull-right" style="margin: 5px">
-                    Prix ​​total: <b>
+            	
+                 	Prix ​​total: <b>
 	                    <?php
 		                    //reduction selon page 10 cahier de charge
 		                    if (!isset($_SESSION['user'] )) {
@@ -210,82 +203,83 @@ if (isset($_POST['purchase'])) {
 	                     ?>
                   
                   	€</b>
+
+		        <?php
+		        //fin else 2
+							}
+		        //panier est vide
+							}else{
+
+								echo "<p><strong>Votre panier est vide !</strong></p>";
+							}
+				?>
+            	</form>
+
+
+                <div class="pull-right" style="margin: 5px">
+
                 </div>
+
+
+			<?php 
+
+			function reduction($prixtotal,$status) {
+				if($status=="V" || $status=="C"){
+				if($prixtotal<229){
+					echo $prixtotal;
+				}else{
+					$prixremise=0;
+					$remise=0;
+					if($prixtotal>229 && $prixtotal<=381){
+						$prixremise=$prixtotal*(1-0.03);
+							$remise=3;
+			        }elseif ($prixtotal>381 && $prixtotal<=1220){
+						$prixremise=$prixtotal*(1-0.05);
+						$remise=5;
+			        }elseif( $prixtotal>1220){
+				    	$prixremise=$prixtotal*(1-0.07);
+			    	 	$remise=7;
+					}
+					echo $prixtotal."€ avec remise de ".$remise."% est : ".$prixremise;	
+				}	
+				}else{
+					if($prixtotal<1220){
+					echo $prixtotal;
+				}elseif($status=="P"){
+					$prixremise=0;
+					$remise=0;
+					if($prixtotal>1220 && $prixtotal<=2020){
+						$prixremise=$prixtotal*(1-0.07);
+							$remise=7;
+					}elseif ($prixtotal>2020 && $prixtotal<=3010){
+						$prixremise=$prixtotal*(1-0.09);
+						$remise=9;
+					}elseif( $prixtotal>3010){
+						$prixremise=$prixtotal*(1-0.11);
+						$remise=11;
+				    }
+
+					echo $prixtotal."€ avec remise de ".$remise."% est : ".$prixremise;	
+				}
+				}
+										
+			}
+			?>
+           
             </div>
 
-            <div class="card-footer">
-            	<form action="" method="post">
-            		<button type="submit" name="orderpaper" class="btn btn-success pull-right">Bon de commande </button>
-                	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
-                	<button type="submit" name="shippingaddress" class="btn btn-success pull-right">Adresse de livraison </button>
-                	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
-            	</form>
-            </div>
+
         </div>
 
-        <?php
-        //fin else 2
-					}
-        //panier est vide
-					}else{
 
-						echo "<p><strong>Votre panier est vide !</strong></p>";
-					}
-		?>
 </div>
-
-
-<?php 
-
-function reduction($prixtotal,$status) {
-	if($status=="V" || $status=="C"){
-	if($prixtotal<229){
-		echo $prixtotal;
-	}else{
-		$prixremise=0;
-		$remise=0;
-		if($prixtotal>229 && $prixtotal<=381){
-			$prixremise=$prixtotal*(1-0.03);
-				$remise=3;
-        }elseif ($prixtotal>381 && $prixtotal<=1220){
-			$prixremise=$prixtotal*(1-0.05);
-			$remise=5;
-        }elseif( $prixtotal>1220){
-	    	$prixremise=$prixtotal*(1-0.07);
-    	 	$remise=7;
-		}
-		echo $prixtotal."€ avec remise de ".$remise."% est : ".$prixremise;	
-	}	
-	}else{
-		if($prixtotal<1220){
-		echo $prixtotal;
-	}elseif($status=="P"){
-		$prixremise=0;
-		$remise=0;
-		if($prixtotal>1220 && $prixtotal<=2020){
-			$prixremise=$prixtotal*(1-0.07);
-				$remise=7;
-		}elseif ($prixtotal>2020 && $prixtotal<=3010){
-			$prixremise=$prixtotal*(1-0.09);
-			$remise=9;
-		}elseif( $prixtotal>3010){
-			$prixremise=$prixtotal*(1-0.11);
-			$remise=11;
-	    }
-
-		echo $prixtotal."€ avec remise de ".$remise."% est : ".$prixremise;	
-	}
-	}
-							
-}
-?>
-
 
 </body>
 
-<footer>
-<!-- inclure le footer-->
-</footer>
 
+
+<footer>
+    <?php include'footer.php';?>
+</footer>
 </html>
 

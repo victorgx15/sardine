@@ -53,7 +53,6 @@ if (isset($_POST['signup'])) {
             if ($user_id > 0) {
                 $_SESSION['user'] = $user_id; // set session et redirect vers index ;)
                 if (isset($_SESSION['user'])) {
-                    print_r($_SESSION);
                     //header("Location: index.php");
                     exit;
                 }
@@ -103,17 +102,7 @@ if (isset($_POST['signup'])) {
                         </div>
                     </div>
                     <?php
-                }else{
-                    ?>
-                    <div class="form-group">
-                        <div class="alert alert-<?php echo ($errTyp == "success") ? "success" : $errTyp; ?>">
-                            <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
-                        </div>
-                    </div>
-                    <?php
                 }
-
-
                 ?>
 <div class="form-group">
  <div class="input-group">
@@ -180,6 +169,10 @@ if (isset($_POST['signup'])) {
 
                 <div class="checkbox">
                     <label><input type="checkbox" id="TOS" value="This"><a href="#">J'accepte les conditions</a></label>
+                </div>
+
+                <div class="checkbox">
+                    <label><input type="checkbox" id="TOS" value="This"><a href="#">J'accepte de recevoir les catalogues de la marque</a></label>
                 </div>
 
                 <div class="form-group">

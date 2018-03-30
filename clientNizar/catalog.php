@@ -71,8 +71,14 @@
 	                  </div>
 	                </div>
 	              </div>
-	            </a>
+	            <div class="" align="center" style="display:table;width: 100%">
+			        <div align="left" style="display: table-cell;vertical-align:middle;padding:5%;width:50%;"><strong><?php echo $row["Designation"]; ?></strong></div> 
+			       	<div align="right" style="display: table-cell;vertical-align:middle;padding:5%;width:50%;"><?php echo "<strong>".$row["Prix"]."€</strong>"; ?></div>
+			    </div>   
 	          </div>
+	          
+	            </a>
+
 
 		<?php 
 		}
@@ -83,9 +89,7 @@
     </section>
 	
 
-      <div class="jumbotron" align="center" style="padding-top: 10px;padding-bottom: 10px;">
-        <h2>Nos services</h2><br>
-      </div> 
+
 	<!-- inclure le footer-->
 	<?php include 'footer.php';?>
 
