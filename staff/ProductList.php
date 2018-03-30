@@ -89,7 +89,7 @@ try {
                     <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Gamme']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Famille']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Designation']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['Description']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php if(strlen($row ['Description'])>50){echo substr($row ['Description'], 0, 50)."...";}else{echo $row ['Description'];}/*display the first 50 char of desc*/?></td> 
                     <?php
                         if($_SESSION['status'] == 'A') {
                     ?>

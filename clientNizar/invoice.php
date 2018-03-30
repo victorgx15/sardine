@@ -104,10 +104,10 @@ while ($rowProduct = mysqli_fetch_array($res)) {
     $pdf->SetX(8);
     $pdf->SetFont('Helvetica','',8);
     $pdf->MultiCell(158,8,utf8_decode($rowProduct['Designation']),1,'L');
-	$pdf->SetFont('Helvetica','',11);
     $pdf->SetY($position_detail);
     $pdf->SetX(96);
     $pdf->MultiCell(30,8,$rowProduct['Ref'],1,'C');
+    $pdf->SetFont('Helvetica','',11);
     $pdf->SetY($position_detail);
     $pdf->SetX(126);
     $pdf->MultiCell(30,8,$rowProduct['Prix'],1,'C');

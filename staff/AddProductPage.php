@@ -15,37 +15,124 @@
 </head>
 
 <body>
-<div class="jumbotron" align="center">
-    <h2>Nouveau produit</h2><br>
-    <form method="post" id="product_add" action="AddProduct.php">
-        <table style="width:60%" >
-            <tr>
-                <td><input type="text" id="Designation" name="Designation" placeholder="Designation" required></td>
-                <td><input type="text" id="Marque" name="Marque" placeholder="Marque" required></td>
-            </tr>
-            <tr>
-                <td><input type="text" id="Famille" name="Famille" placeholder="Famille" required></td>
-                <td><input type="text" id="Gamme" name="Gamme" placeholder="Gamme" required></td>
-            </tr>
-            <tr>
-                <td><input type="text" id="Ref" name="Ref" placeholder="Reference" required></td>
-                <td><input type="text" id="Prix" name="Prix" placeholder="Prix" required>.</td>
-            </tr>
-            <tr>
-                <td><input type="text" id="Poids" name="Poids" placeholder="Poids en gramme" required></td>
-                <td><input type="number" id="Nombre_boites" name="Nombre_boites" placeholder="Nombre de boites" required></td>
-            </tr>
-            <tr>
-                <td>URL de l'image<input id="Url_img" type="file" name="Url_Image"></td>
-                <td><textarea  id="Description" name="Description" form="product_add" placeholder="Description..." cols="45"></textarea></td>
-            </tr>
 
-        </table>
-        <br><input type="submit" value="Confirmer" class="btn btn-success" style="text-align: center;">
+<div class="container">
 
-    </form>
+    <div id="login-form">
+        <form method="post" autocomplete="off" id="product_add" action="AddProduct.php">
+
+            <div class="col-md-12">
+
+                <div class="form-group" align="center">
+                    <h2 class="" align="center">Ajouter un nouveau produit au catalogue</h2>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                        <input type="text" id="Designation" name="Designation"  class="form-control" placeholder="Designation" required/>
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                 </div>
+
+                 <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                        <input type="text" id="Marque" name="Marque"  class="form-control" placeholder="Marque" required/>
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                        <input type="text" id="Famille" name="Famille"  class="form-control" placeholder="Famille" required/>
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-euro"></span></span>
+                        <input type="number" id="Prix" name="Prix"  class="form-control" placeholder="Prix" required />
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                        <input type="number" id="Poids" name="Poids"  class="form-control" placeholder="Poids en gramme" required/>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                        <input type="text" id="Gamme" name="Gamme"  class="form-control" placeholder="Gamme" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-tags"></span></span>
+                        <div align="right" style="display: table-cell;vertical-align:middle;width:90%;">
+                            <select  id="Reference" name="Reference"  class="form-control" style="height: 40px;">
+                                <option>Conserves_Thon</option>
+                                <option>Conserves_Sardine</option>
+                                <option>Conserves_Maquereau</option>
+                                <option>Plats_thon</option>
+                                <option>Plats_sardine</option>
+                                <option>Plats_maquereau</option>
+                                <option>Coffrets_thon</option>
+                                <option>Coffrets_sardine</option>
+                                <option>Coffrets_maquereau</option>
+                                <option>Coffrets_multiples</option>
+                                <option>Nouveauté</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                        <input type="number"  id="Nombre_boites" name="Nombre_boites"  class="form-control" placeholder="Nombre de boites"
+                               required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                        <input  type="text"  id="Description" name="Description"  class="form-control" placeholder="Description"
+                               required/>
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-download-alt"></span></span>
+                        <input type="file" id="Url_Image" name="Url_Image" class="form-control" placeholder="URL de l'image" required/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn    btn-block btn-primary" name="signup" id="reg">Ajouter le produit</button>
+                </div>
+
+
+            </div>
+
+        </form>
+    </div>
 
 </div>
+
+
+
+
+
 </body>
 
 

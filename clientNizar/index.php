@@ -63,7 +63,7 @@
 	                <div class="portfolio-box-caption-content">
 	                     <!--On affiche la référence du produit -->
 	                  <div class="project-category text-faded">
-	                    <?php echo $row["Ref"]; ?>
+	                    <?php echo str_replace('_', ' ', $row["Ref"]); ?>
 	                  </div>
 	                     <!--On affiche la designation du produit -->
 	                  <div class="project-name">
