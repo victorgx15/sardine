@@ -61,7 +61,7 @@
             </tr>
             </thead>
             <?php
-            $commandesList = $bdd->prepare("SELECT * FROM commande WHERE ID_Client='$ID_Client'");
+            $commandesList = $bdd->prepare("SELECT * FROM commande WHERE ID_Client='$ID_Client' ORDER BY Date DESC");
             $commandesList->execute();
             while($commande = $commandesList->fetch()){
             $Id_Commande=$commande['Id_Commande'];
@@ -152,6 +152,8 @@ $Etat=$commande['Etat'];
                         <th style="text-align:center; word-break:break-all;">Nom du Produit</th>
                         <th style="text-align:center; word-break:break-all;">Quantité</th>
                         <th style="text-align:center; word-break:break-all;">Prix</th>
+                        <th style="text-align:center; word-break:break-all;">Retour</th>
+                    
                     </tr>
                     </thead>
                     <tbody>
@@ -168,16 +170,18 @@ $Etat=$commande['Etat'];
                         ?>
                         <tr id="product<?php echo $Id_Commande?>" class="child">
                             <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Id_Produit']; ?></td>
-                            <td style="text-align:center; word-break:break-all"><?php echo $product['Designation']; ?></td>
+                            <td style="text-align:center; word-break:break-all; font-size: 12;" ><?php echo $product['Designation']; ?></td>
                             <td style="text-align:center; word-break:break-all;"><?php echo $ligneCommande['Quantite']; ?></td>
                             <td style="text-align:center; word-break:break-all;"><?php echo number_format($product['Prix'],'2')."€"; ?></td>
-
+                            <td style="text-align:center; word-break:break-all;">
+                                <a href="return_product.php?id_retour_cmd=<?php echo $ligneCommande['Id_Commande'];?>&id_retour_prdt=<?php echo $ligneCommande['Id_Produit'];?>"><span class="glyphicon glyphicon-barcode"></span></a>
+                            </td>
                         </tr>
                         <?php
                     }
                     ?>
                     <tr id="product<?php echo $Id_Commande?>" class="child">
-                        <td style="text-align:center; word-break:break-all;" colspan="3"></td>
+                        <td style="text-align:center; word-break:break-all;" colspan="4"></td>
                         <td style="text-align:center; word-break:break-all;" ><?php echo number_format($orderTotal,'2')."€"; ?></td>
                     </tr>
                     </tbody>

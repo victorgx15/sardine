@@ -96,7 +96,7 @@
 	        <div class="col-md-4 col-sm-6">
 	          	<div class="card card-3">
 				  <div id="layer">
-				    <button id="comprar">Découvrir</button>
+				    <button id="comprar">Promotions</button>
 				  </div>
 	 			</div>
 	        </div>
@@ -106,7 +106,7 @@
 	          <div class="cardNeauveau">
 	            <div class="card card-1">
 				  <div id="layer">
-				    <button id="comprar">Voir la promotion</button>
+				    <button id="comprar">Présence</button>
 				  </div>
 				</div>
 	          </div>
@@ -116,7 +116,7 @@
   			<div class="col-md-4 col-sm-6">
 				<div class="card card-2">
 				  <div id="layer">
-				    <button id="comprar">En savoir plus</button>
+				    <button id="comprar">Offres</button>
 				  </div>
 				</div>            
 	      </div>

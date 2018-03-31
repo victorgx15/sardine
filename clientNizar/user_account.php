@@ -7,7 +7,8 @@
 </head>
 
 <header>
-    <?php include'header.php';?>
+    <?php include'header.php';
+    $userId=$_SESSION['user']?>
 </header>
 
 
@@ -48,7 +49,7 @@
 
 
              <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="DisplayPyrchasesInfos.php?ID_Client=$_SESSION['user']">
+                <a class="portfolio-box" href="DisplayPurchasesInfos.php?ID_Client=<?php echo $userId;?>">
                   <img class="img-fluid" src="images/user_account2.png" alt="">
                   <div class="portfolio-box-caption">
                     <div class="portfolio-box-caption-content">
