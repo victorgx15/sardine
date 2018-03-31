@@ -14,7 +14,7 @@
         $Nombre_boites = $_POST['Nombre_boites'];
         $Prix = floatval($_POST['Prix']);
         $Url_image = $_POST['Url_Image'];
-        $Ref = $_POST['Ref'];
+        $Ref = $_POST['Reference'];
         $Description = $_POST['Description'];
 
         $query="INSERT INTO produit(Designation, Marque, Famille, Gamme, Poids, Nombre_boites, Prix, Url_Image, Description, Ref) 

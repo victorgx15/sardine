@@ -26,7 +26,14 @@ if (isset($_POST['signup'])) {
     $email = trim($_POST['email']);
     $upass = trim($_POST['pass']);
     $upassConfirmation = trim($_POST['passConfirmation']);
-	$status="C";
+    $autorisation = 0;
+    $status="C";
+    $Adresse = trim($_POST['Adresse']);
+    $codePostal = trim($_POST['codePostal']);
+    $Ville = trim($_POST['Ville']);
+    $Pays = trim($_POST['Pays']);
+    $statusAdresse="L";
+
 	
 
     // hashage du mot de pass avec SHA256;
@@ -44,15 +51,26 @@ if (isset($_POST['signup'])) {
     if ($count == 0) { // Si email n'existe pas 
         if($upassConfirmation==$upass){
 
-            $stmts = $conn->prepare("INSERT INTO compte(Civilite,Nom,PRENOM,Tel,Tel2,Email,Password,Status) VALUES(?,?,?,?,?,?,?,?)");
-            $stmts->bind_param("ssssssss", $civil, $uname,$prenom,$tel1, $tel2, $email, $password,$status);
+            $stmts = $conn->prepare("INSERT INTO compte(Civilite,Nom,PRENOM,Tel,Tel2,Email,Password,Status,Autorisation) VALUES(?,?,?,?,?,?,?,?,?)");
+            $stmts->bind_param("sssssssss", $civil, $uname,$prenom,$tel1, $tel2, $email, $password,$status,$autorisation);
             $res = $stmts->execute();//get result
             $stmts->close();
 
+?>
+
+<div class="container">
+
+<?php
             $user_id = mysqli_insert_id($conn);
             if ($user_id > 0) {
+                //if the user account is succussefully created, add his address
+                $stmts = $conn->prepare("INSERT INTO adresse(Pays,Ville,Adresse,Postal_Code,Id_Client,Status) VALUES(?,?,?,?,?,?)");
+                $stmts->bind_param("ssssss", $Pays, $Ville,$Adresse,$codePostal, $user_id,$statusAdresse);
+                $res = $stmts->execute();//get result
+                $stmts->close();
                 $_SESSION['user'] = $user_id; // set session et redirect vers index ;)
                 if (isset($_SESSION['user'])) {
+                    echo "<strong>Votre compte a été créé avec succès !</strong>";
                     //header("Location: index.php");
                     exit;
                 }
@@ -76,9 +94,6 @@ if (isset($_POST['signup'])) {
 
 }
 ?>
-
-<div class="container">
-
     <div id="login-form">
         <form method="post" autocomplete="off">
 
@@ -104,18 +119,15 @@ if (isset($_POST['signup'])) {
                     <?php
                 }
                 ?>
-<div class="form-group">
- <div class="input-group">
-                                                                <label for="civil" name="civil" >Civilité *</label>
-                                                                
-                                                                    <select name="civil" class="form-control" style="height: 40px;">
-                                                                        <option>Madame</option>
-                                                                        <option>Monsieur</option>
-                                                                        
-                                                                    </select>
-                                                                
-																</div>
-                                                            </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="civil" name="civil" >Civilité *</label>
+                        <select name="civil" class="form-control" style="height: 40px;">
+                            <option>Madame</option>
+                            <option>Monsieur</option>
+                        </select>
+    			 	</div>
+                </div>
                       
                 <div class="form-group">
                     <div class="input-group">
@@ -134,13 +146,13 @@ if (isset($_POST['signup'])) {
 				 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                        <input type="text" name="tel1" class="form-control" placeholder="Téléphone 1 *" required/>
+                        <input type="number" name="tel1" class="form-control" placeholder="Téléphone 1 *" required/>
                     </div>
                 </div>
 				 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                        <input type="text" name="tel2" class="form-control" placeholder="Téléphone 2 ( facultatif )"/>
+                        <input type="number" name="tel2" class="form-control" placeholder="Téléphone 2 (facultatif)"/>
                     </div>
                 </div>
 
@@ -150,6 +162,38 @@ if (isset($_POST['signup'])) {
                         <input type="email" name="email" class="form-control" placeholder="Email * exemple@exemple.com" required/>
                     </div>
                 </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                        <input type="text" id="Adresse" name="Adresse" class="form-control" placeholder="Adresse" required/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div align="right" style="display: table-cell;vertical-align:middle;width:33.3%;">
+                            <input type="number"  id="codePostal" name="codePostal"  class="form-control" placeholder="Code Postal" style="height: 40px;">
+                        </div>
+
+                        <div align="right" style="display: table-cell;vertical-align:middle;width:33.3%;">
+                            <input type="text"  id="Ville" name="Ville"  class="form-control" style="height: 40px;">
+                        </div>
+
+                        <div align="right" style="display: table-cell;vertical-align:middle;width:33.3%;">
+                            <select  id="Pays" name="Pays"  class="form-control" style="height: 40px;">
+                                <option>France</option>
+                                <option>Belgique</option>
+                                <option>Angleterre</option>
+                                <option>Hollande</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div class="form-group">
                     <div class="input-group">
@@ -162,13 +206,13 @@ if (isset($_POST['signup'])) {
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input type="password" name="passConfirmation" class="form-control" placeholder="Veuillez confirmer votre mot de passe *"
+                        <input type="password" name="passConfirmation" class="form-control" placeholder="confirmez votre mot de passe *"
                                required/>
                     </div>
                 </div>
 
                 <div class="checkbox">
-                    <label><input type="checkbox" id="TOS" value="This"><a href="#">J'accepte les conditions</a></label>
+                    <label><input type="checkbox" id="TOS" value="This"><a data-toggle="modal" data-target="#myModal">J'accepte les conditions (cliquez ici pour lire les conditions)</a></label>
                 </div>
 
                 <div class="checkbox">
@@ -188,6 +232,34 @@ if (isset($_POST['signup'])) {
                 </div>
 
             </div>
+
+
+
+<!-- Modal Condition de vente -->
+<div id="myModal" class="modal fade" role="dialog" style="height: 500px;">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <?php include("conditionsVente.php");?>
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
 
         </form>
     </div>

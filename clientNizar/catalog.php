@@ -60,7 +60,7 @@
 	                <div class="portfolio-box-caption-content">
 	                     <!--On affiche la référence du produit -->
 	                  <div class="project-category text-faded">
-	                    <?php echo $row["Ref"]; ?>
+	                    <?php echo str_replace('_', ' ', $row["Ref"]); ?>
 	                  </div>
 	                     <!--On affiche la designation du produit -->
 	                  <div class="project-name">
@@ -72,9 +72,10 @@
 	                </div>
 	              </div>
 	            <div class="" align="center" style="display:table;width: 100%">
-			        <div align="left" style="display: table-cell;vertical-align:middle;padding:5%;width:50%;"><strong><?php echo $row["Designation"]; ?></strong></div> 
-			       	<div align="right" style="display: table-cell;vertical-align:middle;padding:5%;width:50%;"><?php echo "<strong>".$row["Prix"]."€</strong>"; ?></div>
+			        <div align="left" style="display: table-cell;vertical-align:middle;padding:5%;width:50%; color: #303030;"><strong><?php echo $row["Designation"]; ?></strong></div> 
+			       	<div align="right" style="display: table-cell;vertical-align:middle;padding:5%;width:50%; color: #303030;"><?php echo "<strong>".$row["Prix"]."€</strong>"; ?></div>
 			    </div>   
+
 	          </div>
 	          
 	            </a>
