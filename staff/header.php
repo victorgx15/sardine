@@ -53,7 +53,7 @@ if(!isset($_SESSION['status'])||($_SESSION['status'] != 'A' && $_SESSION['status
 <nav class="navbar navbar-inverse" style="margin-top:20px; background-color:#0c154c">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="Home.php" style="padding:5px;"><img src="logo.png" width="40px" style="display:inline;margin-right:10px">La Vieille Sardine : Intranet</a>
+            <a class="navbar-brand" href="Home.php" style="padding:5px;"><img src="logo.png" style="display:inline;margin-right:10px;width:40px;">La Vieille Sardine : Intranet</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="MyAccount.php?Edit=0"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['PRENOM'].' '.$_SESSION['Nom'];?></a></li>
