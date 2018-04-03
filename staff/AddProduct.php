@@ -13,7 +13,10 @@
         $Poids = $_POST['Poids'];
         $Nombre_boites = $_POST['Nombre_boites'];
         $Prix = floatval($_POST['Prix']);
-        $Url_image = $_POST['Url_Image'];
+        if(isset($_POST['Url_Image'])){
+            $Url_image = $_POST['Url_Image'];
+            copy($Url_image.toString(), '/images/Produit');
+        }
         $Ref = $_POST['Reference'];
         $Description = $_POST['Description'];
 

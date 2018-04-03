@@ -10,7 +10,7 @@ session_start();
         <!-- En-tête de la page -->
         <meta charset="utf-8" />
         
-        <link rel="stylesheet" href="staff.css" />
+        <link rel="stylesheet" href="css/staff.css" />
         <!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 

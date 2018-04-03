@@ -14,8 +14,7 @@
             }
         </style>
         <link rel="stylesheet" href="css/style_Card.css">
-
-        <link rel="stylesheet" href="staff.css" />
+        <link rel="stylesheet" href="css/staff.css" />
     </head>
 
     <body>
@@ -33,11 +32,13 @@
             ?>
 
                 <div class="col-md-3 col-sm-6">
-                    <div class="card card-1">
-                      <div id="layer">
-                        <a href="StaffList.php" > <button id="comprar">Gestion des employés</button></a>
-                      </div>
-                    </div>
+                    <a href="StaffList.php" >
+                        <div class="card card-1">
+                            <div id="layer">
+                                <button id="comprar">Gestion des employés</button>
+                            </div>
+                        </div>
+                    </a>
                 </div>
 
             <?php
@@ -45,29 +46,27 @@
             }
             ?>
                 <div class="col-md-3 col-sm-6">
-                    <div class="card card-2">
+                    <a href="ClientList.php" ><div class="card card-2">
                       <div id="layer">
-                        <a href="ClientList.php" ><button id="comprar">Gestion des clients</button></a>
+                        <button id="comprar">Gestion des clients</button>
                       </div>
-                    </div>
+                    </div></a>
                 </div>
 
-
-
                 <div class="col-md-3 col-sm-6">
-                    <div class="card card-4">
+                    <a href="StockList.php"><div class="card card-4">
                       <div id="layer">
-                        <a href="StockList.php"><button id="comprar">Gestion des stocks</button></a>
+                        <button id="comprar">Gestion des stocks</button>
                       </div>
-                    </div>            
+                    </div></a>
               </div>
 
                 <div class="col-md-3 col-sm-6">
-                    <div class="card card-3">
+                    <a href="ProductList.php" type="button" ><div class="card card-3">
                       <div id="layer">
-                        <a href="ProductList.php" type="button" ><button id="comprar">Gestion de produits</button></a>
+                        <button id="comprar">Gestion de produits</button>
                       </div>
-                    </div>            
+                    </div></a>
               </div>
               <!-- /.row -->
         </div>            

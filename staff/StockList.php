@@ -11,17 +11,12 @@
             width: 80%;
             box-sizing: border-box;
         }
-        td{
-            white-space: nowrap;
-        }
+
     </style>
 </head>
 <body>
+<!-- New Client Modal -->
 
-<div class="container">
-
-
-</div>
 
 <?php
 
@@ -29,78 +24,100 @@
 
 try {
     ?>
+
     <div class="container" style="width:100%; padding-bottom: 10px">
         <br><div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong><i class="icon-user icon-large"></i>&nbsp;Liste des Produits</strong>
+            <strong><i class="icon-user icon-large"></i>&nbsp;Liste du stock</strong>
         </div>
-        <a href="AddStock.php" class="btn btn-success" role="button">
-            <span class="glyphicon glyphicon-plus"></span>Ajouter stock
-        </a>
-        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#searchFilter">
-            <span class="glyphicon glyphicon-search"></span> Filtrer
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newStorage">
+            <span class="glyphicon glyphicon-plus"></span> Nouveau Emplacement
         </button>
-        <script>
-            function filterCol(k) {
-                var input, filter, table, tr, td, i;
-                input = document.getElementById("filterCol"+k.toString());
-                filter = input.value.toUpperCase();
-                table = document.getElementById("clientTable");
-                tr = table.getElementsByTagName("tr");
-                for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[k];
-                    if (td) {
-                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                        } else {
-                            tr[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-        </script>
+
     </div>
 
-    <div class="container" style="width:100% ">
-        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover" id="clientTable">
-
+    <div class="container" style="width:80% ">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped liveFilterList" id="stockTable">
 
             <thead>
             <tr>
-                <th style="width:10%"; onclick='sortTable(0)' >ID_Produit</th>
-                <th style="width:5%"; onclick='sortTable(1)'>ID_Boutique</th>
-                <th style="width:15%"; onclick='sortTable(2)'>Designation</th>
-                <th style="width:10%"; onclick='sortTable(3)'>Quantite</th>
-            </tr>
-            <tr id="searchFilter" class="collapse">
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol0" onkeyup="ProductList.php"></th>
-                <th style="text-align:center; word-break:break-all; "><input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(1)"></th>
-                <th style="text-align:center; word-break:break-all;"> <input style="text-align:center;" type="text" id="filterCol2" onkeyup="filterCol(2)"></th>
-                <th style="text-align:center; word-break:break-all; "> <input style="text-align:center;" type="text" id="filterCol3" onkeyup="filterCol(3)"></th>
-                <?php
-/*                if($_SESSION['status'] == 'A') {
-                    */?>
-                <th style="text-align:center; word-break:break-all; "> </th>
-                    <?php
-/*                }
-                */?>
+                <th style="width:15%";>ID_Emplacement</th>
+                <th style="width:20%">Couloir</th>
+                <th style="width:20%">Trave</th>
+                <th style="width:20%">Etagere</th>
+                <th></th>
+                <th style="width:15%">Quantite</th>
+                <th> Action </th>
             </tr>
             </thead>
             <tbody>
+            <div class="modal fade" id="newStorage" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" text-align="center">Ajouter un nouveau emplacement</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" method="post" action="AddStorage.php">
+
+
+                                <div class="modal-footer">
+                                    <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:80px">
+                                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
             <?php
             $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-            $result = $bdd->prepare("SELECT pb.pid, pb.bid, p.designation, pb.quantite FROM produitboutique pb, produit p WHERE pb.pid = p.ID_produit");
-            $result->execute();
+            $storageList = $bdd->prepare("SELECT * FROM emplacement_");
+            $storageList->execute();
+            while($storage = $storageList->fetch()){
+                $Id_Emplacement=$storage['Id_Emplacement'];
 
-            for($i=0; $row = $result->fetch(); $i++){
                 ?>
                 <tr>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['pid']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['bid']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['designation']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $row ['quantite']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Id_Emplacement']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Couloir']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Trave']; ?></td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Etagere']; ?></td>
+                    <td>
+                        <div class="tableWrap" style="display:none;">
+                            <table style="width:600px; margin: auto; margin-top: 0; margin-bottom:0; background:rgba(255,255,255,0);" class="table">
+                                <tbody>
+                                <?php
+                                $storageInfoList = $bdd->prepare("SELECT * FROM est_placer WHERE Id_Emplacement='$Id_Emplacement'");
+                                $storageInfoList->execute();
+                                $storageTotal=0;
+                                while($storageInfo=$storageInfoList->fetch()){
+                                    $Id_Produit = $storageInfo['Id_Produit'];
+                                    $getProduct=$bdd->prepare("SELECT * FROM produit WHERE ID_Produit='$Id_Produit'");
+                                    $getProduct->execute();
+                                    $product=$getProduct->fetch();
+                                    $storageTotal+=$storageInfo['Quantite_stock']
+                                    ?>
+                                    <tr id="product<?php echo $Id_Emplacement?>" class="child">
+                                        <td style="text-align:center; word-break:break-all;"><?php echo $storageInfo['Id_Produit']; ?></td>
+                                        <td style="text-align:center; word-break:break-all"><?php echo $product['Designation']; ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                    <td style="text-align:center; word-break:break-all; "> <?php echo $storageTotal; ?></td>
+                    <td style="text-align:center; word-break:break-all; ">
 
-                   
+                    </td>
                 </tr>
             <?php } ?>
             </tbody>
@@ -108,7 +125,7 @@ try {
     </div>
 
 
-<?php
+    <?php
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
@@ -118,66 +135,45 @@ echo "</table>";
 ?>
 
 <script>
-
     $('.modal').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
     });
 
-    function sortTable(n) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("clientTable");
-        switching = true;
-        //Set the sorting direction to ascending:
-        dir = "asc";
-        /*Make a loop that will continue until
-        no switching has been done:*/
-        while (switching) {
-            //start by saying: no switching is done:
-            switching = false;
-            rows = table.getElementsByTagName("TR");
-            /*Loop through all table rows (except the
-            first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
-                //start by saying there should be no switching:
-                shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                one from current row and one from the next:*/
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-                /*check if the two rows should switch place,
-                based on the direction, asc or desc:*/
-                if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch= true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch= true;
-                        break;
-                    }
+    $(document).ready(function () {
+        $('#stockTable').DataTable( {
+            "columnDefs": [
+                {
+                    "targets": [ 4 ],
+                    "visible": false
+                }
+            ],
+            "oLanguage": {
+                "sProcessing":     "Traitement en cours...",
+                "sSearch":         "",
+                "sSearchPlaceholder":         "Rechercher",
+                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                "sInfoPostFix":    "",
+                "sLoadingRecords": "Chargement en cours...",
+                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                "oPaginate": {
+                    "sFirst":      "Premier",
+                    "sPrevious":   "Pr&eacute;c&eacute;dent",
+                    "sNext":       "Suivant",
+                    "sLast":       "Dernier"
+                },
+                "oAria": {
+                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
                 }
             }
-            if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                and mark that a switch has been done:*/
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                //Each time a switch is done, increase this count by 1:
-                switchcount ++;
-            } else {
-                /*If no switching has been done AND the direction is "asc",
-                set the direction to "desc" and run the while loop again.*/
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
-        }
-    }
-</script>
 
+        });
+
+    });
+</script>
 </body>
 </html>
