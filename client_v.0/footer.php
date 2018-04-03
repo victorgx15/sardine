@@ -25,10 +25,10 @@
 <!-- Footer -->
 <!--Footer-->
 
-<footer class="page-footer font-small indigo pt-0 py-5 bg-dark">
+<footer class="page-footer font-small indigo pt-0  bg-dark">
 
     <!--Footer Links-->
-    <div class="container">
+    <div class="container" style="font-family: 'Roboto', sans-serif !important;">
 
         <!--Grid row-->
         <div class="row pt-5 mb-3 text-center d-flex justify-content-center">
@@ -84,15 +84,58 @@
         </div>
         <!--Grid row-->
 
+		<hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+
+        <!--Grid row-->
+        <div class="row pb-3">
+
+            <!--Grid column-->
+            <div class="col-md-12" style="    text-align: center;
+    color: beige;">
+
+                <div class="mb-5 flex-center">
+				<p>Suivez nous sur : </p>
+                    <!--Facebook-->
+                    <a href="#" class="fb-ic">
+                        <i style="color:#3b5999;"class="fa fa-facebook fa-lg white-text mr-md-4"> </i>
+                    </a>
+                    <!--Twitter-->
+                    <a href="#" class="tw-ic">
+                        <i style="color:#55acee;"class="fa fa-twitter fa-lg white-text mr-md-4"> </i>
+                    </a>
+                    <!--Google +-->
+                    
+                    <!--Linkedin-->
+                    <a href="#" class="li-ic">
+                        <i style="color:#0077B5;" class="fa fa-linkedin fa-lg white-text mr-md-4"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a href="#" class="ins-ic">
+                        <i style="color:#e4405f;"class="fa fa-instagram fa-lg white-text mr-md-4"> </i>
+                    </a>
+                    <!--Pinterest-->
+                   
+                </div>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+    </div>
+    <!--/Footer Links-->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3 text-center" style="background-color:black;">
+        Copyright 2018 &copy; <3.5> TEAM
+        
+    </div>
         
 
     </div>
    
 
     <!--Copyright-->
-    <div class="footer-copyright py-3 text-center">
-        <p class="m-0 text-center text-white">Copyright &copy; <3.5> TEAM 2018</p>
-    </div>
+   
     <!--/Copyright-->
   <script  src="js/background.js"></script>
 
