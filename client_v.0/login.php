@@ -42,8 +42,8 @@ if (isset($_POST['btn-login'])) {
         $_SESSION['user'] = $row['ID_Client'];
         header("Location: index.php");
     } elseif ($count == 1) {
-        $errMSG = "mot de passe incorrecte";
-    } else $errMSG = "Il n'existe aucun utilisateur avec cette adresse mail";
+        $errMSG = "Bad password";
+    } else $errMSG = "User not found";
 }
 ?>
 
@@ -54,7 +54,7 @@ if (isset($_POST['btn-login'])) {
 
 
     <div id="login-form">
-        <form method="post" >
+        <form method="post" autocomplete="off">
 
             <div class="col-md-12">
 

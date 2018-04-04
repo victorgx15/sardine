@@ -36,7 +36,7 @@
             <!--Grid column-->
             <div class="col-md-3 mb-3">
                 <h4 class="text-uppercase font-weight-bold">
-                    <a href="#!">Conditions</a>
+                    <a href="a_propos.php">A propos de nous</a>
                 </h4>
             </div>
             <!--Grid column-->
@@ -44,7 +44,7 @@
             <!--Grid column-->
             <div class="col-md-3 mb-3">
                 <h4 class="text-uppercase font-weight-bold">
-                    <a href="#!">Mentions légales</a>
+                    <a href="conditionsVente.php">Mentions légales</a>
                 </h4>
             </div>
             <!--Grid column-->

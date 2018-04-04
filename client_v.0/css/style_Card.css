@@ -13,17 +13,17 @@
   transition: all 1s ease;
 }
 .card-1{
-  background-image: url(Promotion/promoLivraison.jpg); 
+  background-image: url(Promotion/promos.002.jpeg); 
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 .card-2{
-  background-image: url(Promotion/promoReduction.jpeg);
+  background-image: url(Promotion/promos.001.jpeg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 .card-3{
-  background-image:  url(Promotion/promoReduction.jpeg); 
+  background-image:  url(Promotion/promos.003.jpeg); 
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }

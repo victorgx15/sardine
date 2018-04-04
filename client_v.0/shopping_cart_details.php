@@ -73,8 +73,8 @@ if (isset($_POST['purchase'])) {
 
 
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
-<body>
-	<div class="container" style="height: 100%;margin-top: 40px; margin-bottom: 40px;">
+<body style="height: 100%;">
+	<div class="container" style="margin-top: 40px; margin-bottom: 40px;">
 
     <div class="card" style="height: 100%; ">
 
@@ -84,7 +84,7 @@ if (isset($_POST['purchase'])) {
                 <a href="index.php" class="btn btn-outline-info btn-sm pull-right">Continuez vos achats</a>
                 <div class="clearfix"></div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="height: 100%; ">
 
             	<?php 
             		
@@ -172,18 +172,22 @@ if (isset($_POST['purchase'])) {
 					
             	?>
 
-                <div class="pull-right">
+
+
+
+
+
+
+            	<form action="" method="post">
                 	<table class=buttons style=" width: 100%;table-layout: fixed;border-collapse: collapse;margin-bottom: 5px;">
 						<a href="shopping_cart_details.php?action=empty" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Vider le panier</a>
 					</table>
-                </div>
-            </div>
+					<a href="shipping_address.php">Adresse de livraison</a>
+					<a href="invoice.php">Bon de commande</a>
+                	<button type="submit" name="purchase" class="btn btn-success pull-right" style="width:25%; background-color:#00008B; border-color:#00008B;">Passer la commande</button>
 
-            <div class="card-footer">
-            	<form action="" method="post">
-            		<button type="submit" name="purchase" class="btn btn-success pull-right" style="background-color:#00008B; border-color:#00008B;">Passer la commande</button>
                 	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
-            	
+            		
                  	Prix ​​total: <b>
 	                    <?php
 		                    //reduction selon page 10 cahier de charge
@@ -265,8 +269,16 @@ if (isset($_POST['purchase'])) {
 										
 			}
 			?>
-           
+
+
+
+
+
+
+
+
             </div>
+
 
 
         </div>

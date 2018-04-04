@@ -11,10 +11,7 @@
 
       <!-- Jumbotron Header -->
       <header class="  my-4">
-      <div class="jumbotron" align="center"  style="padding-top: 10px;padding-bottom: 10px;">
-        <h2>Nos nouveautés</h2><br>
-      </div>
-	  
+
 	  
 	   <div class="fish-row">
 <svg class="hellohal" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 328.4 189.5" enable-background="new 0 0 328.4 189.5">
@@ -123,7 +120,6 @@
 	        <div class="col-md-4 col-sm-6">
 	          	<div class="card card-3">
 				  <div id="layer">
-				    <button id="comprar">Découvrir</button>
 				  </div>
 	 			</div>
 	        </div>
@@ -133,7 +129,6 @@
 	          <div class="cardNeauveau">
 	            <div class="card card-1">
 				  <div id="layer">
-				    <button id="comprar">Voir la promotion</button>
 				  </div>
 				</div>
 	          </div>
@@ -143,7 +138,6 @@
   			<div class="col-md-4 col-sm-6">
 				<div class="card card-2">
 				  <div id="layer">
-				    <button id="comprar">En savoir plus</button>
 				  </div>
 				</div>            
 	      </div>

@@ -169,19 +169,20 @@ a:focus, a:hover{
 
 </header>
 
+<?php 
+$urlpath="http://localhost/sia/sardine/clientNizar/";
+?>
 
-  <div class="btn-group-justified" style="width:auto">
+  <div class="btn-group-justified" style="width:auto;padding-bottom: 40px;">
 <ul class="hList">
   <li>
     <a href="#click" class="menu">
       <h2 class="menu-title">Conserves</h2>
       <ul class="menu-dropdown">
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Conserves&souscategorie=Conserves_Thon';">
-		Thon</li>
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Conserves&souscategorie=Conserves_Sardine';">Sardine</li>
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Conserves&souscategorie=Conserves_Maquereau';">   Maquereau
-</li>
-        <li style="color: #3a3737;" onclick="location.href='http://localhost/sia/sardine/clientNizar/atalog.php?categorie=Conserves';">Tous les produits</li>
+        <li onclick="location.href='catalog.php?famille=Conserve&gamme=Thon';">Thon</li>
+        <li onclick="location.href='catalog.php?famille=Conserve&gamme=Sardine';">Sardine</li>
+        <li onclick="location.href='catalog.php?famille=Conserve&gamme=Maquereaux';">Maquereau</li>
+        <li style="color: #3a3737;" onclick="location.href='catalog.php?famille=Conserve';">Tous les produits</li>
       </ul>
     </a>
   </li>
@@ -189,12 +190,10 @@ a:focus, a:hover{
     <a href="#click" class="menu">
       <h2 class="menu-title menu-title_2nd">Plats préparés</h2>
       <ul class="menu-dropdown">
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Plats&souscategorie=Plats_thon';">   À base de thon
-</li>
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Plats&souscategorie=Plats_sardine';">À base de sardine</li>
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Plats&souscategorie=Plats_maquereau';">   À base de maquereau
-</li>
-<li style="color: #3a3737;" onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Plats';"> Tous les plats</li>
+        <li onclick="location.href='catalog.php?famille=Plat&gamme=Thon';">À base de thon</li>
+        <li onclick="location.href='catalog.php?famille=Plat&gamme=Sardine';">À base de sardine</li>
+        <li onclick="location.href='catalog.php?famille=Plat&gamme=Maquereau';">À base de maquereau</li>
+<li style="color: #3a3737;" onclick="location.href='catalog.php?famille=Plat';">Tous les plats</li>
       </ul>
     </a>
   </li>
@@ -202,16 +201,11 @@ a:focus, a:hover{
     <a href="#click" class="menu">
       <h2 class="menu-title menu-title_3rd"> Les coffrets</h2>
       <ul class="menu-dropdown">
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Coffrets&souscategorie=Coffrets_thon';">    Thon
-</li>
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Coffrets&souscategorie=Coffrets_sardine';"> Sardine
-</li>
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Coffrets&souscategorie=Coffrets_maquereau;">   Maquereau
-</li>
-        <li onclick="location.href='http://localhost/sia/sardine/clientNizar/catalog.php?categorie=Coffrets&souscategorie=Coffrets_multiples';">  Multiples
-</li>
-        <li style="color: #3a3737;" onclick="location.href='http://localhost/sia/sardine/clientNizar/Coffrets';">    Tous les coffrets
-</li>
+        <li onclick="location.href='catalog.php?famille=Coffret&gamme=Thon';">Thon</li>
+        <li onclick="location.href='catalog.php?famille=Coffret&gamme=Sardine';">Sardine</li>
+        <li onclick="location.href='catalog.php?famille=Coffret&gamme=Maquereau;">Maquereaux</li>
+        <li onclick="location.href='catalog.php?famille=Coffret&gamme=Multiples';">Multiples</li>
+        <li style="color: #3a3737;" onclick="location.href='catalog.php?famille=Coffret';">Tous les coffrets</li>
         
       </ul>
     </a>

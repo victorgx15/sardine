@@ -87,7 +87,7 @@
   <body>
 	
 	<div class="container" >
-		<div class="card" style="width: 100%; height: 100%;">
+		<div class="card" style="width: 100%; height: 100%;margin-bottom: 10%">
 			<div class="container-fliud" >
 				<div class="wrapper row">
 					<div class="preview col-md-6">
@@ -101,18 +101,17 @@
 					</div>
 					<div class="details col-md-6" style="width: 40%;">
 						<h3 class="product-title"><?php echo $row["Designation"]; ?></h3>
-						<div class="rating">
-							<div class="stars">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</div>
-							<span class="review-no">41 avis</span>
-						</div>
 						<p class="product-description"><?php echo $row["Description"]; ?></p>
-						<h4 class="price">Prix : <span><?php echo $row["Prix"]; ?>€</span></h4>
+						<p class="product-description">
+							Référence du produit : <strong><span style="color:#191970;"><?php echo $row["Ref"]; ?></span></strong>
+						    - Nombre de boîtes : <strong><span style="color:#191970;"><?php echo $row["Nombre_boites"]; ?></span></strong>
+						    - Poids : <strong><span style="color:#191970;"><?php echo $row["Poids"]." grammes"; ?></span></strong>
+						</p>
+						<p class="product-description">
+							Famille : <strong><span style="color:#191970;"><?php echo $row["Famille"]; ?></span></strong>
+						    - Gamme : <strong><span style="color:#191970;"><?php echo $row["Gamme"]; ?></span></strong>
+						</p>
+						<h4 class="price">Prix (TTC) : <span><?php echo $row["Prix"]; ?>€</span></h4>
 						<h5 class="price">Etat du stock : 
 							<span>
 								<?php
@@ -125,8 +124,6 @@
 								}
 								?>
 							</span></h5>
-						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-					
 
 						<?php 
 						//afficher bouton ajouter au panier quand il y a bien une quantité disponible 
@@ -134,7 +131,7 @@
 						<div class="action">
 							<form method="post">
 								<button class="add-to-cart btn btn-default" type="submit" name="add_to_cart" value="add_to_cart">Ajouter au panier</button>
-								<input type="input" class="like btn btn-default" type="button" name="quantity" value="1" style="width: 80px;"></input>
+								<input type="number" class="like btn btn-default" type="button" name="quantity" value="1" style="width: 80px;"></input>
 								<button class="like btn btn-default" type="button" name="signup"><span class="fa fa-heart" placeholder="Quantité souhaitée"></span></button>
 							</form>
 								<p class="">

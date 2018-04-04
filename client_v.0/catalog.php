@@ -7,13 +7,13 @@
  		    /*on inclue fichier de connexion à la bd */
     	require_once 'dbconnect.php';
 		//$stmt = $conn->prepare("SELECT * FROM produit");
-	   	$categorie=$_GET["categorie"];
-	   	$souscategorie="";
-	   	$stmt = $conn->prepare("SELECT * FROM produit WHERE Ref LIKE '%$categorie%'");
+	   	$famille=$_GET["famille"];
+	   	$gamme="";
+	   	$stmt = $conn->prepare("SELECT * FROM produit WHERE Famille LIKE '$famille'");
 
-	   	if(isset($_GET["souscategorie"])){
-		   	$souscategorie=$_GET["souscategorie"];
-		   	$stmt = $conn->prepare("SELECT * FROM produit WHERE Ref='$souscategorie'");
+	   	if(isset($_GET["gamme"])){
+		   	$gamme=$_GET["gamme"];
+		   	$stmt = $conn->prepare("SELECT * FROM produit WHERE Gamme='$gamme' AND Famille LIKE '$famille'");
 	   	}
 	   	
 
@@ -30,8 +30,8 @@
       <!-- Jumbotron Header -->
       <header class="  my-4">
       <div class="jumbotron" align="center"  style="padding-top: 10px;padding-bottom: 10px;">
-        <h2><?php echo $categorie;?></h2><br>
-        <h4><?php echo $souscategorie = str_replace('_', ' ', $souscategorie);?></h4><br>
+        <h2><?php echo $famille;?></h2><br>
+        <h4><?php echo $gamme = str_replace('_', ' ', $gamme);?></h4><br>
 
       </div>
       </header>
@@ -60,7 +60,7 @@
 	                <div class="portfolio-box-caption-content">
 	                     <!--On affiche la référence du produit -->
 	                  <div class="project-category text-faded">
-	                    <?php echo $row["Ref"]; ?>
+	                    <?php echo str_replace('_', ' ', $row["Ref"]); ?>
 	                  </div>
 	                     <!--On affiche la designation du produit -->
 	                  <div class="project-name">
@@ -72,9 +72,10 @@
 	                </div>
 	              </div>
 	            <div class="" align="center" style="display:table;width: 100%">
-			        <div align="left" style="display: table-cell;vertical-align:middle;padding:5%;width:50%;"><strong><?php echo $row["Designation"]; ?></strong></div> 
-			       	<div align="right" style="display: table-cell;vertical-align:middle;padding:5%;width:50%;"><?php echo "<strong>".$row["Prix"]."€</strong>"; ?></div>
+			        <div align="left" style="display: table-cell;vertical-align:middle;padding:5%;width:50%; color: #303030;"><strong><?php echo $row["Designation"]; ?></strong></div> 
+			       	<div align="right" style="display: table-cell;vertical-align:middle;padding:5%;width:50%; color: #303030;"><?php echo "<strong>".$row["Prix"]."€</strong>"; ?></div>
 			    </div>   
+
 	          </div>
 	          
 	            </a>

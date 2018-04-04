@@ -73,7 +73,7 @@ if (isset($_POST['signup'])) {
 <div class="container">
 
     <div id="login-form">
-        <form method="post">
+        <form method="post" autocomplete="off">
 
             <div class="col-md-12">
 
