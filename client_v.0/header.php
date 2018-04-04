@@ -48,6 +48,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 <style>
+
+
+.logo{
+  padding-top: 15px;
+  padding-left: 10px;
+  font-size: 15px;
+}
 .btn{
 border-radius: 0px !important;
 }
@@ -89,16 +96,13 @@ a:focus, a:hover{
 <script  src="js/background.js"></script>
   <body>
 
-  <header id="header">
+  <header class="navbar navbar-inverse" style="width:1120px;margin:auto;margin-top: 20px;">
 <div class="container">
   <a href="index.php" style="color: #FFFFF0;">
     <img src="images/logo.png" style="width:45px; length :30px;float:left;" alt="Accueil">
-      <h1 class="logo">La vieille
-        <span>Sardine</span>
-      </h1>
-      <h1 class="logoBas">- Villeneuve la vieille -</h1>
+      <h1 class="logo">La vieille Sardine</h1>
   </a>
-  <nav class="site-nav">
+  <nav class="site-nav" style="margin-top: 3px;">
       <ul>
         <li><a href=""><i class=" "></i>
 
@@ -166,7 +170,7 @@ a:focus, a:hover{
 </header>
 
 
-  <div class="btn-group-justified" >
+  <div class="btn-group-justified" style="width:auto">
 <ul class="hList">
   <li>
     <a href="#click" class="menu">
