@@ -14,7 +14,6 @@
             }
         </style>
         <link rel="stylesheet" href="css/style_Card.css">
-        <link rel="stylesheet" href="css/staff.css" />
     </head>
 
     <body>
@@ -35,7 +34,10 @@
                     <a href="StaffList.php" >
                         <div class="card card-1">
                             <div id="layer">
-                                <button id="comprar">Gestion des employés</button>
+                                <div class="card-body">
+                                    <h3>Employés</h3>
+                                </div>
+
                             </div>
                         </div>
                     </a>
@@ -48,7 +50,9 @@
                 <div class="col-md-3 col-sm-6">
                     <a href="ClientList.php" ><div class="card card-2">
                       <div id="layer">
-                        <button id="comprar">Gestion des clients</button>
+                          <div class="card-body">
+                              <h3>Clients</h3>
+                          </div>
                       </div>
                     </div></a>
                 </div>
@@ -56,7 +60,9 @@
                 <div class="col-md-3 col-sm-6">
                     <a href="StockList.php"><div class="card card-4">
                       <div id="layer">
-                        <button id="comprar">Gestion des stocks</button>
+                          <div class="card-body">
+                              <h3>Stocks</h3>
+                          </div>
                       </div>
                     </div></a>
               </div>
@@ -64,7 +70,9 @@
                 <div class="col-md-3 col-sm-6">
                     <a href="ProductList.php" type="button" ><div class="card card-3">
                       <div id="layer">
-                        <button id="comprar">Gestion de produits</button>
+                          <div class="card-body">
+                              <h3>Produits</h3>
+                          </div>
                       </div>
                     </div></a>
               </div>
