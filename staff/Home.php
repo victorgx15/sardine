@@ -14,7 +14,7 @@
     </head>
 
     <body>
-    <div class="jumbotron" style="text-align: center; width=100%">
+    <div class="jumbotron" style="text-align: center; width=100%;">
         <br><h1>Bienvenue</h1>
 
         <div class="container" style="padding: 10px; display:inline;">

@@ -35,13 +35,16 @@
 
     <?php
     require_once 'dbconnect.php';
-    $ID_Client=$_GET['ID_Client'];
-    $query = $bdd->prepare("SELECT * FROM compte WHERE ID_Client='$ID_Client' AND Status='C'");
-    $query->execute();
-    $client=$query->fetch();
+    $Id_Emplacement=$_GET['Id_Emplacement'];
+    $getStorage = $bdd->prepare("SELECT * FROM emplacement_ WHERE Id_Emplacement='$Id_Emplacement'");
+    $getStorage->execute();
+    $storage=$getStorage->fetch();
     ?>
-    <h2>Passer une commande pour le client: </h2>
-    <h3 style="color:#ad0510"><?php echo $client ['PRENOM']." ".$client ['Nom'];?></h3><br>
+
+    <div class="col-sm-4"></div>
+
+    <h2>Ajouter du stock à l'emplacement <?php echo  $Id_Emplacement?> : </h2>
+    <h3 style="text-align: left; margin-left:45%; "> <?php echo "<div class='col-sm-2' >Couloir : </div>".$storage ['Couloir']." <br> <div class='col-sm-2'>Trave : </div>".$storage ['Trave']." <br> <div class='col-sm-2'>Etagère : </div>".$storage ['Etagere'];?></h3><br>
 
     <table id="ProductList" hidden>
         <?php
@@ -63,7 +66,7 @@
     <a href="ProductList.php" target="_blank" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Parcourir</a>
 </div><br>
 
-<form id="OrderForm" name="OrderForm" method="post" action="AddOrder.php?ID_Client=<?php echo $ID_Client;?>">
+<form id="OrderForm" name="OrderForm" method="post" action="">
     <table id="OrderFormTable" name="OrderFormTable" class="table" style="width:80%; background:transparent;">
         <input id="nbProducts" name="nbProducts" type="number" hidden value="0">
         <tbody>
@@ -71,10 +74,9 @@
             <td style="width:5%">
                 <button class="btn btn-danger btn-xs btn-circle deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
             </td>
-            <td style="width:35%; "><input type="text" id="ID_Produit0" name="ID_Produit0" class="form-control idField" placeholder="ID Produit"></td>
-            <td style="width:10%"><input type="number" id="Quantite0" name="Quantite0" class="form-control qtField" placeholder="0" min="0"></td>
+            <td style="width:35%; "><input type="text" id="ID_Produit0" name="ID_Produit[]" class="form-control idField" placeholder="ID Produit"></td>
+            <td style="width:10%"><input type="number" id="Quantite0" name="Quantite[]" class="form-control qtField" placeholder="0" min="0"></td>
             <td class="productInfo" style="width:40%;"></td>
-            <td class="productPrice" style="width:10%;"></td>
         </tr>
         </tbody>
         <tfoot>
@@ -108,17 +110,15 @@
                     )
                 )
                 .append($('<td style="width:35%">')
-                    .append($("<input type='text' id='ID_Produit"+idProd+"' name='ID_Produit"+idProd+"' class='form-control idField' placeholder='ID Produit'>")
+                    .append($("<input type='text' id='ID_Produit"+idProd+"' name='ID_Produit[]' class='form-control idField' placeholder='ID Produit'>")
                     )
                 )
 
                 .append($('<td style="width:10%">')
-                    .append($("<input type='number' id='Quantite"+idProd+"' min='0' name='Quantite"+idProd+"' class='form-control qtField' placeholder='0'>")
+                    .append($("<input type='number' id='Quantite"+idProd+"' min='0' name='Quantite[]' class='form-control qtField' placeholder='0'>")
                     )
                 )
                 .append($('<td style="width:40%" class="productInfo">')
-                )
-                .append($('<td style="width:10%" class="productPrice">')
                 )
             );
         $(".idField").on('input', function () {
@@ -129,7 +129,6 @@
             if($(this).val()<0){
                 $(this).val('');
             }
-            updateTotalPrice();
         });
     })
 
@@ -147,31 +146,9 @@
         if($(this).val()<0){
             $(this).val('');
         }
-        updateTotalPrice();
     });
 
-    function updateTotalPrice(){
-        priceArray=[];
-        qteArray=[];
-        i=0;
-        $("#OrderFormTable .productPrice").each(function() {
-            var value = $(this).text();
-            priceArray[i++]= parseFloat(value);
-        });
-        i=0;
-        $("#OrderFormTable .qtField").each(function() {
-            var value = $(this).val();
-            qteArray[i++]= parseFloat(value);
-        });
-        sum=0;
-        for(i=0;i<priceArray.length;i++){
-            if(isNaN(priceArray[i])||isNaN(qteArray[i])){
-                continue;
-            }
-            sum+=qteArray[i]*priceArray[i];
-        }
-        $('#orderTotal').text(sum == 0 ? '' : sum.toFixed(2) + "€");
-    }
+
 
     function allProductsExist(){
         test=true;

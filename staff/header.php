@@ -50,7 +50,7 @@ if(!isset($_SESSION['status'])||($_SESSION['status'] != 'A' && $_SESSION['status
 
 
 ?>
-<nav class="navbar navbar-inverse" style="margin-top:20px; background-color:#0c154c">
+<nav class="navbar navbar-inverse" style="margin-top:20px; background-color:#121e6e;">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="Home.php" style="padding:5px;"><img src="logo.png" style="display:inline;margin-right:10px;width:40px;">La Vieille Sardine : Intranet</a>
