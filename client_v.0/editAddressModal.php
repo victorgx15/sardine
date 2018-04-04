@@ -1,7 +1,26 @@
                 <!-- Edit Client Modal -->
                 <?php
-                try {
+                    include_once 'dbconnect.php';
                     $id=$_SESSION['user'];
+
+                    if (isset($_POST['editaddress'])) {
+                        $Adresse=$_POST['Adresse'];
+                        $Postal_Code=$_POST['Postal_Code'];
+                        $Ville=$_POST['Ville'];
+                        $Pays=$_POST['Pays'];
+                        $statusAdresse="L";
+
+                        
+                $stmts = $conn->prepare("INSERT INTO adresse(Pays,Ville,Adresse,Postal_Code,Id_Client,Status) VALUES(?,?,?,?,?,?)");
+                $stmts->bind_param("ssssss", $Pays, $Ville,$Adresse,$Postal_Code, $id,$statusAdresse);
+                $res = $stmts->execute();//get result
+                $stmts->close();
+
+                    }
+
+
+
+                try {
                     $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $accountInfo = $bdd->prepare("SELECT * FROM compte WHERE Id_Client = '$id'");
@@ -14,10 +33,10 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
-                                <h4>Modifier un client</h4>
+                                <h4>Modifier mes adresses</h4>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal" method="post" id="edit_client" action="EditAccount.php">
+                                <form class="form-horizontal" method="post">
                                     <div class="container">
                                         <div class="form-group">
 
@@ -79,7 +98,7 @@
                                         ?>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" type="button" class="btn btn-info" value="Confirmer">
+                                        <input type="submit" type="button" name="editaddress" class="btn btn-info" value="Confirmer">
                                         <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                     </div>
                                 </form>

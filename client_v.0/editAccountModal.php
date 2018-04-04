@@ -61,38 +61,21 @@
                                                 <input type="password" class="form-control" name="Password" id="Password">
                                                 <input type="hidden" class="form-control" name="Password_def" id="Password_def" value=<?php echo $compte['Password']; ?>>
                                             </div>
-                                        </div><br>
-                                        <?php
-                                        $addressList = $bdd->prepare("SELECT * FROM adresse WHERE Id_Client='$id' ");
-                                        $addressList->execute();
-                                        while($adr = $addressList->fetch()){
-                                            ?>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-2" for Adresse> Adresse : </label>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control" name="Adresse" id="Adresse" required value="<?php echo $adr['Adresse'];?>">
-                                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2"> Autorisation : </label>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" name="Civilite" id="Civilite" required>
+                                                    <option value="M">J'autorise l'envoi du catalogue à mon domicile</option>
+                                                    <option value="Mme">Je n'autorise pas l'envoi du catalogue à mon domicile</option>
+                                                </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-2" for Ville> Ville : </label>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control"  name="Ville" id="Ville" required value=<?php echo $adr['Ville'];?>>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-2" for Postal_Code> Code Postal : </label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" class="form-control" name="Postal_Code" id="Postal_Code" required value=<?php echo $adr['Postal_Code'];?>>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-2" for Pays> Pays : </label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" class="form-control" name="Pays" id="Pays" required value=<?php echo $adr['Pays'];?>>
-                                                </div>
-                                            </div><br>
+                                        </div>
+
+                                        <br>
+
                                             <?php
-                                        }
                                         }
                                         catch(PDOException $e) {
                                             echo "Error: " . $e->getMessage();
