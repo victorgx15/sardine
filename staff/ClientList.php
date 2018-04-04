@@ -45,7 +45,7 @@ try {
                 <th style="width:20%">Prenom</th>
                 <th style="width:20%">Nom</th>
                 <th style="width:15%">Tel</th>
-                <th style="width:10%">Email</th>
+                <th style="width:20%">Email</th>
                 <th> Action </th>
             </tr>
             </thead>

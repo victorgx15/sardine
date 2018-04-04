@@ -11,7 +11,26 @@
             width: 80%;
             box-sizing: border-box;
         }
+        .mtable {
+            display: table;
+            border-collapse: collapse;
+            width:100%;
+        }
+        .mrow {
+            display: table-row;
+            border-bottom: 1px solid rgba(133, 133, 133, 0.74);
+            padding:5px;
+        }
+        .mcell {
+            display: table-cell;
+            text-align: center;
+            padding:5px;
+        }
+        .mtabhead {
+            display: table-header-group;
+            font-weight: bold;
 
+        }
     </style>
 </head>
 <body>
@@ -124,9 +143,69 @@
                     </td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $storageTotal; ?></td>
                     <td style="text-align:center; word-break:break-all; ">
+                        <a href="#details<?php echo $Id_Emplacement; ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span></a>
                         <a href="#delete<?php echo $Id_Emplacement;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
                     </td>
-                    <!-- Delete Product Modal -->
+
+
+                    <!-- Storage Details Modal -->
+                    <div id="details<?php  echo $Id_Emplacement;?>" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" text-align="center">Produits se trouvant à l'emplacement <?php echo $storage ['Id_Emplacement']; ?></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mtable">
+                                        <div class="mtabhead">
+                                            <div class="mrow">
+                                                <div class="mcell">Id_Produit</div>
+                                                <div class="mcell">Designation</div>
+                                                <div class="mcell">Quantité</div>
+                                            </div>
+                                        </div>
+                                        <form class="form-horizontal orderForm" method="post" id="modifyStock<?php echo $Id_Emplacement; ?>" action="EditStock.php">
+                                            <input type="hidden" value='<?php echo $Id_Emplacement?>' name="Id_Emplacement[]">
+                                            <?php
+                                            $productList=$bdd->prepare("SELECT * FROM est_placer WHERE Id_Emplacement = '$Id_Emplacement'");
+                                            $productList->execute();
+                                            while($product=$productList->fetch()){
+                                                //Get all Id_Emplacement from est_placer
+                                                $Id_Produit=$product['Id_Produit'];
+                                                $productInfoList=$bdd->prepare("SELECT * FROM produit WHERE Id_Produit='$Id_Produit'");
+                                                $productInfoList->execute();
+                                                while($productInfo=$productInfoList->fetch()){
+                                                    ?>
+                                                    <div class="mrow">
+                                                        <div class="mcell"><?php echo $product['Id_Produit']?></div>
+                                                        <div class="mcell"><?php echo $productInfo['Designation']?></div>
+                                                        <div class="mcell" style="width:80px">
+                                                            <input type="hidden" value='<?php echo $Id_Produit?>' name="Id_Produit[]">
+                                                            <input type="number" class="form-control stockAmount" value="<?php echo $product["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:20%">
+                                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!-- Delete Storage Modal -->
                     <div id="delete<?php  echo $Id_Emplacement;?>" class="modal fade" role="dialog">
                         <div class="modal-header">
                             <h3 id="myModalLabel">Delete</h3>
@@ -150,6 +229,10 @@
                             </div>
                         <?php } ?>
                     </div>
+
+
+
+
                 </tr>
             <?php } ?>
             </tbody>
