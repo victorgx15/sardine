@@ -28,19 +28,21 @@
       <file leaf-file-name="StockList.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/staff/StockList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="78" column="28" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+            <state relative-caret-position="612">
+              <caret line="156" column="132" lean-forward="false" selection-start-line="156" selection-start-column="132" selection-end-line="156" selection-end-column="132" />
               <folding>
-                <element signature="e#2954#2961#1#HTML" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1522870127736" expanded="true" signature="144:192" ph="SELECT MAX(C... emplacement_" />
-                <marker date="1522870127736" expanded="true" signature="1785:1858" ph="SELECT * FRO... emplacement_" />
-                <marker date="1522870127736" expanded="true" signature="2143:2208" ph="SELECT * FRO... emplacement_" />
-                <marker date="1522870127736" expanded="true" signature="4263:4328" ph="SELECT * FRO... est_placer" />
-                <marker date="1522870127736" expanded="true" signature="4717:4769" ph="SELECT * FRO... produit" />
-                <marker date="1522870127736" expanded="true" signature="6637:6638" ph="..." />
-                <marker date="1522870127736" expanded="true" signature="6637:6746" ph="..." />
+                <element signature="e#2879#2886#1#HTML" expanded="true" />
+                <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1522872451399" expanded="true" signature="144:192" ph="SELECT MAX(C... emplacement_" />
+                <marker date="1522872451399" expanded="true" signature="1809:1882" ph="SELECT * FRO... emplacement_" />
+                <marker date="1522872451399" expanded="true" signature="2167:2232" ph="SELECT * FRO... emplacement_" />
+                <marker date="1522872451399" expanded="true" signature="4175:4240" ph="SELECT * FRO... est_placer" />
+                <marker date="1522872451399" expanded="true" signature="4710:4762" ph="SELECT * FRO... produit" />
+                <marker date="1522872451399" expanded="true" signature="6939:6940" ph="..." />
+                <marker date="1522872451399" expanded="true" signature="6939:6947" ph="..." />
+                <marker date="1522872451399" expanded="true" signature="6939:7048" ph="..." />
+                <marker date="1522872451399" expanded="true" signature="6989:7037" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -347,12 +349,12 @@
       <workItem from="1522238800027" duration="4230000" />
       <workItem from="1522336860064" duration="4527000" />
       <workItem from="1522738292539" duration="460000" />
-      <workItem from="1522738934880" duration="60843000" />
+      <workItem from="1522738934880" duration="63036000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="312360000" />
+    <option name="totallyTimeSpent" value="314553000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -866,19 +868,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/staff/StockList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="78" column="28" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+        <state relative-caret-position="612">
+          <caret line="156" column="132" lean-forward="false" selection-start-line="156" selection-start-column="132" selection-end-line="156" selection-end-column="132" />
           <folding>
-            <element signature="e#2954#2961#1#HTML" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1522870127736" expanded="true" signature="144:192" ph="SELECT MAX(C... emplacement_" />
-            <marker date="1522870127736" expanded="true" signature="1785:1858" ph="SELECT * FRO... emplacement_" />
-            <marker date="1522870127736" expanded="true" signature="2143:2208" ph="SELECT * FRO... emplacement_" />
-            <marker date="1522870127736" expanded="true" signature="4263:4328" ph="SELECT * FRO... est_placer" />
-            <marker date="1522870127736" expanded="true" signature="4717:4769" ph="SELECT * FRO... produit" />
-            <marker date="1522870127736" expanded="true" signature="6637:6638" ph="..." />
-            <marker date="1522870127736" expanded="true" signature="6637:6746" ph="..." />
+            <element signature="e#2879#2886#1#HTML" expanded="true" />
+            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1522872451399" expanded="true" signature="144:192" ph="SELECT MAX(C... emplacement_" />
+            <marker date="1522872451399" expanded="true" signature="1809:1882" ph="SELECT * FRO... emplacement_" />
+            <marker date="1522872451399" expanded="true" signature="2167:2232" ph="SELECT * FRO... emplacement_" />
+            <marker date="1522872451399" expanded="true" signature="4175:4240" ph="SELECT * FRO... est_placer" />
+            <marker date="1522872451399" expanded="true" signature="4710:4762" ph="SELECT * FRO... produit" />
+            <marker date="1522872451399" expanded="true" signature="6939:6940" ph="..." />
+            <marker date="1522872451399" expanded="true" signature="6939:6947" ph="..." />
+            <marker date="1522872451399" expanded="true" signature="6939:7048" ph="..." />
+            <marker date="1522872451399" expanded="true" signature="6989:7037" ph="{...}" />
           </folding>
         </state>
       </provider>

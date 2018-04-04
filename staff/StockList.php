@@ -25,6 +25,7 @@
         }
         .mrow {
             display: table-row;
+            width:100%;
             border-bottom: 1px solid rgba(133, 133, 133, 0.74);
             padding:5px;
         }
@@ -92,9 +93,9 @@
             $shelfList->execute();
             while($shelf=$shelfList->fetch()){
                 $Id_Emplacement=$shelf['Id_Emplacement'];
+                $stored=0;
 
             ?>
-                <div class="grid-child-item"  data-toggle="modal" data-target="#details<?php  echo $Id_Emplacement;?>"></div>
                 <!-- Storage location details -->
                 <div id="details<?php  echo $Id_Emplacement;?>" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -102,54 +103,58 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title" text-align="center">Produits se trouvant à l'emplacement <?php
+                                <h4 class="modal-title" text-align="center">Produits à l'emplacement <?php
 
                                     echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2));
                                 //echo $storage ['Id_Emplacement']; ?></h4>
                             </div>
-                            <div class="modal-body">
-                                <div class="mtable">
-                                    <div class="mtabhead">
-                                        <div class="mrow">
-                                            <div class="mcell">Id_Produit</div>
-                                            <div class="mcell">Designation</div>
-                                            <div class="mcell">Quantité</div>
-                                        </div>
-                                    </div>
-                                    <form class="form-horizontal orderForm" method="post" id="modifyStock<?php echo $Id_Emplacement; ?>" action="EditStock.php">
+                            <form class="form-horizontal orderForm" method="post" id="modifyStock<?php echo $Id_Emplacement; ?>" action="EditStock.php">
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Id_Produit</th>
+                                            <th>Designation</th>
+                                            <th style="width:10%">Quantité</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
                                         <input type="hidden" value='<?php echo $Id_Emplacement?>' name="Id_Emplacement[]">
                                         <?php
                                         $productList=$bdd->prepare("SELECT * FROM est_placer WHERE Id_Emplacement = '$Id_Emplacement'");
                                         $productList->execute();
                                         while($product=$productList->fetch()){
+                                            $stored+=$product["Quantite_stock"];
                                             //Get all Id_Emplacement from est_placer
                                             $Id_Produit=$product['Id_Produit'];
                                             $productInfoList=$bdd->prepare("SELECT * FROM produit WHERE Id_Produit='$Id_Produit'");
                                             $productInfoList->execute();
                                             while($productInfo=$productInfoList->fetch()){
                                                 ?>
-                                                <div class="mrow">
-                                                    <div class="mcell"><?php echo $product['Id_Produit']?></div>
-                                                    <div class="mcell"><?php echo $productInfo['Designation']?></div>
-                                                    <div class="mcell" style="width:80px">
+                                                <tr>
+                                                    <td><?php echo $product['Id_Produit']?></td>
+                                                    <td><?php echo $productInfo['Designation']?></td>
+                                                    <td >
                                                         <input type="hidden" value='<?php echo $Id_Produit?>' name="Id_Produit[]">
                                                         <input type="number" class="form-control stockAmount" value="<?php echo $product["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
-                                                    </div>
-                                                </div>
+                                                    </td>
+                                                </tr>
                                                 <?php
                                             }
                                         }
                                         ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:20%">
-                                <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                            </div>
+                                <div class="modal-footer">
+                                    <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:20%">
+                                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
+                <div class="grid-child-item" title="<?php echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2)); ?>" data-toggle="modal" data-target="#details<?php  echo $Id_Emplacement;?>" <?php $opacity=0.05+$stored/20; echo "style='background-color: rgba(62, 67, 71, ".$opacity.");'"?>></div>
             <?php
             }
             ?>
