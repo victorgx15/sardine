@@ -59,7 +59,7 @@
         ?>
     </table>
 <div style="text-align:left; width:80%">
-    <button class="btn btn-success"  id="addRow"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
+    <button class="btn btn-success"  id="addRow"><span class="glyphicon glyphicon-plus"></span></button>
     <a href="ProductList.php" target="_blank" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Parcourir</a>
 </div><br>
 
