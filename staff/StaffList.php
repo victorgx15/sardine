@@ -425,11 +425,11 @@ try {
                 </div>
             </div>
             <?php
-            $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-            $result = $bdd->prepare("SELECT * FROM compte WHERE Status='E' OR Status='A'");
-            $result->execute();
+            require_once 'dbconnect.php';
+            $staffList = $bdd->prepare("SELECT * FROM compte WHERE Status='E' OR Status='A'");
+            $staffList->execute();
 
-            for($i=0; $compte = $result->fetch(); $i++){
+            for($i=0; $compte = $staffList->fetch(); $i++){
                 $id=$compte['ID_Client'];
                 ?>
                 <tr>

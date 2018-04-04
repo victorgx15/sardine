@@ -93,7 +93,7 @@ try {
             </thead>
             <tbody>
             <?php
-            $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+            require_once 'dbconnect.php';
             $productList = $bdd->prepare("SELECT * FROM produit");
             $productList->execute();
 

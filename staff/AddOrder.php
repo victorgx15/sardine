@@ -1,8 +1,6 @@
 
 <?php
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once 'dbconnect.php';
     $Date=date("Y-m-d");
     $Date_Livraison=date("Y-m-d", strtotime($Date. ' + 3 days'));
     $Etat='Attente de paiement';
@@ -38,10 +36,3 @@ try {
     }
     echo "<script>alert('Commande passé avec succès');window.location.href='ClientList.php';window.location('ClientList.php');</script>";
 
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$bdd = null;
-
-?>

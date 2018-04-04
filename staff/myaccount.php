@@ -1,7 +1,7 @@
 <head>
     <?php
     include('header.php');
-    $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+    require_once 'dbconnect.php';
     $id=$_SESSION['id'];
     ?>
 

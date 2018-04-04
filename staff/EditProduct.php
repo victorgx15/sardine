@@ -1,9 +1,8 @@
 
 <?php
-try {
-    $bdd = new PDO('mysql$host=localhost;dbname=db;charset=utf8', 'root', '');
 
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once 'dbconnect.php';
+
     $designation = $_POST['designation'];
     $marque = $_POST['brand'];
     $famille = $_POST['family'];
@@ -23,10 +22,4 @@ try {
     $stmt->execute();
 
     echo "<script>alert('Produit modifié avec succès');window.location.href='ProductList.php'; window.location('ProductList.php');</script>";
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$bdd = null;
-
 ?>

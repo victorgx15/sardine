@@ -1,9 +1,7 @@
 
 <?php
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    require_once 'dbconnect.php';
     if (isset($_POST['Email'])) {
         // Insertion
         $Status=$_POST['Status'];
@@ -13,8 +11,12 @@ try {
         $Tel=$_POST['Tel'];
         $Email=$_POST['Email'];
         $Password=hash('sha256', $_POST['Password']);
+        $Autorisation='N';
+        if (isset($_POST['Autorisation'])&&$_POST['Autorisation'] == 'Y'){
+            $Autorisation='Y';
+        }
 
-        $query="INSERT INTO compte(Civilite, PRENOM, Nom, Tel, Email, Password, Status) VALUES('$Civilite', '$PRENOM', '$Nom', '$Tel', '$Email', '$Password','$Status')";
+        $query="INSERT INTO compte(Civilite, PRENOM, Nom, Tel, Email, Password, Status, Autorisation) VALUES('$Civilite', '$PRENOM', '$Nom', '$Tel', '$Email', '$Password','$Status','$Autorisation')";
         $newAccount = $bdd->prepare($query);
         $newAccount->execute();
         $ID_Client=$bdd->lastInsertId();
@@ -32,10 +34,3 @@ try {
         echo "<script>alert('Compte ajouté avec succès'); window.location.href='$prevPage'; window.location('$prevPage')</script>";
 
     }
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$bdd = null;
-
-?>

@@ -30,7 +30,7 @@
 <div class="jumbotron" align="center">
 
     <?php
-    $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+    require_once 'dbconnect.php';
     $ID_Client=$_GET['ID_Client'];
     $query = $bdd->prepare("SELECT * FROM compte WHERE ID_Client='$ID_Client' AND Status='C'");
     $query->execute();

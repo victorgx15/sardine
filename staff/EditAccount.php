@@ -1,9 +1,6 @@
 <?php
-try {
     session_start();
-    $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    require_once 'dbconnect.php';
     $get_id=$_POST['id'];
 
     $Status=$_POST['Status'];
@@ -18,13 +15,17 @@ try {
         $_SESSION['Nom']=$Nom;
     }
 
+    $Autorisation='N';
+    if (isset($_POST['Autorisation'])&&$_POST['Autorisation'] == 'Y'){
+        $Autorisation='Y';
+    }
     if(!isset($_POST['Password'])||$_POST['Password']=='') {
         $Password = $_POST['Password_def'];
     }else{
         $Password=hash('sha256', $_POST['Password']);
     }
 
-    $query="UPDATE compte SET Civilite='$Civilite', PRENOM='$PRENOM', Nom='$Nom', Tel='$Tel', Email='$Email', Password='$Password', Status='$Status' WHERE ID_Client = '$get_id'";
+    $query="UPDATE compte SET Civilite='$Civilite', PRENOM='$PRENOM', Nom='$Nom', Tel='$Tel', Email='$Email', Password='$Password', Status='$Status', Autorisation='$Autorisation' WHERE ID_Client = '$get_id'";
     $stmt=$bdd->prepare($query);
     $stmt->execute();
 
@@ -46,11 +47,5 @@ try {
     }
     echo "<script>alert('Compte modifié avec succès'); window.location.href='$prevPage'; window.location('$prevPage')</script>";
 
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-
-$bdd = null;
 
 ?>

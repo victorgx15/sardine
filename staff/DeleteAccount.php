@@ -1,5 +1,5 @@
 <?php
-$bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+require_once 'dbconnect.php';
 $get_id=$_GET['id'];
 
 $query = $bdd->prepare("DELETE FROM compte WHERE ID_Client = '$get_id'");

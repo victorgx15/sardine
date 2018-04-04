@@ -1,8 +1,5 @@
 <?php
-// Sous WAMP (Windows)
-$bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,7 +58,8 @@ session_start();
 
 
         <form method="post" id="employee_form_login" action="">
-        	<?php 
+        	<?php
+            require_once 'dbconnect.php';
 				if (isset($_POST['employeeEmail']) OR isset($_POST['employeePwd'])) {
 				    $req = $bdd->prepare('SELECT Id_client, Password, Status, Nom, PRENOM FROM compte WHERE email = :pseudo');
 					$req->execute(array('pseudo' => $_POST['employeeEmail']));

@@ -1,8 +1,6 @@
 
 <?php
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once 'dbconnect.php';
     $i=0;
     foreach ($_POST['Id_Produit'] as $Id_Produit){
         foreach($_POST['Id_Emplacement'] as $Id_Emplacement){
@@ -18,10 +16,5 @@ try {
 
     $prevPage=$_SERVER['HTTP_REFERER'];
     echo "<script>alert('Stock modifié avec succès'); window.location.href='$prevPage'; window.location('$prevPage')</script>";
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$bdd = null;
 
 ?>

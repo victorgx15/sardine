@@ -1,8 +1,5 @@
 
 <html>
-
-
-
     <head>
         <?php include('header.php'); ?>
 
@@ -76,7 +73,6 @@
                       </div>
                     </div></a>
               </div>
-              <!-- /.row -->
         </div>            
         </div>
 
@@ -86,4 +82,3 @@
 
     </body>
 </html
-        }

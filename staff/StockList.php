@@ -76,7 +76,7 @@ try {
                 </div>
             </div>
             <?php
-            $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+            require_once 'dbconnect.php';
             $storageList = $bdd->prepare("SELECT * FROM emplacement_");
             $storageList->execute();
             while($storage = $storageList->fetch()){

@@ -7,9 +7,8 @@
             cursor: pointer;
             text-align: center;
         }
-        input {
-            width: 80%;
-            box-sizing: border-box;
+        .form-group{
+            vertical-align: middle;
         }
 
     </style>
@@ -375,7 +374,23 @@ try {
                                                 <option value="Zimbabwe">Zimbabwe</option>
                                             </select>
                                         </div>
-                                    </div><br><br>
+                                    </div><br>
+                                    <!--
+                                    <div class="checkbox" style="margin-left: 0; background-color:grey">
+                                        <label class="checkbox-inline" style="margin-left: 0;  float:left; text-align: left; background-color: yellow">
+                                            <input name="Autorisation" id="Autorisation" type="checkbox" value='Y'/>
+                                            J'autorise La Vieille Sardine de m'envoyer ses offres et catalogues par mail
+                                        </label>
+                                    </div>
+                                    -->
+                                    <div class="form-group" style="margin-left: 15px;">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input name="Autorisation" id="Autorisation" type="checkbox" value='Y'>
+                                                    J'autorise La Vieille Sardine de m'envoyer ses offres et catalogues par mail
+                                                </label>
+                                            </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <input type="submit" type="button" class="btn btn-info" value="Confirmer">
@@ -389,7 +404,7 @@ try {
                 </div>
             </div>
             <?php
-            $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
+            require_once 'dbconnect.php';
             $compteList = $bdd->prepare("SELECT * FROM compte WHERE Status='C' ");
             $compteList->execute();
             while($compte = $compteList->fetch()){
@@ -496,6 +511,14 @@ try {
                                                 <?php
                                             }
                                             ?>
+                                        </div>
+                                        <div class="form-group" style="margin-left: 15px;">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input name="Autorisation" id="Autorisation" type="checkbox" value='Y' <?php if($compte ['Autorisation']=='Y') echo 'checked="checked"';?>>
+                                                    J'autorise La Vieille Sardine de m'envoyer ses offres et catalogues par mail
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <input type="submit" type="button" class="btn btn-info" value="Confirmer">
