@@ -18,35 +18,17 @@
             box-sizing: border-box;
         }
 
-        .mtable {
-            display: table;
-            border-collapse: collapse;
-            width:100%;
-        }
-        .mrow {
-            display: table-row;
-            border-bottom: 1px solid rgba(133, 133, 133, 0.74);
-            padding:5px;
-        }
-        .mcell {
-            display: table-cell;
-            text-align: center;
-            padding:5px;
-        }
-        .mtabhead {
-            display: table-header-group;
-            font-weight: bold;
-
+        table td {
+            vertical-align: middle !important;
         }
 
         .grid-container {
-            margin-left:5%;
-            margin-top:5%;
+            margin:5%;
             grid-column-gap: 50px;
             grid-row-gap: 10px;
             display: grid;
-            grid-template-columns: repeat(<?php echo $nbCols?>, 100px);
-            grid-auto-rows: 100px;
+            grid-template-columns: repeat(<?php echo $nbCols?>, 1fr);
+            grid-auto-rows: 1fr;
         }
 
         .grid-item {
@@ -58,12 +40,14 @@
         .grid-child{
             display: grid;
             grid-template-columns: auto;
-            grid-auto-rows:17px;
-            grid-row-gap: 1px;
+            grid-auto-rows:1fr;
+            grid-row-gap: 2px;
+
         }
 
         .grid-child-item{
             background-color: rgba(62, 67, 71, 0.1);
+
         }
 
         .grid-colhead{
@@ -75,8 +59,23 @@
     </style>
 </head>
 <body>
+<div id="test">?</div>
+<table id="ProductList" hidden>
+    <?php
+    $query = $bdd->prepare("SELECT * FROM produit");
+    $query->execute();
 
-<div class="grid-container">
+    while($product = $query->fetch()){
+        ?>
+        <tr id="<?php echo $product ['Id_Produit']; ?>">
+            <td class="productInfo"> <?php echo $product ['Designation']; ?></td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+
+<div class="grid-container" id="storage">
     <?php
     $storageList = $bdd->prepare("SELECT *  FROM emplacement_ GROUP BY Couloir,Trave ORDER BY Trave,Couloir");
     $storageList->execute();
@@ -92,9 +91,9 @@
             $shelfList->execute();
             while($shelf=$shelfList->fetch()){
                 $Id_Emplacement=$shelf['Id_Emplacement'];
+                $stored=0;
 
             ?>
-                <div class="grid-child-item"  data-toggle="modal" data-target="#details<?php  echo $Id_Emplacement;?>"></div>
                 <!-- Storage location details -->
                 <div id="details<?php  echo $Id_Emplacement;?>" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -102,54 +101,71 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title" text-align="center">Produits se trouvant à l'emplacement <?php
+                                <h4 class="modal-title" text-align="center">Produits à l'emplacement <?php
 
                                     echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2));
                                 //echo $storage ['Id_Emplacement']; ?></h4>
                             </div>
-                            <div class="modal-body">
-                                <div class="mtable">
-                                    <div class="mtabhead">
-                                        <div class="mrow">
-                                            <div class="mcell">Id_Produit</div>
-                                            <div class="mcell">Designation</div>
-                                            <div class="mcell">Quantité</div>
-                                        </div>
-                                    </div>
-                                    <form class="form-horizontal orderForm" method="post" id="modifyStock<?php echo $Id_Emplacement; ?>" action="EditStock.php">
+                            <form class="form-horizontal orderForm" method="post" id="modifyStock<?php echo $Id_Emplacement; ?>" action="EditStock.php">
+                                <div class="modal-body" style="padding-bottom: 5px">
+                                    <table class="table" id="stockDetails<?php echo $Id_Emplacement; ?>" style="padding:0; margin:0">
+                                        <thead>
+                                        <tr>
+                                            <th style="width:10%"></th>
+                                            <th style="width:20%">Id_Produit</th>
+                                            <th style="width:60%">Designation</th>
+                                            <th style="width:10%">Quantité</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
                                         <input type="hidden" value='<?php echo $Id_Emplacement?>' name="Id_Emplacement[]">
                                         <?php
                                         $productList=$bdd->prepare("SELECT * FROM est_placer WHERE Id_Emplacement = '$Id_Emplacement'");
                                         $productList->execute();
                                         while($product=$productList->fetch()){
+                                            $stored+=$product["Quantite_stock"];
                                             //Get all Id_Emplacement from est_placer
                                             $Id_Produit=$product['Id_Produit'];
                                             $productInfoList=$bdd->prepare("SELECT * FROM produit WHERE Id_Produit='$Id_Produit'");
                                             $productInfoList->execute();
                                             while($productInfo=$productInfoList->fetch()){
                                                 ?>
-                                                <div class="mrow">
-                                                    <div class="mcell"><?php echo $product['Id_Produit']?></div>
-                                                    <div class="mcell"><?php echo $productInfo['Designation']?></div>
-                                                    <div class="mcell" style="width:80px">
+                                                <tr>
+                                                    <td></td>
+                                                    <td><?php echo $product['Id_Produit']?></td>
+                                                    <td><?php echo $productInfo['Designation']?></td>
+                                                    <td >
                                                         <input type="hidden" value='<?php echo $Id_Produit?>' name="Id_Produit[]">
                                                         <input type="number" class="form-control stockAmount" value="<?php echo $product["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
-                                                    </div>
-                                                </div>
+                                                    </td>
+                                                </tr>
                                                 <?php
                                             }
                                         }
                                         ?>
+
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm addRow"  id="addRow<?php echo $Id_Emplacement?>"><span class="glyphicon glyphicon-plus"></span></button>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:20%">
-                                <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                            </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-info confirm" value="Confirmer" style="width:20%">
+                                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
+                <div class="grid-child-item" title="<?php echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2)); ?>" data-toggle="modal" data-target="#details<?php  echo $Id_Emplacement;?>" <?php $opacity=0.05+$stored/40; echo "style='background-color: rgba(62, 67, 71, ".$opacity.");'"?>><?php echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2)); ?></div>
             <?php
             }
             ?>
@@ -159,11 +175,60 @@
     }
     ?>
 </div>
-
-<script>
-    $('.modal').on('hidden.bs.modal', function(){
-        $(this).find('form')[0].reset();
-    });
-</script>
 </body>
+<script>
+
+
+    $(".addRow").on('click', function(){
+        $(this).closest('table').find('tbody')
+            .append($('<tr>')
+                .append($('<td>')
+                    .append($("<button type=\"button\" class='btn btn-danger btn-xs btn-circle deleteBtn'><span class='glyphicon glyphicon-remove'></span></button>")
+                    )
+                )
+                .append($('<td>')
+                    .append($("<input type=\"number\" class=\"form-control idField\" value='0' name=\"addId_Produit[]\" style=\"text-align: center\">")
+                    )
+                )
+                .append($('<td class="productInfo">')
+                )
+                .append($('<td>')
+                    .append($("<input type=\"number\" class=\"form-control\" value=\"0\" min=\"0\" name=\"addQuantite_stock\">")
+                    )
+                )
+            );
+
+        var test=true;
+        $(this).closest("table").find(".idField").each(function(){
+            if($("#" + this.value).length){
+                $(this).closest('tr').children('.productInfo').text($("#" + this.value).children('.productInfo').text());
+            }else{
+                $(this).closest('tr').children('.productInfo').text("Cette référence de produit n'existe pas");
+                test=false;
+            }
+        });
+        $(this).closest("form").find(".confirm").prop('disabled', !test);
+
+        $(".idField").on('input', function () {
+            var test=true;
+            $(this).closest("table").find(".idField").each(function(){
+                if($("#" + this.value).length){
+                    $(this).closest('tr').children('.productInfo').text($("#" + this.value).children('.productInfo').text());
+                }else{
+                    $(this).closest('tr').children('.productInfo').text("Cette référence de produit n'existe pas");
+                    test=false;
+                }
+            });
+            $(this).closest("form").find(".confirm").prop('disabled', !test);
+        });
+
+    });
+
+    $('tbody').on('click', 'button', function () {
+        $(this).closest('tr').remove();
+    });
+
+
+</script>
+
 </html>
