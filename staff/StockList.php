@@ -15,15 +15,7 @@
     </style>
 </head>
 <body>
-<!-- New Client Modal -->
 
-
-<?php
-
-
-
-try {
-    ?>
 
     <div class="container" style="width:100%; padding-bottom: 10px">
         <br><div class="alert alert-info">
@@ -46,14 +38,13 @@ try {
                 <th style="width:20%">Trave</th>
                 <th style="width:20%">Etagere</th>
                 <th></th>
-                <th style="width:15%">Quantite</th>
+                <th style="width:15%">Quantite Stocké</th>
                 <th> Action </th>
             </tr>
             </thead>
             <tbody>
             <div class="modal fade" id="newStorage" role="dialog">
                 <div class="modal-dialog">
-
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
@@ -61,16 +52,33 @@ try {
                             <h4 class="modal-title" text-align="center">Ajouter un nouveau emplacement</h4>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal" method="post" action="AddStorage.php">
+                            <form class="form-inline" method="post" action="AddStorage.php">
+                                <div class="form-group" style="margin:0;">
+                                    <label class="control-label col-sm-2" for="Couloir">Couloir: </label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control newStorage" value="0" min="0" name="Couloir" id="newCouloir">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin:0">
+                                    <label class="control-label col-sm-2" for="Trave">Trave: </label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control newStorage" value="0" min="0" name="Trave" id="newTrave">
 
-
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin:0">
+                                    <label class="control-label col-sm-2" for="Etagere">Etagere: </label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control newStorage" value="0" min="0" name="Etagere" id="newEtagere">
+                                    </div><br><br>
+                                </div>
                                 <div class="modal-footer">
-                                    <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:80px">
+                                    <p id="testText" style="color:red">Cet emplacement existe déjà</p>
+                                    <input type="submit" id="submitForm" type="button" class="btn btn-info" value="Confirmer" style="width:20%" disabled="true">
                                     <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                 </div>
                             </form>
                         </div>
-
                     </div>
 
                 </div>
@@ -83,11 +91,11 @@ try {
                 $Id_Emplacement=$storage['Id_Emplacement'];
 
                 ?>
-                <tr>
+                <tr class="storagePlace">
                     <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Id_Emplacement']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Couloir']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Trave']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php echo $storage ['Etagere']; ?></td>
+                    <td style="text-align:center; word-break:break-all; " class="Couloir"> <?php echo $storage ['Couloir']; ?></td>
+                    <td style="text-align:center; word-break:break-all; " class="Trave"> <?php echo $storage ['Trave']; ?></td>
+                    <td style="text-align:center; word-break:break-all; " class="Etagere"> <?php echo $storage ['Etagere']; ?></td>
                     <td>
                         <div class="tableWrap" style="display:none;">
                             <table style="width:600px; margin: auto; margin-top: 0; margin-bottom:0; background:rgba(255,255,255,0);" class="table">
@@ -116,8 +124,32 @@ try {
                     </td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $storageTotal; ?></td>
                     <td style="text-align:center; word-break:break-all; ">
-
+                        <a href="#delete<?php echo $Id_Emplacement;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
                     </td>
+                    <!-- Delete Product Modal -->
+                    <div id="delete<?php  echo $Id_Emplacement;?>" class="modal fade" role="dialog">
+                        <div class="modal-header">
+                            <h3 id="myModalLabel">Delete</h3>
+                        </div>
+                        <?php if($storageTotal==0){ ?>
+                            <div class="modal-body">
+                                <p><div style="font-size:larger;" class="alert alert-danger">Etes-vous sûr de vouloir supprimer cet emplacement? <br> Cette action n'est pas réversible</p>
+                            </div>
+                            <br>
+                            <div class="modal-footer">
+                                <button class="btn btn-inverse" data-dismiss="modal" >Non</button>
+                                <a href="DeleteStorage.php<?php echo '?id='.$Id_Emplacement; ?>" class="btn btn-danger">Oui</a>
+                            </div>
+                        <?php }else{ ?>
+                            <div class="modal-body">
+                                <p><div style="font-size:larger;" class="alert alert-danger">Attention, cet emplacement est stocké de produits <br> Veuillez supprimer tout les produits de cet emplacement avant de procéder</p>
+                            </div>
+                            <br>
+                            <div class="modal-footer">
+                                <button class="btn btn-inverse" data-dismiss="modal" >Annuler</button>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </tr>
             <?php } ?>
             </tbody>
@@ -125,20 +157,39 @@ try {
     </div>
 
 
-    <?php
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$bdd = null;
-echo "</table>";
-?>
 
 <script>
     $('.modal').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
     });
 
+    function storageExists(){
+        var test=false;
+
+        $(".storagePlace").each(function(){
+
+            var coul=false;
+            var trav=false;
+            var etag=false;
+            if(parseInt($(this).children(".Couloir").text())==$('#newCouloir').val()){
+                coul=true
+            }
+            if(parseInt($(this).children(".Trave").text())==$('#newTrave').val()){
+
+                trav=true
+            }
+            if(parseInt($(this).children(".Etagere").text())==$('#newEtagere').val().toString()){
+                etag=true
+            }
+            if(coul&&trav&&etag){
+                test=true;
+                return false;
+            }
+        });
+
+        return test;
+    };
+    
     $(document).ready(function () {
         $('#stockTable').DataTable( {
             "columnDefs": [
@@ -173,7 +224,34 @@ echo "</table>";
 
         });
 
+        var test=storageExists();
+        $("#submitForm").prop('disabled', test)
+        if(test){
+            $('#testText').show();
+        }else{
+            $('#testText').hide();
+        }
+
+
+
     });
+
+    $(".newStorage").on('input', function () {
+        if($(this).val()<0){
+            $(this).val(0);
+        }
+        var test=storageExists();
+        $("#submitForm").prop('disabled', test)
+        if(test){
+            $('#testText').show();
+        }else{
+            $('#testText').hide();
+        }
+    });
+
+
+
+
 </script>
 </body>
 </html>

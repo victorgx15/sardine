@@ -521,7 +521,7 @@ try {
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <input type="submit" type="button" class="btn btn-info" value="Confirmer">
+                                            <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:20%">
                                             <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                         </div>
                                     </form>
