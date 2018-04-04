@@ -163,66 +163,71 @@
         $(this).find('form')[0].reset();
     });
 
+
+
+    oTable = $('#stockTable').DataTable( {
+        "columnDefs": [
+            {
+                "targets": [ 4 ],
+                "visible": false
+            }
+        ],
+        "oLanguage": {
+            "sProcessing":     "Traitement en cours...",
+            "sSearch":         "",
+            "sSearchPlaceholder":         "Rechercher",
+            "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+            "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+            "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+            "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+            "sInfoPostFix":    "",
+            "sLoadingRecords": "Chargement en cours...",
+            "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+            "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+            "oPaginate": {
+                "sFirst":      "Premier",
+                "sPrevious":   "Pr&eacute;c&eacute;dent",
+                "sNext":       "Suivant",
+                "sLast":       "Dernier"
+            },
+            "oAria": {
+                "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+            }
+        }
+
+    });
+
     function storageExists(){
         var test=false;
 
-        $(".storagePlace").each(function(){
-
+        oTable.rows().every(function(){
             var coul=false;
             var trav=false;
             var etag=false;
-            if(parseInt($(this).children(".Couloir").text())==$('#newCouloir').val()){
+            if(this.data()[1]==$('#newCouloir').val()){
                 coul=true
             }
-            if(parseInt($(this).children(".Trave").text())==$('#newTrave').val()){
+            if(this.data()[2]==$('#newTrave').val()){
 
                 trav=true
             }
-            if(parseInt($(this).children(".Etagere").text())==$('#newEtagere').val().toString()){
+            if(this.data()[3]==$('#newEtagere').val().toString()){
                 etag=true
             }
+
+
+
             if(coul&&trav&&etag){
                 test=true;
                 return false;
             }
         });
-
         return test;
     };
     
     $(document).ready(function () {
-        $('#stockTable').DataTable( {
-            "columnDefs": [
-                {
-                    "targets": [ 4 ],
-                    "visible": false
-                }
-            ],
-            "oLanguage": {
-                "sProcessing":     "Traitement en cours...",
-                "sSearch":         "",
-                "sSearchPlaceholder":         "Rechercher",
-                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-                "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                "sInfoPostFix":    "",
-                "sLoadingRecords": "Chargement en cours...",
-                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
-                "oPaginate": {
-                    "sFirst":      "Premier",
-                    "sPrevious":   "Pr&eacute;c&eacute;dent",
-                    "sNext":       "Suivant",
-                    "sLast":       "Dernier"
-                },
-                "oAria": {
-                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
-                    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                }
-            }
 
-        });
 
         var test=storageExists();
         $("#submitForm").prop('disabled', test)
