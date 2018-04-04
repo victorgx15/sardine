@@ -15,21 +15,22 @@
             white-space: nowrap;
         }
 
-        .table {
+        .mtable {
             display: table;
             border-collapse: collapse;
+            width:100%;
         }
-        .row {
+        .mrow {
             display: table-row;
             border-bottom: 1px solid rgba(133, 133, 133, 0.74);
             padding:5px;
         }
-        .cell {
+        .mcell {
             display: table-cell;
             text-align: center;
             padding:5px;
         }
-        .tabhead {
+        .mtabhead {
             display: table-header-group;
             font-weight: bold;
 
@@ -73,22 +74,16 @@ try {
             <tr>
                 <th style="width:10%";>ID_Produit</th>
                 <th style="width:5%";>Prix</th>
-                <th style="width:10%";>Quantité Stocké</th>
-                <th style="width:20%";>Ref</th>
-                <th style="width:10%";>Nb boites</th>
-                <th style="width:10%";>Poid</th>
-                <th style="width:10%";>Marque</th>
-                <th style="width:10%";>Gamme</th>
-                <th style="width:10%";>Famille</th>
-                <th style="width:10%";>Designation</th>
+                <th style="width:5%";>Quantité Stocké</th>
+                <th style="width:10%";>Ref</th>
+                <th style="width:5%";>Nb boites</th>
+                <th style="width:5%";>Poid</th>
+                <th style="width:8%";>Marque</th>
+                <th style="width:8%";>Gamme</th>
+                <th style="width:8%";>Famille</th>
+                <th style="width:20%";>Designation</th>
                 <th style="width:10%";>Description</th>
-                <?php
-                if($_SESSION['status'] == 'A') {
-                    ?>
-                <th> Action </th>
-                <?php
-                }
-                ?>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -114,14 +109,14 @@ try {
                                 <h4 class="modal-title" text-align="center">Emplacements du produit <?php echo $product ['Id_Produit']; ?></h4>
                             </div>
                             <div class="modal-body">
-                                <div class="table">
-                                    <div class="tabhead">
-                                        <div class="row">
-                                            <div class="cell">ID_Emplacement</div>
-                                            <div class="cell">Couloir</div>
-                                            <div class="cell">Trave</div>
-                                            <div class="cell">Etagere</div>
-                                            <div class="cell">Quantité</div>
+                                <div class="mtable">
+                                    <div class="mtabhead">
+                                        <div class="mrow">
+                                            <div class="mcell">ID_Emplacement</div>
+                                            <div class="mcell">Couloir</div>
+                                            <div class="mcell">Trave</div>
+                                            <div class="mcell">Etagere</div>
+                                            <div class="mcell">Quantité</div>
                                         </div>
                                     </div>
                                     <form class="form-horizontal orderForm" method="post" id="modifyStock<?php echo $Id_Produit; ?>" action="EditStock.php">
@@ -135,12 +130,12 @@ try {
 
                     while($storageInfo=$storageInfoList->fetch()){
                     ?>
-                        <div class="row">
-                            <div class="cell"><?php echo $Id_Emplacement?></div>
-                            <div class="cell"><?php echo $storageInfo['Couloir']?></div>
-                            <div class="cell"><?php echo $storageInfo['Trave']?></div>
-                            <div class="cell"><?php echo $storageInfo['Etagere']?></div>
-                            <div class="cell" style="width:80px">
+                        <div class="mrow">
+                            <div class="mcell"><?php echo $Id_Emplacement?></div>
+                            <div class="mcell"><?php echo $storageInfo['Couloir']?></div>
+                            <div class="mcell"><?php echo $storageInfo['Trave']?></div>
+                            <div class="mcell"><?php echo $storageInfo['Etagere']?></div>
+                            <div class="mcell" style="width:80px">
                                 <input type="hidden" value='<?php echo $Id_Emplacement?>' name="Id_Emplacement[]">
                                 <input type="number" class="form-control stockAmount" value="<?php echo $storage["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
                             </div>
@@ -173,18 +168,18 @@ try {
                     <td style="text-align:center; word-break:break-all; "> <?php echo $product ['Famille']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $product ['Designation']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php if(strlen($product ['Description'])>50){echo substr($product ['Description'], 0, 50)."...";}else{echo $product ['Description'];}/*display the first 50 char of desc*/?></td>
+                    <td style="text-align:center; word-break:break-all; ">
+                        <a href="#details<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span></a>
                     <?php
                         if($_SESSION['status'] == 'A') {
                     ?>
-                    <td style="text-align:center; word-break:break-all; ">
-                        <a href="#details<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span></a>
                         <a href="#edit<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href="#delete<?php echo $Id_Produit;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
-                    </td>
+
                     <?php
                         }
                     ?>
-
+                    </td>
                     <!-- Delete Product Modal -->
                     <div id="delete<?php  echo $Id_Produit;?>" class="modal fade" role="dialog">
                         <div class="modal-header">
