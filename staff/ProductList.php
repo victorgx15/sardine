@@ -66,7 +66,7 @@ try {
         ?>
     </div>
 
-    <div class="container" style="width:100% ">
+    <div class="container" style="width:100%; font-size: 12px; ">
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover" id="productTable">
 
 
@@ -82,7 +82,6 @@ try {
                 <th style="width:8%";>Gamme</th>
                 <th style="width:8%";>Famille</th>
                 <th style="width:20%";>Designation</th>
-                <th style="width:10%";>Description</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -181,14 +180,13 @@ try {
                     <td style="text-align:center; word-break:break-all; "> <?php echo $product ['Gamme']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $product ['Famille']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $product ['Designation']; ?></td>
-                    <td style="text-align:center; word-break:break-all; "> <?php if(strlen($product ['Description'])>50){echo substr($product ['Description'], 0, 50)."...";}else{echo $product ['Description'];}/*display the first 50 char of desc*/?></td>
                     <td style="text-align:center; word-break:break-all; ">
-                        <a href="#details<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span></a>
+                        <a href="#details<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-th-list"></span></a>
                     <?php
                         if($_SESSION['status'] == 'A') {
                     ?>
-                        <a href="EditProductPage.php?id=<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#delete<?php echo $Id_Produit;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
+                        <a href="EditProductPage.php?id=<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="#delete<?php echo $Id_Produit;?>"  data-toggle="modal"  class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash"></span> </a>
 
                     <?php
                         }

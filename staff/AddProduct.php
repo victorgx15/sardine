@@ -9,10 +9,8 @@
     $Nombre_boites = $_POST['Nombre_boites'];
     $Prix = floatval($_POST['Prix']);
     $Url_image = "";
-    $Ref = $_POST['Reference'];
+    $Ref = strtoupper(substr($Famille , 0,2));
     $Description = $_POST['Description'];
-
-
     $Id_Produit=$bdd->lastInsertId();
 
     $target_dir="images/Produits/".$Famille."/";

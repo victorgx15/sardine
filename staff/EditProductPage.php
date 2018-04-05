@@ -57,14 +57,14 @@ while($productInfo=$productList->fetch()){
                  <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-euro"></span></span>
-                        <input type="number" id="Prix" name="Prix"  class="form-control" value="<?php echo $productInfo['Prix']?>" required />
+                        <input step="0.01" type="number" id="Prix" name="Prix"  class="form-control" value="<?php echo $productInfo['Prix']?>" required />
                     </div>
                 </div>
 
                  <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
-                        <input type="number" id="Poids" name="Poids"  class="form-control" value="<?php echo $productInfo['Poids']?>" required/>
+                        <input step="0.1" type="number" id="Poids" name="Poids"  class="form-control" value="<?php echo $productInfo['Poids']?>" required/>
                     </div>
                 </div>
                  <div class="form-group">

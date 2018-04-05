@@ -12,7 +12,11 @@
     $Prix = $_POST['Prix'];
     $Url_image = "";
     $Description = $_POST['Description'];
-    $Ref = $_POST['Ref'];
+
+    $Ref = strtoupper(substr($Famille , 0,2)).rand(1000,9999);
+
+
+
 $target_dir="images/Produits/".$Famille."/";
 if (!file_exists($target_dir)) {
     mkdir($target_dir, 0777, true);
