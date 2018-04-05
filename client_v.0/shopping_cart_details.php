@@ -173,19 +173,25 @@ if (isset($_POST['purchase'])) {
             	?>
 
 
-
-
-
-
-
-            	<form action="" method="post">
-                	<table class= "buttons" style=" width: 100%;table-layout: fixed;border-collapse: collapse;margin-bottom: 5px;">
-						<a href="shopping_cart_details.php?action=empty" class="btn btn-outline-secondary pull-right" style="color: #e31010cc;background-color:white; width: 25%;">Vider le panier</a>
+				<form action="" method="post">
+                	<table class=buttons style=" width: 100%;table-layout: fixed;border-collapse: collapse;margin-bottom: 5px;">
+						<a href="shopping_cart_details.php?action=empty" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Vider le panier</a>
 					</table>
+						<?php 
+						    if (!isset($_SESSION['user'])) {
+						;?>
+						<a href="login.php" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Connectez vous</a>
+						<?php   
+						}else{
+							;?>
+						<a href="shipping_address.php" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Passez la commande</a>
+						<?php
+						};?>
 
 
-					
-                	<div   name="purchase" class="btn btn-success pull-right" style="width:25%; background-color:#8BC34A; border-color:#00008B;"><a style="color:white;" href="shipping_address.php">Passer la commande</a></div>
+                	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
+            		
+                 	Prix ​​total: <b>
 
 
 
