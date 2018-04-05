@@ -59,7 +59,6 @@
     </style>
 </head>
 <body>
-<div id="test">?</div>
 <table id="ProductList" hidden>
     <?php
     $query = $bdd->prepare("SELECT * FROM produit");
@@ -166,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="grid-child-item" title="<?php echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2)); ?>" data-toggle="modal" data-target="#details<?php  echo $Id_Emplacement;?>" <?php $opacity=0.05+$stored/40; echo "style='background-color: rgba(62, 67, 71, ".$opacity.");'"?>><?php echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2)); ?></div>
+                <div class="grid-child-item" title="<?php echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2)); ?>" data-toggle="modal" data-target="#details<?php  echo $Id_Emplacement;?>" <?php $opacity=min(0.05+$stored/50,.6); echo "style='background-color: rgba(62, 67, 71, ".$opacity.");'"?>><?php echo join('-', str_split(sprintf( '%06d',$shelf ['Id_Emplacement']), 2)); ?></div>
             <?php
             }
             ?>
