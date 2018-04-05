@@ -13,7 +13,7 @@
 <?php
 
 if (isset($_SESSION['user']) != "") {
-    header("Location: index.php");
+    //header("Location: index.php");
 }
 include_once 'dbconnect.php';
 
@@ -70,9 +70,13 @@ if (isset($_POST['signup'])) {
                 $stmts->close();
                 $_SESSION['user'] = $user_id; // set session et redirect vers index ;)
                 if (isset($_SESSION['user'])) {
-                    echo "<strong>Votre compte a été créé avec succès !</strong>";
-                    //header("Location: index.php");
-                    exit;
+                ?>
+                    <div class="form-group">
+                        <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-info-sign"></span>Votre compte a été créé avec succès !
+                        </div>
+                    </div>
+                <?php
                 }
 
             } else {
