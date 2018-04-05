@@ -173,29 +173,26 @@ if (isset($_POST['purchase'])) {
             	?>
 
 
-
-
-
-
-
-            	<form action="" method="post">
+				<form action="" method="post">
                 	<table class=buttons style=" width: 100%;table-layout: fixed;border-collapse: collapse;margin-bottom: 5px;">
 						<a href="shopping_cart_details.php?action=empty" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Vider le panier</a>
 					</table>
-					<a href="shipping_address.php">Adresse de livraison</a>
-					<a href="invoice.php">Bon de commande</a>
 						<?php 
-						    echo var_dump($_SESSION);
-						    echo $_SESSION['cart'][10];
 						    if (!isset($_SESSION['user'])) {
 						;?>
-						<a href="login.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
+						<a href="login.php" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Connectez vous</a>
 						<?php   
 						}else{
 							;?>
-						<a href="shipping_address.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
+						<a href="shipping_address.php" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%;">Passez la commande</a>
 						<?php
 						};?>
+
+
+                	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
+            		
+                 	Prix ​​total: <b>
+
 
 
                 	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->

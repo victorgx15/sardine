@@ -29,7 +29,7 @@ input, textarea {
 
 <body>
 
-  <header>
+  <header class="Contact">
 	<h1 style="font-weight: normal;
 	font-size: 4em;
 	font-family: 'Raleway', sans-serif;
@@ -41,6 +41,11 @@ input, textarea {
 ">Contactez nous</h1>
 </header>
 
+<div class="container">
+	
+
+	
+</div>
 <div id="form">
 
 <div class="fish" id="fish"></div>
