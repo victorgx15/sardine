@@ -174,7 +174,7 @@ try {
                     <?php
                         if($_SESSION['status'] == 'A') {
                     ?>
-                        <a href="#edit<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="EditProductPage.php?id=<?php echo $Id_Produit; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href="#delete<?php echo $Id_Produit;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>
 
                     <?php

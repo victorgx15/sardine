@@ -24,6 +24,7 @@
 
         .grid-container {
             margin:5%;
+            margin-top:2%;
             grid-column-gap: 50px;
             grid-row-gap: 10px;
             display: grid;
@@ -59,6 +60,53 @@
     </style>
 </head>
 <body>
+<?php
+if($_SESSION['status'] == 'A') {
+    ?>
+    <div class="container" style="margin:auto; padding:0;">
+        <button data-target="#resize" data-toggle="modal" class="btn btn-tan"><span class="glyphicon glyphicon-resize-full"></span>  Redimensioner l'entrepot</button>
+    </div>
+
+<div id="resize" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Redimensionner l'entrepot</h4>
+            </div>
+            <form class="form-horizontal orderForm" method="post" id="resize" action="EditStorage.php">
+                <div class="modal-body" >
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 col-sm-offset-2" for="Couloir"> Couloirs : </label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" min='0' name="Couloir" id="Couloir" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 col-sm-offset-2" for="Trave"> Travées : </label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" min='0' name="Trave" id="Trave" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 col-sm-offset-2" for="Etagere"> Etagères : </label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" min='0' name="Etagere" id="Etagere" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-info confirm" value="Confirmer" style="width:35%">
+                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <?php
+}
+?>
 <table id="ProductList" hidden>
     <?php
     $query = $bdd->prepare("SELECT * FROM produit");

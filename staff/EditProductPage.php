@@ -19,12 +19,12 @@
 <div class="container">
 
     <div id="login-form">
-        <form method="post" autocomplete="off" id="product_add" action="AddProduct.php" enctype="multipart/form-data">
+        <form method="post" autocomplete="off" id="product_add" action="AddProduct.php">
 
             <div class="col-md-12">
 
                 <div class="form-group" align="center">
-                    <h2 class="" align="center">Ajouter un nouveau produit au catalogue</h2>
+                    <h2 class="" align="center">Modifier le produit <?php ?> </h2>
                 </div>
 
                 <div class="form-group">
@@ -71,7 +71,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-tags"></span></span>
@@ -113,13 +112,13 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-download-alt"></span></span>
-                        <input type="file" id="Url_image" name="Url_image" class="form-control" placeholder="URL de l'image" required/>
+                        <input type="file" id="Url_Image" name="Url_Image" class="form-control" placeholder="URL de l'image" required/>
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-primary" name="signup" id="reg">Ajouter le produit</button>
+                    <button type="submit" class="btn    btn-block btn-primary" name="signup" id="reg">Ajouter le produit</button>
                 </div>
 
 
