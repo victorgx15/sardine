@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="css/style_DropDown.css">
 <link rel="stylesheet" href="css/style_lang.css">
 <link rel="stylesheet" href="css/style_poisson.css">
+<link rel="stylesheet" href="css/header.css">
+
 
     <!-- Bootstrap core CSS -->
   
@@ -96,13 +98,13 @@ a:focus, a:hover{
 <script  src="js/background.js"></script>
   <body>
 
-  <header class="navbar navbar-inverse" style="width:1120px;margin:auto;margin-top: 20px;">
-<div class="container">
+  <header class="navbar navbar-inverse" style="margin:auto;">
+<div class="container sardine-nav">
   <a href="index.php" style="color: #FFFFF0;">
     <img src="images/logo.png" style="width:45px; length :30px;float:left;" alt="Accueil">
-      <h1 class="logo">La vieille Sardine</h1>
+      <h1 class="logo awesome">La vieille Sardine</h1>
   </a>
-  <nav class="site-nav" style="margin-top: 3px;">
+  <nav class="site-nav" style="margin-top: 13px;">
       <ul>
         <li><a href=""><i class=" "></i>
 
