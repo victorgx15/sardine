@@ -8,7 +8,7 @@
 	<?php include 'nos_services.php';?>
 	
 	</div>
-	<div id='footer'></div>
+	<!-- <div id='footer'></div> -->
 	 <div class="body_fish" style="background-color: #93d1f3; ">
 	  <div class="poisson">
 	  <canvas  id="fishtank" width="1200" ></canvas>
@@ -96,21 +96,21 @@
                 <div class="mb-5 flex-center">
 				<p>Suivez nous sur : </p>
                     <!--Facebook-->
-                    <a href="#" class="fb-ic">
+                    <a href="http://www.facebook.com" class="fb-ic">
                         <i style="color:#3b5999;"class="fa fa-facebook fa-lg white-text mr-md-4"> </i>
                     </a>
                     <!--Twitter-->
-                    <a href="#" class="tw-ic">
+                    <a href="http://www.twitter.com" class="tw-ic">
                         <i style="color:#55acee;"class="fa fa-twitter fa-lg white-text mr-md-4"> </i>
                     </a>
                     <!--Google +-->
                     
                     <!--Linkedin-->
-                    <a href="#" class="li-ic">
+                    <a href="http://www.linkedin.com" class="li-ic">
                         <i style="color:#0077B5;" class="fa fa-linkedin fa-lg white-text mr-md-4"> </i>
                     </a>
                     <!--Instagram-->
-                    <a href="#" class="ins-ic">
+                    <a href="http://www.instagram.com" class="ins-ic">
                         <i style="color:#e4405f;"class="fa fa-instagram fa-lg white-text mr-md-4"> </i>
                     </a>
                     <!--Pinterest-->
