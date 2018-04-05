@@ -21,6 +21,12 @@
         border-color: #130269;
     }
 
+    .btn-tan {
+        color: #404040;
+        background-color: rgba(228, 216, 145, 0.81);
+        border-color: #938d5c;
+    }
+
     .jumbotron {
         background: rgba(255, 255, 255, 0.61);
     }
