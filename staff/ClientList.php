@@ -42,8 +42,8 @@ try {
             <tr>
                 <th style="width:10%";>ID_Client</th>
                 <th style="width:5%">Civilite</th>
-                <th style="width:20%">Prenom</th>
-                <th style="width:20%">Nom</th>
+                <th style="width:16%">Prenom</th>
+                <th style="width:16%">Nom</th>
                 <th style="width:15%">Tel</th>
                 <th style="width:20%">Email</th>
                 <th> Action </th>
@@ -419,7 +419,7 @@ try {
                     <td style="text-align:center; word-break:break-all; "> <?php echo $compte ['Tel']; ?></td>
                     <td style="text-align:center; word-break:break-all; "> <?php echo $compte ['Email']; ?></td>
                     <td style="text-align:center; word-break:break-all; ">
-                        <a href="ClientInfo.php?ID_Client=<?php echo $id;?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-time"></span></a>
+                        <a href="ClientOrderHistory.php?ID_Client=<?php echo $id;?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-time"></span></a>
                         <a href="AddOrderPage.php?ID_Client=<?php echo $id;?>" data-toggle="modal" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>
                         <a href="#edit<?php echo $id; ?>" data-toggle="modal" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href="#delete<?php echo $id;?>"  data-toggle="modal"  class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> </a>

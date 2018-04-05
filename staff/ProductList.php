@@ -30,19 +30,19 @@
             text-align: center;
             padding:5px;
         }
-        .mtabhead {
+        .mthead {
             display: table-header-group;
             font-weight: bold;
-
+        }
+        .mtbody {
+            display: table-row-group;
+        }
+        .mtfoot {
+            display: table-footer-group;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-
-
-</div>
 
 <?php
 
@@ -103,58 +103,71 @@ try {
                 <div id="details<?php  echo $Id_Produit;?>" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title" text-align="center">Emplacements du produit <?php echo $product ['Id_Produit']; ?></h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mtable">
-                                    <div class="mtabhead">
-                                        <div class="mrow">
-                                            <div class="mcell">ID_Emplacement</div>
-                                            <div class="mcell">Couloir</div>
-                                            <div class="mcell">Trave</div>
-                                            <div class="mcell">Etagere</div>
-                                            <div class="mcell">Quantité</div>
+                        <form class="form-horizontal orderForm" id="storageForm<?php echo $Id_Produit; ?>" method="post" action="EditStock.php">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-backdrop="static" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" text-align="center">Emplacements du produit <?php echo $product ['Id_Produit']; ?></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mtable">
+                                        <div class="mthead">
+                                            <div class="mrow">
+                                                <div class="mcell" style="width:8%"></div>
+                                                <div class="mcell">Couloir</div>
+                                                <div class="mcell">Trave</div>
+                                                <div class="mcell">Etagere</div>
+                                                <div class="mcell">ID_Emplacement</div>
+                                                <div class="mcell">Quantité</div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" value='<?php echo $Id_Produit?>' name="Id_Produit[]">
+                                        <div class="mtbody">
+                                            <?php
+                                            while($storage=$storageList->fetch()){
+                                                $Id_Emplacement=$storage["Id_Emplacement"];
+                                                $stockCount+=$storage['Quantite_stock'];
+                                                $storageInfoList=$bdd->prepare("SELECT * FROM emplacement_ WHERE Id_Emplacement='$Id_Emplacement'");
+                                                $storageInfoList->execute();
+                                                while($storageInfo=$storageInfoList->fetch()){
+                                                    ?>
+                                                    <div class="mrow">
+                                                        <div class="mcell"></div>
+                                                        <div class="mcell"><?php echo $storageInfo['Couloir']?></div>
+                                                        <div class="mcell"><?php echo $storageInfo['Trave']?></div>
+                                                        <div class="mcell"><?php echo $storageInfo['Etagere']?></div>
+                                                        <div class="mcell"><?php echo join('-', str_split(sprintf( '%06d',$Id_Emplacement), 2)); ?></div>
+                                                        <div class="mcell" style="width:80px">
+                                                            <input type="hidden" value='<?php echo $Id_Emplacement?>' name="Id_Emplacement[]">
+                                                            <input type="hidden" class="form-control" value="0" name="addingQuantity[]">
+                                                            <input type="number" class="form-control stockAmount" value="<?php echo $storage["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mtfoot">
+                                            <div class="mrow" style="border-bottom:0">
+                                                <div class="mcell"></div>
+                                                <div class="mcell"></div>
+                                                <div class="mcell"></div>
+                                                <div class="mcell"></div>
+                                                <div class="mcell"></div>
+                                                <div class="mcell">
+                                                    <button type="button" class="btn btn-success btn-sm addRow"  id="addRow<?php echo $Id_Produit?>"><span class="glyphicon glyphicon-plus"></span></button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <form class="form-horizontal orderForm" method="post" id="modifyStock<?php echo $Id_Produit; ?>" action="EditStock.php">
-                                        <input type="hidden" value='<?php echo $Id_Produit?>' name="Id_Produit[]">
-                                    <?php
-                while($storage=$storageList->fetch()){
-                    $Id_Emplacement=$storage["Id_Emplacement"];
-                    $stockCount+=$storage['Quantite_stock'];
-                    $storageInfoList=$bdd->prepare("SELECT * FROM emplacement_ WHERE Id_Emplacement='$Id_Emplacement'");
-                    $storageInfoList->execute();
-
-                    while($storageInfo=$storageInfoList->fetch()){
-                    ?>
-                        <div class="mrow">
-                            <div class="mcell"><?php echo join('-', str_split(sprintf( '%06d',$Id_Emplacement), 2)); ?></div>
-                            <div class="mcell"><?php echo $storageInfo['Couloir']?></div>
-                            <div class="mcell"><?php echo $storageInfo['Trave']?></div>
-                            <div class="mcell"><?php echo $storageInfo['Etagere']?></div>
-                            <div class="mcell" style="width:80px">
-                                <input type="hidden" value='<?php echo $Id_Emplacement?>' name="Id_Emplacement[]">
-                                <input type="hidden" class="form-control" value="0" name="addingQuantity[]">
-                                <input type="number" class="form-control stockAmount" value="<?php echo $storage["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
-                            </div>
-                        </div>
-                    <?php
-                    }
-                }
-                ?>
-
-
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:20%">
+                                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <input type="submit" type="button" class="btn btn-info" value="Confirmer" style="width:20%">
-                                <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                            </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <tr>
@@ -217,7 +230,6 @@ echo "</table>";
     $('.modal').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
     });
-
     $(document).ready(function () {
         var oTable = $('#productTable').DataTable( {
 
@@ -256,6 +268,71 @@ echo "</table>";
             $(this).val(0);
         }
     });
+
+    $(".addRow").on('click', function(){
+        var formID = $(this).closest('.modal').find('form').attr('id')
+        $(this).closest('.mtable').find('.mtbody')
+            .append($('<div class="mrow">')
+                .append($("<div class=\"mcell\">")
+                    .append($("<button type=\"button\" class='btn btn-danger btn-xs btn-circle deleteBtn'><span class='glyphicon glyphicon-remove'></span></button>")
+                    )
+                )
+                .append($("<div class=\"mcell\">")
+                    .append($("<input type=\"number\" class=\"form-control storage\" min='0' max='99' value='0' name=\"Couloir[]\" style=\"text-align: center\">")
+                    )
+                )
+                .append($("<div class=\"mcell\">")
+                    .append($("<input type=\"number\" class=\"form-control storage\" min='0' max='99' value='0' name=\"Trave[]\" style=\"text-align: center\">")
+                    )
+                )
+                .append($("<div class=\"mcell\">")
+                    .append($("<input type=\"number\" class=\"form-control storage\" min='0' max='99' value='0' name=\"Etagere[]\" style=\"text-align: center\">")
+                    )
+                )
+                .append($("<div class=\"mcell\">")
+                    .append($("<input type=\"hidden\" class=\"form-control IdEmplacement\" value=\"0\" name='Id_Emplacement[]' form='"+formID+"'>")
+                    )
+                    .append('<p>00-00-00</p>')
+
+                )
+                .append($("<div class=\"mcell\">")
+                    .append($("<input type=\"number\" class=\"form-control stockAmount\" value=\"0\" min=\"0\" name=\"Quantite_stock[]\" form='"+formID+"'>")
+                    )
+                )
+
+
+            );
+        $(".storage").on("input", function (){
+            $(this).closest('.mtbody').find('.mrow').each(function(){
+                var str="";
+                var IdEmp="";
+                $(this).find('.storage').each(function(){
+                    if(str!=""){
+                        str+="-";
+                    }
+                    str += pad($(this).val(),2);
+                    IdEmp += pad($(this).val(),2);
+                });
+                IdEmp=parseInt(IdEmp)
+                $(this).closest('.mrow').find('.IdEmplacement').parent().find('p').text(str);
+                $(this).closest('.mrow').find('.IdEmplacement').parent().find('.IdEmplacement').val(IdEmp);
+            });
+
+        });
+    });
+
+    $('.mtbody').on('click', 'button', function () {
+        $(this).closest('.mrow').remove();
+    });
+
+    function pad (str, max) {
+        str = str.toString();
+        return str.length < max ? pad("0" + str, max) : str;
+    }
+
+
+
+
 
 </script>
 

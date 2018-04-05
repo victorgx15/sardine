@@ -26,7 +26,7 @@
                 $addOrder->execute();
             }
     }
-    $link='ClientInfo.php?ID_Client='.$ID_Client;
+    $link='ClientOrderHistory.php?ID_Client='.$ID_Client;
     echo "<script>alert('Commande passé avec succès');window.location.href='$link';window.location('$link');</script>";
 
 ?>

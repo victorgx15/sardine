@@ -64,12 +64,13 @@
                 $Date_Livraison=$_POST['Date_Livraison'];
                 $updateStatus=$bdd->prepare("UPDATE commande SET Etat='$Etat', Date_Livraison='$Date_Livraison' WHERE Id_Commande='$Id_Commande'");
                 $updateStatus->execute();
+
             }
             ?>
                 <tr>
                     <td style="text-align:center; word-break:break-all; width: 15%" class="clickSlide" data-toggle="modal" data-target="#orderDetails<?php  echo $Id_Commande;?>"><?php echo $commande['Id_Commande']; ?></td>
                     <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide" data-toggle="modal" data-target="#orderDetails<?php  echo $Id_Commande;?>" id="<?php echo $Id_Commande ?>"><?php echo date( "d/m/Y", strtotime($commande['Date'])); ?></td>
-                    <form class="form-horizontal orderForm" method="post" id="orderForm<?php echo $Id_Commande; ?>" action="ClientInfo.php?ID_Client=<?php echo $ID_Client;?>">
+                    <form class="form-horizontal orderForm" method="post" id="orderForm<?php echo $Id_Commande; ?>" action="ClientOrderHistory.php?ID_Client=<?php echo $ID_Client;?>">
                         <td style="text-align:center; word-break:break-all; width: 25%" class="clickSlide" >
                             <input type="hidden" value="<?php  echo $Id_Commande;?>" id= "Id_Commande" name="Id_Commande">
                             <input readonly ondblclick="onDoubleClick(this.id)" class="form-control Date_Livraison" type="date" value="<?php echo $Date_Livraison; ?>" id="Date_Livraison<?php  echo $Id_Commande;?>" name="Date_Livraison" style="text-align:center;">
