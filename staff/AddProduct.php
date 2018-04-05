@@ -36,6 +36,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
+    //comment
 // if everything is ok, try to upload file
 } else {
     if (copy($_FILES["Url_image"]["tmp_name"], $target_file)) {

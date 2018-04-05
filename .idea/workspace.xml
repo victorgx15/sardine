@@ -93,10 +93,10 @@
       <file leaf-file-name="AddProduct.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/staff/AddProduct.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="179">
+              <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
               <folding>
-                <marker date="1522951676973" expanded="true" signature="1518:1761" ph="INSERT INTO produit... " />
+                <marker date="1522952401191" expanded="true" signature="1532:1775" ph="INSERT INTO produit... " />
               </folding>
             </state>
           </provider>
@@ -338,12 +338,12 @@
       <workItem from="1522238800027" duration="4230000" />
       <workItem from="1522336860064" duration="4527000" />
       <workItem from="1522738292539" duration="460000" />
-      <workItem from="1522738934880" duration="114467000" />
+      <workItem from="1522738934880" duration="114820000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="365984000" />
+    <option name="totallyTimeSpent" value="366337000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -870,10 +870,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/staff/AddProduct.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="179">
+          <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
           <folding>
-            <marker date="1522951676973" expanded="true" signature="1518:1761" ph="INSERT INTO produit... " />
+            <marker date="1522952401191" expanded="true" signature="1532:1775" ph="INSERT INTO produit... " />
           </folding>
         </state>
       </provider>
