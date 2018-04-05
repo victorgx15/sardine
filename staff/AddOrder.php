@@ -5,34 +5,29 @@
     $Date_Livraison=date("Y-m-d", strtotime($Date. ' + 3 days'));
     $Etat='Attente de paiement';
     $ID_Client=$_GET['ID_Client'];
-    $stmt = $bdd->prepare("INSERT INTO commande(Date, Date_Livraison, Etat, ID_Client) VALUES('$Date', '$Date_Livraison','$Etat','$ID_Client')");
-    $stmt->execute();
 
-    $ID_Commande=$bdd->lastInsertId();
-    $emptyCommande=true;
+    $addOrder = $bdd->prepare("INSERT INTO commande(Date, Date_Livraison, Etat, ID_Client) VALUES('$Date', '$Date_Livraison','$Etat','$ID_Client')");
+    $addOrder->execute();
 
-    for($i=0; $i<=$_POST['nbProducts']; $i++){
-        if(!isset($_POST['ID_Produit'.$i])||!isset($_POST['Quantite'.$i])){
-            continue;
-        }
+    $Id_Commande=$bdd->lastInsertId();
+    foreach ($_POST['Id_Produit'] as $ind => $Id_Produit){
+        $Quantite=$_POST['Quantite'][$ind];
+            if($Quantite>0){
+                $checkExistence=$bdd->prepare("SELECT * FROM lignecommande WHERE Id_Commande='$Id_Commande' AND Id_Produit='$Id_Produit'");
+                $checkExistence->execute();
+                if( $checkExistence->rowCount() > 0) {
+                    $Quantite+=$checkExistence->fetch()['Quantite'];
+                    $query="UPDATE lignecommande SET Quantite='$Quantite' WHERE Id_Commande='$Id_Commande' AND Id_Produit='$Id_Produit'";
+                }else{
+                    $query="INSERT INTO lignecommande(Quantite, Id_Commande, Id_Produit) VALUES('$Quantite','$Id_Commande','$Id_Produit')";
+                }
 
-        $ID_Produit=$_POST['ID_Produit'.$i];
-        $Quantite=$_POST['Quantite'.$i];
-
-
-        $checkProduct=$bdd->prepare("SELECT ID_Produit from produit where ID_Produit = '$ID_Produit'");
-        $checkProduct->execute();
-
-        if($Quantite==""||$Quantite=="0"||$checkProduct->rowCount()<1){
-            continue;
-        }
-
-        $emptyCommande=false;
-        $stmt = $bdd->prepare("INSERT INTO lignecommande(Quantite, ID_Commande, ID_Produit) VALUES('$Quantite','$ID_Commande','$ID_Produit')");
-        $stmt->execute();
+                $addOrder = $bdd->prepare($query);
+                $addOrder->execute();
+            }
     }
-    if($emptyCommande){
-        $stmt=$bdd->prepare("DELETE FROM commande WHERE ID_Commande='$ID_Commande'");
-    }
-    echo "<script>alert('Commande passé avec succès');window.location.href='ClientList.php';window.location('ClientList.php');</script>";
+    $link='ClientInfo.php?ID_Client='.$ID_Client;
+    echo "<script>alert('Commande passé avec succès');window.location.href='$link';window.location('$link');</script>";
+
+?>
 
