@@ -136,6 +136,7 @@
                                                     <td><?php echo $productInfo['Designation']?></td>
                                                     <td >
                                                         <input type="hidden" value='<?php echo $Id_Produit?>' name="Id_Produit[]">
+                                                        <input type="hidden" class="form-control" value="0" name="addingQuantity[]">
                                                         <input type="number" class="form-control stockAmount" value="<?php echo $product["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
                                                     </td>
                                                 </tr>
@@ -187,13 +188,15 @@
                     )
                 )
                 .append($('<td>')
-                    .append($("<input type=\"number\" class=\"form-control idField\" value='0' name=\"addId_Produit[]\" style=\"text-align: center\">")
+                    .append($("<input type=\"number\" class=\"form-control idField\" value='0' name=\"Id_Produit[]\" style=\"text-align: center\">")
                     )
                 )
                 .append($('<td class="productInfo">')
                 )
                 .append($('<td>')
-                    .append($("<input type=\"number\" class=\"form-control\" value=\"0\" min=\"0\" name=\"addQuantite_stock\">")
+                    .append($("<input type=\"number\" class=\"form-control\" value=\"0\" min=\"0\" name=\"Quantite_stock[]\">")
+                    )
+                    .append($("<input type=\"hidden\" class=\"form-control\" value=\"1\" name=\"addingQuantity[]\">")
                     )
                 )
             );
@@ -214,6 +217,7 @@
             $(this).closest("table").find(".idField").each(function(){
                 if($("#" + this.value).length){
                     $(this).closest('tr').children('.productInfo').text($("#" + this.value).children('.productInfo').text());
+
                 }else{
                     $(this).closest('tr').children('.productInfo').text("Cette référence de produit n'existe pas");
                     test=false;
@@ -227,6 +231,8 @@
     $('tbody').on('click', 'button', function () {
         $(this).closest('tr').remove();
     });
+
+
 
 
 </script>
