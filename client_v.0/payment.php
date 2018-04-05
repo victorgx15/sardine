@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Paiment</title>
+	<title>Paiement</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 	      <link rel="stylesheet" href="css/cheque.css">
-		  	      <link rel="stylesheet" href="css/switch.css">
-
-		  
-
+  	      <link rel="stylesheet" href="css/switch.css">
 	<style>
 	
 	.afficher {
@@ -30,12 +27,6 @@
 
 <header>
 	<?php include'header.php';?>
-	
-	
-	
-
-
-
 </header>
 
 <?php
@@ -81,7 +72,6 @@ if (isset($_POST['purchase'])) {
 			$stmt = $conn->prepare("INSERT INTO lignecommande(Quantite, ID_Commande, ID_Produit) VALUES('$quantite','$ID_Commande','$idProduit')");
 			$stmt->execute();
 		}		
-		echo "<p><strong>Votre commande est passée avec succès !</strong></p>";		
 		
 		$stmt->close();
 
@@ -101,10 +91,10 @@ if (isset($_POST['purchase'])) {
     <div class="jumbotron" align="center">
 	<div class="switch">
   <input name="radio" type="radio" value="optionone" id="optionone" onclick="show2();" />
-  <label for="optionone">Via Paypal</label>
+  <label for="optionone">VIA PAYPAL</label>
   
   <input name="radio" type="radio" value="optiontwo" id="optiontwo"  onclick="show1();" checked />
-  <label for="optiontwo" class="right">Par chèque</label>
+  <label for="optiontwo" class="right">PAR CHÈQUE</label>
   
   <span aria-hidden="true"></span>
 </div>
@@ -143,7 +133,7 @@ if (isset($_POST['purchase'])) {
 
 
  <div id="div2" class="jumbotron PasAfficher" align="center">
-
+<h4><strong>Veuillez envoyer votre chèque au "5 Rue Jean Jaurès - 56937 Villeneuve la Vieille"</strong></h4>
 <div class="check">
   <div class="number">1025</div>
   <div class="date">05 Avril 2018</div>
