@@ -3,6 +3,9 @@
 require('pdf_generator/fpdf.php');
 require_once 'dbconnect.php';
 session_start();
+$mode=$_GET['reglement'];
+$id_cmd=$_GET['id_cmd'];
+
 $res;
 if (isset($_SESSION['user'])) {
     $res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
@@ -51,10 +54,9 @@ $pdf->SetTextColor(0);
 $row =array("id"=>"562297", "date_com"=>"2018/02/02", "reglement"=>"espèce");
 
 // Infos de la commande calées à gauche
-$pdf->Text(8,38,utf8_decode('N° de commande : '.$row['id']));
-$pdf->Text(8,43,utf8_decode('Date de commande : '.$row['date_com']));
-$pdf->Text(8,48,utf8_decode('Mode de règlement : '.$row['reglement']));
-$pdf->Text(8,53,utf8_decode('Date d\'émission du bon : '.Date("Y/n/j")));
+$pdf->Text(8,38,utf8_decode('N° de commande : '.$id_cmd));
+$pdf->Text(8,43,utf8_decode('Mode de règlement : '.$mode));
+$pdf->Text(8,48,utf8_decode('Date d\'émission du bon : '.Date("Y/n/j")));
 
 
 // Infos du client calées à droite
@@ -187,10 +189,10 @@ function facturation($position,$userAdress,$prixTotal){
 
 
 	$pdf->SetX(8);
-    $pdf->Cell(88,8,utf8_decode('Espèce/Paypal/CB/Chèque'),1,0,'L',1);
+    $pdf->Cell(88,8,utf8_decode($_GET['reglement']),1,0,'L',1);
  	$pdf->SetY($position+8*5);
     $pdf->SetX(8);
-    $pdf->Cell(88,8,utf8_decode('N° d\'autorisation : 51293'),1,0,'L',1);
+    $pdf->Cell(88,8,utf8_decode('N° d\'autorisation :'.rand(1000,2000)),1,0,'L',1);
 
     $pdf->SetFillColor(221); // Couleur des filets
     $pdf->SetY($position+8*4);
@@ -249,5 +251,6 @@ $nom = 'Facture-'.$row['id'].'.pdf';
 // Création du PDF
 //$pdf->Output($nom,'D');
 $pdf->Output();
+unset($_SESSION["cart"]);
 
 ?>

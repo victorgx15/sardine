@@ -41,6 +41,11 @@ input, textarea {
 ">Contactez nous</h1>
 </header>
 
+<div class="container">
+	
+
+	
+</div>
 <div id="form">
 
 <div class="fish" id="fish"></div>

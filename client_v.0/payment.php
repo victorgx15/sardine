@@ -35,24 +35,8 @@
 //récupérer la session 
 //session_start();
 require_once 'dbconnect.php';
-
-if(isset($_POST['orderpaper'])){
-	require('pdf_generator/fpdf.php');
-	    header("Location: invoice.php");
-}
-
-if(isset($_POST['shippingaddress'])){
-	    header("Location: shipping_address.php");
-}
-
+$mode="Paypal";
 if (isset($_POST['purchase'])) {
-    if (!isset($_SESSION['user'])) {
-    header("Location: inscription_connexion/login.php");
-    exit;
-	}else{
-		
-		//a mettre apres validation du paiement 
-		//unset($_SESSION["cart"]);
 		
 		$Date=date("Y-m-d");
 	    $Date_Livraison=date("Y-m-d", strtotime($Date. ' + 3 days'));
@@ -71,25 +55,48 @@ if (isset($_POST['purchase'])) {
 		foreach($_SESSION["cart"] as $idProduit => $quantite) {
 			$stmt = $conn->prepare("INSERT INTO lignecommande(Quantite, ID_Commande, ID_Produit) VALUES('$quantite','$ID_Commande','$idProduit')");
 			$stmt->execute();
+
+
+		    $stmtStock = $conn->prepare("SELECT SUM(Quantite_stock) FROM est_placer GROUP BY Id_Produit HAVING Id_Produit=$idProduit");
+		    $stmtStock->execute();
+			
+			$resultQuantityStock= mysqli_fetch_array($stmtStock->get_result(),MYSQLI_ASSOC); 
+			$quantiteDansStock=$resultQuantityStock["SUM(Quantite_stock)"];
+
+			$nouvelleQuantite=$quantiteDansStock-$quantite;
+			//$query="INSERT INTO est_placer(Id_Emplacement, Id_Produit, Quantite_Stock) VALUES('$Id_Emplacement','$Id_Produit','$nouvelleQuantite')";
+
 		}		
 		
 		$stmt->close();
+		$MSG="success";
+		//unset($_SESSION["cart"]);
+
 
 	}
-}
 
 
 ?>
 
-
-
-    <div class="jumbotron" align="center">
+    <div class="jumbotron" align="center" style="margin-left: 20%;margin-right: 20%">
         <h2>Veuillez choisir votre mode de paiement</h2>
 
+                <?php
+                if(isset($MSG)){
+                    ?>
+                    <div class="form-group">
+                        <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-info-sign"></span>Commande passée avec succès.
+                            <a href="invoice.php?id_cmd=<?php echo "11";?>&reglement=<?php echo $mode;?>"> Récuperez votre Bon de Commande.</a>
+                        </div>
+                    </div>
+                    <?php                               
+                }
+                ?>
     </div> 
 
-    <div class="jumbotron" align="center">
-	<div class="switch">
+    <div class="jumbotron" align="center" style="margin-left: 20%;margin-right: 20%">
+	<div class="switch" >
   <input name="radio" type="radio" value="optionone" id="optionone" onclick="show2();" />
   <label for="optionone">VIA PAYPAL</label>
   
@@ -115,7 +122,7 @@ if (isset($_POST['purchase'])) {
 
 
 
-      <div id="div1" class="jumbotron afficher" align="center">
+      <div id="div1" class="jumbotron afficher" align="center" style="margin-left: 20%;margin-right: 20%">
 	  <div id="paypal-button-container"></div>
 	  <div style="display:none;">
 <div style="display:none;">
@@ -140,6 +147,7 @@ if (isset($_POST['purchase'])) {
   <div class="info">
     <div class="orderof">La Vieille Sardine</div>
     <div class="num"><?php
+    						 $mode="Chèque";
 		                    //reduction selon page 10 cahier de charge
 		                    if (!isset($_SESSION['user'] )) {
 		                    	reduction($prixtotal,"V");
@@ -167,8 +175,8 @@ if (isset($_POST['purchase'])) {
 
 
 	<div id="etape" class="modal-footer">
-        	<form method="post"  action="invoice.php">
-	            <input type="submit" name="continu" type="button" class="btn btn-success" value="Continuez vers l'étape suivante" >
+        	<form method="post"  action="">
+	            <input type="submit" name="purchase" type="button" class="btn btn-success" value="Finaliser votre commande" >
         	</form>
         </div>
 
@@ -186,7 +194,7 @@ if (isset($_POST['purchase'])) {
 function show2(){
   document.getElementById('div1').style.display = 'block';
   document.getElementById('div2').style.display ='none';
-  document.getElementById('etape').style.display ='none';
+  document.getElementById('etape').style.display ='block';
 }
 
 
