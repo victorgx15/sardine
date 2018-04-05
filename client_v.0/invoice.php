@@ -5,6 +5,7 @@ require_once 'dbconnect.php';
 session_start();
 $mode=$_GET['reglement'];
 $id_cmd=$_GET['id_cmd'];
+$id_address=$_GET['id_address'];
 
 $res;
 if (isset($_SESSION['user'])) {
@@ -203,7 +204,7 @@ function facturation($position,$userAdress,$prixTotal){
     $pdf->Ln(); // Retour à la ligne
 }
 
-$res = $conn->query("SELECT * FROM adresse WHERE Status='L' AND ID_Client=" . $_SESSION['user']);
+$res = $conn->query("SELECT * FROM adresse WHERE Id_Adresse=" . $id_address);
 $userAdress = mysqli_fetch_array($res, MYSQLI_ASSOC);
 facturation($position_detail+10,$userAdress,$prixTotal);
 
@@ -249,8 +250,10 @@ function reduction($prixtotal,$status) {
 $nom = 'Facture-'.$row['id'].'.pdf';
 
 // Création du PDF
-//$pdf->Output($nom,'D');
-$pdf->Output();
+$pdf->Output($nom,'D');
+//$pdf->Output();
+
+
 unset($_SESSION["cart"]);
 
 ?>

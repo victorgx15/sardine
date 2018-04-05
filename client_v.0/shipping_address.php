@@ -17,19 +17,14 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $id=$_SESSION['user'];
 
     if(isset($_POST['continu'])){
-        $boutique=$_POST['boutique'];
-        $domicile=$_POST['domicile'];
-
-        var_dump($domicile);
-        echo $domicile;
-        echo $boutique;
-        if($boutique=='---' and $domicile=='---'){
-            echo "Veuillez choisir un mode de livraison s'il vous plaît";
-        }elseif ($boutique!='---' and $domicile!='---') {
-            echo "Veuillez choisir un seul mode de livraison s'il vous plaît";
-        }elseif ($boutique!='---' or $domicile!='---') {
-            echo "merci";
+        $id_adr=0;
+        if(isset($_POST['boutique'])){
+             $id_adr=$_POST['boutique'];
         }
+        if (isset($_POST['domicile'])) {
+             $id_adr=$_POST['domicile'];
+        }
+
     }
     ?>
 </head>
@@ -53,13 +48,12 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                         <span class="input-group-addon"><span class="glyphicon glyphicon-send"></span></span>
                         <div align="right" style="display: table-cell;vertical-align:middle;width:100%;">
                             <select  id="boutique" name="boutique"  class="form-control" style="height: 40px;">
-                                <option value="">---</option>
                     	    <?php
 					            $addressList = $bdd->prepare("SELECT * FROM adresse WHERE Status='B' "); //pour les boutiques le status sera 'B' et l'Id_client correspondra à l'ID_Boutique
 					            $addressList->execute();
 					            while($adr = $addressList->fetch()){
 	            			?>
-                    	    	<option value=""><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays']; $id_adress=$adr['Id_Adresse'];?></option>
+                    	    	<option value="<?php echo $adr['Id_Adresse'];?>"><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays']; $id_adress=$adr['Id_Adresse'];?></option>
                     	    <?php
 				            }
 				            ?>
@@ -80,13 +74,12 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                         <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
                         <div align="right" style="display: table-cell;vertical-align:middle;width:100%;">
                             <select  id="domicile" name="domicile"  class="form-control" style="height: 40px;">
-                                <option value="">---</option>
                             <?php
 					            $addressList = $bdd->prepare("SELECT * FROM adresse WHERE Id_Client='$id' "); //pour les boutiques le status sera 'B' et l'Id_client correspondra à l'ID_Boutique
 					            $addressList->execute();
 					            while($adr = $addressList->fetch()){
 	            			?>
-                    	    	<option value=""><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays']; $id_adress=$adr['Id_Adresse'];?> </option>
+                    	    	<option value="<?php echo $adr['Id_Adresse'];?>"><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays']; $id_adress=$adr['Id_Adresse'];?> </option>
                     	    <?php
 				            }
 				            ?>
@@ -96,7 +89,16 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                 </div>
 				</div>
 
-	        <input type="submit" name="continu" type="button" class="btn btn-success" value="Continuez vers l'étape suivante" >
+
+	        <button type="submit" name="continu" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B; width: 25%; height: 35px; margin-left: 5px;" type="button"> Confirmez votre choix</button>
+                <?php 
+                if(isset($id_adr)){
+                    ?>
+                <a href="payment.php?id_address=<?php echo $id_adr;?>" class="btn btn-outline-secondary pull-right" style="color: #FFFFF0;background-color:#00008B;">Continuez vers l'étape suivante</a>
+                    <?php
+                }
+                ;?>
+
        	</form>
 </div>
 

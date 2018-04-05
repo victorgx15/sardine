@@ -36,6 +36,8 @@
 //session_start();
 require_once 'dbconnect.php';
 $mode="Paypal";
+$id_address=$_GET['id_address'];
+
 if (isset($_POST['purchase'])) {
 		
 		$Date=date("Y-m-d");
@@ -87,9 +89,10 @@ if (isset($_POST['purchase'])) {
                     <div class="form-group">
                         <div class="alert alert-success">
                             <span class="glyphicon glyphicon-info-sign"></span>Commande passée avec succès.
-                            <a href="invoice.php?id_cmd=<?php echo "11";?>&reglement=<?php echo $mode;?>"> Récuperez votre Bon de Commande.</a>
+                            <a href="invoice.php?id_cmd=<?php echo "11";?>&reglement=<?php echo $mode;?>&id_address=<?php echo $id_address;?>"> Récuperez votre Bon de Commande.</a>
                         </div>
                     </div>
+
                     <?php                               
                 }
                 ?>

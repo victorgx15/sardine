@@ -202,9 +202,9 @@ $pdf->SetX(8+48);
 $pdf->Cell(96,8*2,utf8_decode('5 Rue Jean Jaurès - 56937 Villeneuve la Vieille'),1,0,'C',1);
 
 // Nom du fichier
-$nom = 'Facture-'.$id_cmd.$id_prd.'.pdf';
+$nom = 'Retour-'.$id_cmd.$id_prd.'.pdf';
 // Création du PDF
-//$pdf->Output($nom,'D');
+$pdf->Output($nom,'D');
 $pdf->Output();
 
 ?>
