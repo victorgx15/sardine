@@ -40,7 +40,8 @@ if (isset($_POST['btn-login'])) {
     $count = $res->num_rows;
     if ($count == 1 && $row['Password'] == $password) {
         $_SESSION['user'] = $row['ID_Client'];
-        header("Location: index.php");
+        $MSG = "success";
+
     } elseif ($count == 1) {
         $errMSG = "Bad password";
     } else $errMSG = "User not found";
@@ -67,6 +68,15 @@ if (isset($_POST['btn-login'])) {
                 </div>
 
                 <?php
+                if(isset($MSG)){
+                    ?>
+                    <div class="form-group">
+                        <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-info-sign"></span>Connexion réussie.
+                        </div>
+                    </div>
+                    <?php                               
+                }
                 if (isset($errMSG)) {
 
                     ?>
