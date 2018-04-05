@@ -185,8 +185,6 @@ if (isset($_POST['purchase'])) {
 					<a href="shipping_address.php">Adresse de livraison</a>
 					<a href="invoice.php">Bon de commande</a>
 						<?php 
-						    echo var_dump($_SESSION);
-						    echo $_SESSION['cart'][10];
 						    if (!isset($_SESSION['user'])) {
 						;?>
 						<a href="login.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>

@@ -12,6 +12,21 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
     $id=$_SESSION['user'];
 
+    if(isset($_POST['continu'])){
+        $boutique=$_POST['boutique'];
+        $domicile=$_POST['domicile'];
+
+        var_dump($domicile);
+        echo $domicile;
+        echo $boutique;
+        if($boutique=='---' and $domicile=='---'){
+            echo "Veuillez choisir un mode de livraison s'il vous plaît";
+        }elseif ($boutique!='---' and $domicile!='---') {
+            echo "Veuillez choisir un seul mode de livraison s'il vous plaît";
+        }elseif ($boutique!='---' or $domicile!='---') {
+            echo "merci";
+        }
+    }
     ?>
 </head>
 
@@ -20,19 +35,22 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 </div>  
 
 <div class="container">
+
+        <form method="post"  action="">
                 <h2>En boutique</h2>
                 <h4>Choisissez la boutique la plus proche de vous</h4>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-send"></span></span>
                         <div align="right" style="display: table-cell;vertical-align:middle;width:100%;">
-                            <select  id="Pays" name="Pays"  class="form-control" style="height: 40px;">
+                            <select  id="boutique" name="boutique"  class="form-control" style="height: 40px;">
+                                <option value="">---</option>
                     	    <?php
 					            $addressList = $bdd->prepare("SELECT * FROM adresse WHERE Status='B' "); //pour les boutiques le status sera 'B' et l'Id_client correspondra à l'ID_Boutique
 					            $addressList->execute();
 					            while($adr = $addressList->fetch()){
 	            			?>
-                    	    	<option value=""><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays'];?></option>
+                    	    	<option value=""><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays']; $id_adress=$adr['Id_Adresse'];?></option>
                     	    <?php
 				            }
 				            ?>
@@ -47,13 +65,14 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
                         <div align="right" style="display: table-cell;vertical-align:middle;width:100%;">
-                            <select  id="Pays" name="Pays"  class="form-control" style="height: 40px;">
-                    	    <?php
+                            <select  id="domicile" name="domicile"  class="form-control" style="height: 40px;">
+                                <option value="">---</option>
+                            <?php
 					            $addressList = $bdd->prepare("SELECT * FROM adresse WHERE Id_Client='$id' "); //pour les boutiques le status sera 'B' et l'Id_client correspondra à l'ID_Boutique
 					            $addressList->execute();
 					            while($adr = $addressList->fetch()){
 	            			?>
-                    	    	<option value=""><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays'];?></option>
+                    	    	<option value=""><?php echo $adr['Adresse']." ".$adr['Postal_Code']." ".$adr['Ville']." ".$adr['Pays']; $id_adress=$adr['Id_Adresse'];?> </option>
                     	    <?php
 				            }
 				            ?>
@@ -62,11 +81,8 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                     </div>
                 </div>
 
-    <div class="modal-footer">
-      	<form method="post"  action="payment.php">
 	        <input type="submit" name="continu" type="button" class="btn btn-success" value="Continuez vers l'étape suivante" >
        	</form>
-    </div>
 </div>
 
 <!-- inclure le footer-->
