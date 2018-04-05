@@ -182,39 +182,11 @@ if (isset($_POST['purchase'])) {
                 	<table class= "buttons" style=" width: 100%;table-layout: fixed;border-collapse: collapse;margin-bottom: 5px;">
 						<a href="shopping_cart_details.php?action=empty" class="btn btn-outline-secondary pull-right" style="color: #e31010cc;background-color:white; width: 25%;">Vider le panier</a>
 					</table>
-<<<<<<< HEAD
+
 
 					
                 	<div   name="purchase" class="btn btn-success pull-right" style="width:25%; background-color:#8BC34A; border-color:#00008B;"><a style="color:white;" href="shipping_address.php">Passer la commande</a></div>
-||||||| merged common ancestors
-					<a href="shipping_address.php">Adresse de livraison</a>
-					<a href="invoice.php">Bon de commande</a>
-						<?php 
-						    echo var_dump($_SESSION);
-						    echo $_SESSION['cart'][10];
-						    if (!isset($_SESSION['user'])) {
-						;?>
-						<a href="login.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
-						<?php   
-						}else{
-							;?>
-						<a href="shipping_address.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
-						<?php
-						};?>
-=======
-					<a href="shipping_address.php">Adresse de livraison</a>
-					<a href="invoice.php">Bon de commande</a>
-						<?php 
-						    if (!isset($_SESSION['user'])) {
-						;?>
-						<a href="login.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
-						<?php   
-						}else{
-							;?>
-						<a href="shipping_address.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
-						<?php
-						};?>
->>>>>>> 132261a53a391d20eff981b9f671bdcd6df1fba0
+
 
 
                 	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
