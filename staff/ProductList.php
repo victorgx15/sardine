@@ -137,6 +137,7 @@ try {
                             <div class="mcell"><?php echo $storageInfo['Etagere']?></div>
                             <div class="mcell" style="width:80px">
                                 <input type="hidden" value='<?php echo $Id_Emplacement?>' name="Id_Emplacement[]">
+                                <input type="hidden" class="form-control" value="0" name="addingQuantity[]">
                                 <input type="number" class="form-control stockAmount" value="<?php echo $storage["Quantite_stock"]?>" min="0" name="Quantite_stock[]">
                             </div>
                         </div>
