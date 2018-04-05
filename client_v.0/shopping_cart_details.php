@@ -25,16 +25,16 @@ require_once 'dbconnect.php';
 
 if(isset($_POST['orderpaper'])){
 	require('pdf_generator/fpdf.php');
-	    header("Location: invoice.php");
+	    //header("Location: invoice.php");
 }
 
 if(isset($_POST['shippingaddress'])){
-	    header("Location: shipping_address.php");
+	    //header("Location: shipping_address.php");
 }
 
 if (isset($_POST['purchase'])) {
     if (!isset($_SESSION['user'])) {
-    header("Location: inscription_connexion/login.php");
+    //header("Location: inscription_connexion/login.php");
     exit;
 	}else{
 		
@@ -184,7 +184,19 @@ if (isset($_POST['purchase'])) {
 					</table>
 					<a href="shipping_address.php">Adresse de livraison</a>
 					<a href="invoice.php">Bon de commande</a>
-                	<button type="submit" name="purchase" class="btn btn-success pull-right" style="width:25%; background-color:#00008B; border-color:#00008B;">Passer la commande</button>
+						<?php 
+						    echo var_dump($_SESSION);
+						    echo $_SESSION['cart'][10];
+						    if (!isset($_SESSION['user'])) {
+						;?>
+						<a href="login.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
+						<?php   
+						}else{
+							;?>
+						<a href="shipping_address.php" class="btn btn-outline-danger btn-xs">Passer la commande</a>
+						<?php
+						};?>
+
 
                 	<!--<a type="submit" name="purchase" href="inscription_connexion/login.php" class="btn btn-success pull-right">Passer la commande</a>-->
             		
@@ -269,13 +281,6 @@ if (isset($_POST['purchase'])) {
 										
 			}
 			?>
-
-
-
-
-
-
-
 
             </div>
 

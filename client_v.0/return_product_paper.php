@@ -4,6 +4,10 @@ require('pdf_generator/fpdf.php');
 require_once 'dbconnect.php';
 session_start();
 $res;
+
+$id_cmd=$_GET['id_cmd'];
+$id_prd=$_GET['id_prd'];
+
 if (isset($_SESSION['user'])) {
     $res = $conn->query("SELECT * FROM compte WHERE ID_Client=" . $_SESSION['user']);
     }
@@ -48,16 +52,14 @@ $pdf->SetTextColor(0);
 //$rep = mysqli_query($db, $req);
 //$row = mysqli_fetch_array($rep);
 
-$row =array("id"=>"562297", "date_com"=>"2018/02/02", "reglement"=>"espèce");
+
 
 // Infos de la commande calées à gauche
 $pdf->SetFont('Helvetica','',14);
 $pdf->Text(8,30,utf8_decode('- - - - - - - - - - - - - - - - - - - - PARTIE RESERVÉE AU CLIENT - - - - - - - - - - - - - - - - - - - -'));
 $pdf->SetFont('Helvetica','',11);
-$pdf->Text(8,38,utf8_decode('N° de commande : '.$row['id']));
-$pdf->Text(8,43,utf8_decode('Date de commande : '.$row['date_com']));
-$pdf->Text(8,48,utf8_decode('Mode de règlement : '.$row['reglement']));
-$pdf->Text(8,53,utf8_decode('Date d\'émission du bon : '.Date("Y/n/j")));
+$pdf->Text(8,38,utf8_decode('N° de commande : '.$id_cmd));
+$pdf->Text(8,43,utf8_decode('Date d\'émission du bon : '.Date("Y/n/j")));
 
 
 // Infos du client calées à droite
@@ -76,9 +78,9 @@ function entete_table($position_entete){
     $pdf->SetTextColor(0); // Couleur du texte
     $pdf->SetY($position_entete);
     $pdf->SetX(8);
-    $pdf->Cell(96,8,utf8_decode('Désignation'),1,0,'C',1);
+    $pdf->Cell(96,8,utf8_decode('Commande N° '),1,0,'C',1);
  	$pdf->SetX(104); // 8 + 96
-    $pdf->Cell(96,8,utf8_decode('Référence'),1,0,'C',1);  
+    $pdf->Cell(96,8,utf8_decode('Produit N°'),1,0,'C',1);  
  	$pdf->SetX(192); // 8 + 96
     $pdf->Ln(); // Retour à la ligne
 }
@@ -91,9 +93,9 @@ $pdf->SetFillColor(256); // Couleur des filets
 
 $pdf->SetY($position_detail);
 $pdf->SetX(8);
-$pdf->Cell(96,8,utf8_decode('Désignation'),1,0,'C',1);
+$pdf->Cell(96,8,utf8_decode($id_cmd),1,0,'C',1);
 $pdf->SetX(104); // 8 + 96
-$pdf->Cell(96,8,utf8_decode('Référence'),1,0,'C',1);  
+$pdf->Cell(96,8,utf8_decode($id_prd),1,0,'C',1);  
 $pdf->SetX(192); // 8 + 96
 $pdf->Ln(); // Retour à la ligne
 
@@ -178,7 +180,7 @@ function Code39($xpos, $ypos, $code, $baseline=0.5, $height=5){
 }
 
 $pdf->Text(8+68,90,utf8_decode('Code d\'autorisation retour produit :'));
-Code39(80,95,'HOLA 78',1,10);
+Code39(80,95,'ROSA'.$id_prd.$id_cmd,1,10);
 $pdf->Text(8,115,utf8_decode('Merci d\'apposer l\'étiquette de retour sur le produit retourné.'));
 
 $pdf->Image('images/ciseaux.png',8,120,8);
@@ -200,7 +202,7 @@ $pdf->SetX(8+48);
 $pdf->Cell(96,8*2,utf8_decode('5 Rue Jean Jaurès - 56937 Villeneuve la Vieille'),1,0,'C',1);
 
 // Nom du fichier
-$nom = 'Facture-'.$row['id'].'.pdf';
+$nom = 'Facture-'.$id_cmd.$id_prd.'.pdf';
 // Création du PDF
 //$pdf->Output($nom,'D');
 $pdf->Output();
