@@ -30,7 +30,7 @@
 <div class="jumbotron">
     <?php
     require_once 'dbconnect.php';
-    
+
     $ID_Client=$_GET['ID_Client'];
     $query = $bdd->prepare("SELECT * FROM compte WHERE ID_Client='$ID_Client' AND Status='C'");
     $query->execute();
@@ -194,6 +194,7 @@ $Etat=$commande['Etat'];
 
     $(document).ready(function () {
         $('#orderTable').DataTable( {
+            "order": [[ 0, "desc" ]],
             "columnDefs": [
                 {
                     "targets": [ 4 ],

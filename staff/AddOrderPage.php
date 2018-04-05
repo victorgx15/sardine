@@ -59,27 +59,20 @@
         ?>
     </table>
 <div style="text-align:left; width:80%">
-    <button class="btn btn-success"  id="addRow"><span class="glyphicon glyphicon-plus"></span></button>
     <a href="ProductList.php" target="_blank" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Parcourir</a>
+
 </div><br>
 
 <form id="OrderForm" name="OrderForm" method="post" action="AddOrder.php?ID_Client=<?php echo $ID_Client;?>">
+
     <table id="OrderFormTable" name="OrderFormTable" class="table" style="width:80%; background:transparent;">
         <input id="nbProducts" name="nbProducts" type="number" hidden value="0">
         <tbody>
-        <tr id = 0>
-            <td style="width:5%">
-                <button class="btn btn-danger btn-xs btn-circle deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
-            </td>
-            <td style="width:35%; "><input type="text" id="ID_Produit0" name="ID_Produit0" class="form-control idField" placeholder="ID Produit"></td>
-            <td style="width:10%"><input type="number" id="Quantite0" name="Quantite0" class="form-control qtField" placeholder="0" min="0"></td>
-            <td class="productInfo" style="width:40%;"></td>
-            <td class="productPrice" style="width:10%;"></td>
-        </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="5" style="text-align: right" id="orderTotal"></td>
+            <td><button type="button" class="btn btn-success"  id="addRow"><span class="glyphicon glyphicon-plus"></span> Ajouter un produit</button></td>
+            <td colspan="4" style="text-align: right" id="orderTotal"></td>
         </tr>
         </tfoot>
     </table><br>
@@ -95,60 +88,6 @@
 </div>
 </body>
 <script>
-    var idProd=0;
-
-    $("#addRow").on('click', function(){
-        idProd++;
-        $('#nbProducts').val(idProd);
-        $("#submitForm").prop('disabled', true);
-        $("#OrderFormTable").find('tbody')
-            .append($('<tr>')
-                .append($('<td style="width:5%">')
-                    .append($("<button class='btn btn-danger btn-xs btn-circle deleteBtn'><span class='glyphicon glyphicon-remove'></span></button>")
-                    )
-                )
-                .append($('<td style="width:35%">')
-                    .append($("<input type='text' id='ID_Produit"+idProd+"' name='ID_Produit"+idProd+"' class='form-control idField' placeholder='ID Produit'>")
-                    )
-                )
-
-                .append($('<td style="width:10%">')
-                    .append($("<input type='number' id='Quantite"+idProd+"' min='0' name='Quantite"+idProd+"' class='form-control qtField' placeholder='0'>")
-                    )
-                )
-                .append($('<td style="width:40%" class="productInfo">')
-                )
-                .append($('<td style="width:10%" class="productPrice">')
-                )
-            );
-        $(".idField").on('input', function () {
-            $("#submitForm").prop('disabled', !allProductsExist());
-        });
-
-        $(".qtField, .idField").on('input', function () {
-            if($(this).val()<0){
-                $(this).val('');
-            }
-            updateTotalPrice();
-        });
-    })
-
-
-    $('#OrderFormTable').on('click', 'button', function () {
-        $(this).closest('tr').remove();
-        updateTotalPrice();
-    })
-
-    $(".idField").on('input', function () {
-        $("#submitForm").prop('disabled', !allProductsExist());
-    });
-
-    $(".qtField, .idField").on('input', function () {
-        if($(this).val()<0){
-            $(this).val('');
-        }
-        updateTotalPrice();
-    });
 
     function updateTotalPrice(){
         priceArray=[];
@@ -171,22 +110,71 @@
             sum+=qteArray[i]*priceArray[i];
         }
         $('#orderTotal').text(sum == 0 ? '' : sum.toFixed(2) + "€");
-    }
+    };
 
-    function allProductsExist(){
-        test=true;
-        $("#OrderFormTable .idField").each(function(){
-            if($("#" + this.value).length){
-                $(this).parent().parent().children('.productInfo').text($("#" + this.value).children('.productInfo').text());
-                $(this).parent().parent().children('.productPrice').text($("#" + this.value).children('.productPrice').text());
-            }else{
-                $(this).parent().parent().children('.productInfo').text("Cette référence de produit n'existe pas");
-                $(this).parent().parent().children('.productPrice').text("");
-                test=false;
-            }
+    $("#addRow").on('click', function(){
+        $("#OrderFormTable").find("tbody")
+            .append($('<tr>')
+                .append($('<td style="width:5%">')
+                    .append($("<button class='btn btn-danger btn-xs btn-circle deleteBtn'><span class='glyphicon glyphicon-remove'></span></button>")
+                    )
+                )
+                .append($('<td style="width:35%">')
+                    .append($("<input type=\"number\" name=\"Id_Produit[]\" class=\"form-control idField\" placeholder=\"ID Produit\">")
+                    )
+                )
+
+                .append($('<td style="width:10%">')
+                    .append($("<input type=\"number\" name=\"Quantite[]\" class=\"form-control qtField\" placeholder=\"0\" min=\"0\">")
+                    )
+                )
+                .append($('<td style="width:40%" class="productInfo">')
+                )
+                .append($('<td style="width:10%" class="productPrice">')
+                )
+            );
+        $(".idField").on('input', function () {
+            var test=true;
+            $(this).closest("table").find(".idField").each(function(){
+                if($("#" + this.value).length){
+                    $(this).closest('tr').children('.productInfo').text($("#" + this.value).children('.productInfo').text());
+                    $(this).closest('tr').children('.productPrice').text($("#" + this.value).children('.productPrice').text());
+                }else{
+                    $(this).closest('tr').children('.productInfo').text("Cette référence de produit n'existe pas");
+                    $(this).closest('tr').children('.productPrice').text("");
+                    test=false;
+                }
+            });
+            updateTotalPrice();
+            $("#submitForm").prop('disabled', !test);
         });
-        return test;
-    }
+
+        $(".qtField").on('input', function () {
+            updateTotalPrice();
+        });
+
+    });
+
+    $('tbody').on('click', 'button', function () {
+        $(this).closest('tr').remove();
+        updateTotalPrice();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

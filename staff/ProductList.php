@@ -131,7 +131,7 @@ try {
                     while($storageInfo=$storageInfoList->fetch()){
                     ?>
                         <div class="mrow">
-                            <div class="mcell"><?php echo $Id_Emplacement?></div>
+                            <div class="mcell"><?php echo join('-', str_split(sprintf( '%06d',$Id_Emplacement), 2)); ?></div>
                             <div class="mcell"><?php echo $storageInfo['Couloir']?></div>
                             <div class="mcell"><?php echo $storageInfo['Trave']?></div>
                             <div class="mcell"><?php echo $storageInfo['Etagere']?></div>

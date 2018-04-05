@@ -58,7 +58,7 @@
                     <a href="StockList.php"><div class="card card-4">
                       <div id="layer">
                           <div class="card-body">
-                              <h3>Stocks</h3>
+                              <h3>Stock</h3>
                           </div>
                       </div>
                     </div></a>
