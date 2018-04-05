@@ -29,7 +29,7 @@ input, textarea {
 
 <body>
 
-  <header>
+  <header class="Contact">
 	<h1 style="font-weight: normal;
 	font-size: 4em;
 	font-family: 'Raleway', sans-serif;
