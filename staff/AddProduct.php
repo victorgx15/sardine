@@ -12,10 +12,7 @@
     $Ref = $_POST['Reference'];
     $Description = $_POST['Description'];
 
-    $query="INSERT INTO produit(Designation, Marque, Famille, Gamme, Url_image, Poids, Nombre_boites, Prix, Description, Ref) VALUES('$Designation', '$Marque', '$Famille', '$Gamme', '$Url_image','$Poids', '$Nombre_boites', '$Prix', '$Description', '$Ref')";
 
-    $stmt = $bdd->prepare($query);
-    $stmt->execute();
     $Id_Produit=$bdd->lastInsertId();
 
     $target_dir="images/Produits/".$Famille."/";
@@ -45,13 +42,16 @@ if ($uploadOk == 0) {
 } else {
     if (copy($_FILES["Url_image"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["Url_image"]["name"]). " has been uploaded to ".$target_file;
-        echo "<script>alert('Produit ajouté avec succès');window.location.href='ProductList.php'; window.location('ProductList.php');</script>";
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
 }
+$Url_image=$target_dir;
+$query="INSERT INTO produit(Designation, Marque, Famille, Gamme, Url_image, Poids, Nombre_boites, Prix, Description, Ref) VALUES('$Designation', '$Marque', '$Famille', '$Gamme', '$Url_image','$Poids', '$Nombre_boites', '$Prix', '$Description', '$Ref')";
+$stmt = $bdd->prepare($query);
+$stmt->execute();
 
-//echo "<script>alert('Produit ajouté avec succès');window.location.href='ProductList.php'; window.location('ProductList.php');</script>";
+echo "<script>alert('Produit ajouté avec succès');window.location.href='ProductList.php'; window.location('ProductList.php');</script>";
 
 
 
