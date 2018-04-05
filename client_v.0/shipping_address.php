@@ -6,6 +6,10 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 <html>
   <head>
     <title>Adresse de livraison</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+      <link rel="stylesheet" href="css/radio.css">
 
     <?php
     include('header.php');
@@ -37,7 +41,12 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
 <div class="container">
 
         <form method="post"  action="">
-                <h2>En boutique</h2>
+		<div class="radio">
+    <input id="radio-1" name="radio" type="radio" onclick="show1();"  checked>
+    <label for="radio-1" class="radio-label">En boutique</label>
+  </div>
+  
+             <div id="div1" >
                 <h4>Choisissez la boutique la plus proche de vous</h4>
                 <div class="form-group">
                     <div class="input-group">
@@ -58,8 +67,13 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                         </div>
                     </div>
                 </div>
+				</div>
 
-                <h2>Chez vous</h2>
+  <div class="radio">
+    <input id="radio-2" name="radio" type="radio" onclick="show2();" >
+    <label  for="radio-2" class="radio-label">Chez vous</label>
+  </div>
+  <div id="div2">
                 <h4>Choisissez l'adresse de votre domicile</h4>
                 <div class="form-group">
                     <div class="input-group">
@@ -80,6 +94,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
                         </div>
                     </div>
                 </div>
+				</div>
 
 	        <input type="submit" name="continu" type="button" class="btn btn-success" value="Continuez vers l'étape suivante" >
        	</form>
@@ -96,6 +111,17 @@ $bdd = new PDO('mysql:host=localhost;dbname=db;charset=utf8', 'root', '');
         $("#"+test).show();
     }); 
 	});
+	
+	
+	
+		function show1(){
+  document.getElementById('div2').style.display ='none';
+  document.getElementById('div1').style.display ='block';
+}
+function show2(){
+  document.getElementById('div2').style.display = 'block';
+  document.getElementById('div1').style.display ='none';
+}
 </script>
 
 
